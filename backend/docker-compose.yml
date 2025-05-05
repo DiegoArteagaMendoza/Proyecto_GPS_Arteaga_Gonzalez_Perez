@@ -1,0 +1,10 @@
+services:
+  db_hola_mundo:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports: 
+      - "5432:5432"
+    volumes:
+      - ./db/db_hola_mundo.sql:/docker-entrypoint-initdb.d/init.sql
