@@ -2,41 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-from .queryset import InventarioQuerySet, ProdcutosQuerySet, BodegaQuerySet, MovimientoInventarioQuerySet
-
-# Visats para productos
-@api_view(['GET'])
-def listar_productos(request):
-    return ProdcutosQuerySet.consultar_productos()
-
-@api_view(['GET'])
-def buscar_producto_por_nombre(request):
-    return ProdcutosQuerySet.consulta_producto_por_nombre(request)
-
-@api_view(['GET'])
-def buscar_producto_por_id(request):
-    return ProdcutosQuerySet.consulta_producto_por_id(request)
-
-@api_view(['POST'])
-def crear_producto(request):
-    return ProdcutosQuerySet.crear_producto(request)
-
-# Vistas para bodegas
-@api_view(['GET'])
-def obtener_bodegas(request):
-    return BodegaQuerySet.listar_bodegas()
-
-@api_view(['GET'])
-def buscar_bodega_nombre(request):
-    return BodegaQuerySet.buscar_bodega_por_nombre(request)
-
-@api_view(['GET'])
-def buscar_bodega_id(request):
-    return BodegaQuerySet.buscar_bodega_por_id(request)
-
-@api_view(['POST'])
-def crear_bodega(request):
-    return BodegaQuerySet.crear_bodega(request)
+from .queryset import InventarioQuerySet
 
 # Vistas para inventario
 @api_view(['GET'])
@@ -66,24 +32,3 @@ def buscar_inventario_por_bodega(request):
 @api_view(['POST'])
 def registrar_inventario(request):
     return InventarioQuerySet.crear_inventario(request)
-
-# Vistas para movimientos de inventario
-@api_view(['GET'])
-def obtener_movimientos(request):
-    return MovimientoInventarioQuerySet.listar_movimientos()
-
-@api_view(['GET'])
-def buscar_movimiento_id(request):
-    return MovimientoInventarioQuerySet.buscar_movimiento_por_id(request)
-
-@api_view(['GET'])
-def buscar_movimiento_tipo(request):
-    return MovimientoInventarioQuerySet.buscar_movimiento_por_tipo(request)
-
-@api_view(['GET'])
-def buscar_movimiento_fecha(request):
-    return MovimientoInventarioQuerySet.buscar_movimiento_por_fecha(request)
-
-@api_view(['POST'])
-def crear_movimiento(request):
-    return MovimientoInventarioQuerySet.crear_movimiento(request)
