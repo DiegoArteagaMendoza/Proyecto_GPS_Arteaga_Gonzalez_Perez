@@ -27,15 +27,15 @@ jobs:
       - name: Enviar la imagen a Docker Hub
         run: docker push $IMAGE_NAME
 
-      - name: Configurar kubectl
-        run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-          kubectl config use-context minikube
-          kubectl config current-context
+      # - name: Configurar kubectl
+      #   run: |
+      #     mkdir -p $HOME/.kube
+      #     echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+      #     kubectl config use-context minikube
+      #     kubectl config current-context
 
-      - name: Desplegar a Kubernetes
-        run: |
-          # Reemplazar variables en los archivos YAML si es necesario
-          sed -i "s|\${{ secrets.DOCKERHUB_USERNAME }}/ms-inventario|$IMAGE_NAME|g" backend/ms-inventario/k8s/deployment.yaml
-          kubectl apply -f backend/ms-inventario/k8s/
+      # - name: Desplegar a Kubernetes
+      #   run: |
+      #     # Reemplazar variables en los archivos YAML si es necesario
+      #     sed -i "s|\${{ secrets.DOCKERHUB_USERNAME }}/ms-inventario|$IMAGE_NAME|g" backend/ms-inventario/k8s/deployment.yaml
+      #     kubectl apply -f backend/ms-inventario/k8s/
