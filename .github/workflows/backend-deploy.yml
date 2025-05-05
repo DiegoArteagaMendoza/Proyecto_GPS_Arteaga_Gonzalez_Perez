@@ -31,7 +31,8 @@ jobs:
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-          kubectl config use-context default
+          kubectl config use-context minikube
+          kubectl config current-context
 
       - name: Desplegar a Kubernetes
         run: |
