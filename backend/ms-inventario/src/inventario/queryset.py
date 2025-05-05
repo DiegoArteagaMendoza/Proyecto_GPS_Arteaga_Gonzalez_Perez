@@ -1,8 +1,9 @@
 from django.apps import apps
 from django.db import models
+from django.db.models import F, Q
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import InventarioSerializer, ProductoSerializer, BodegaSerializer
+from .serializers import InventarioSerializer, ProductoSerializer, BodegaSerializer, MovimientoInventarioSerializer
 
 # consultas para producto
 """
@@ -131,10 +132,10 @@ class InventarioQuerySet(models.QuerySet):
     @staticmethod
     def consulta_inventario_nombre_producto(request):
         Inventario = apps.get_model('inventario', 'Inventario')
-        nombre_producto=request.get('nombre_producto')
+        nombre_producto=request.GET.get('nombre_producto')
 
         if not nombre_producto:
-            return Response({'error':'Debe proporcionar un nombre de producot'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error':'Debe proporcionar un nombre de producto'}, status=status.HTTP_400_BAD_REQUEST)
 
         respuesta = Inventario.objects.filter(nombre_producto__icontains=nombre_producto)
         serializer = InventarioSerializer(respuesta, many=True)
@@ -144,19 +145,22 @@ class InventarioQuerySet(models.QuerySet):
     @staticmethod
     def consultar_inventario_por_id_produto(request):
         Inventario = apps.get_model('inventario', 'Inventario')
-        id_produto=request.get('id_producto')
+        id_producto = request.GET.get('id_producto')
+
+        if not id_producto:
+            return Response({'error': 'Debe proporcionar un ID de producto'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            inventario = Inventario.objects.filter(producto__id_producto=id_produto)
-            serialize = InventarioSerializer(inventario, many=True)
-            return Response(serialize.data, status=status.HTTP_200_OK)
+            inventario = Inventario.objects.filter(producto__id_producto=id_producto)
+            serializer = InventarioSerializer(inventario, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response({"error":str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     # Consultar por lote
     @staticmethod
     def consulta_inventario_por_lote(request):
-        lote = request.get('lote')
+        lote = request.GET.get('lote')
         Inventario = apps.get_model('inventario', 'Inventario')
         
         inventario = Inventario.objects.filter(lote=lote)
@@ -175,7 +179,7 @@ class InventarioQuerySet(models.QuerySet):
     # Consultar inventario por bodega
     @staticmethod
     def consulta_inventario_por_bodega(request):
-        id_bodega = request.get('id_bodega')
+        id_bodega = request.GET.get('id_bodega')
         Inventario = apps.get_model('inventario', 'Inventario')
         
         inventario = Inventario.objects.filter(bodega__id_bodega=id_bodega)
@@ -197,3 +201,78 @@ class InventarioQuerySet(models.QuerySet):
 
         
 # consultas para movimientos inventario
+class MovimientoInventarioQuerySet(models.QuerySet):
+# Listar todos los movimientos
+    @staticmethod
+    def listar_movimientos():
+        MovimientoInventario = apps.get_model('inventario', 'MovimientoInventario')
+        movimientos = MovimientoInventario.objects.all().select_related('inventario', 'inventario__producto')
+        serializer = MovimientoInventarioSerializer(movimientos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Buscar movimiento por ID
+    @staticmethod
+    def buscar_movimiento_por_id(request):
+        MovimientoInventario = apps.get_model('inventario', 'MovimientoInventario')
+        id_movimiento = request.query_params.get('id_movimiento')
+
+        if not id_movimiento:
+            return Response({'error': 'Debe proporcionar un ID de movimiento'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            movimiento = MovimientoInventario.objects.select_related('inventario', 'inventario__producto').get(id_movimiento=id_movimiento)
+            serializer = MovimientoInventarioSerializer(movimiento)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except MovimientoInventario.DoesNotExist:
+            return Response({'error': 'Movimiento no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Buscar movimientos por tipo (entrada/salida)
+    @staticmethod
+    def buscar_movimiento_por_tipo(request):
+        MovimientoInventario = apps.get_model('inventario', 'MovimientoInventario')
+        tipo = request.query_params.get('tipo_movimiento')
+
+        if tipo not in ['entrada', 'salida']:
+            return Response({'error': 'Tipo de movimiento inválido. Debe ser "entrada" o "salida"'}, status=status.HTTP_400_BAD_REQUEST)
+
+        movimientos = MovimientoInventario.objects.filter(tipo_movimiento=tipo).select_related('inventario', 'inventario__producto')
+        serializer = MovimientoInventarioSerializer(movimientos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Buscar movimientos por rango de fechas
+    @staticmethod
+    def buscar_movimiento_por_fecha(request):
+        MovimientoInventario = apps.get_model('inventario', 'MovimientoInventario')
+        fecha_inicio = request.query_params.get('fecha_inicio')
+        fecha_fin = request.query_params.get('fecha_fin')
+
+        if not fecha_inicio or not fecha_fin:
+            return Response({'error': 'Debe proporcionar una fecha de inicio y una fecha de fin'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            from django.utils.dateparse import parse_datetime
+            fecha_inicio = parse_datetime(fecha_inicio)
+            fecha_fin = parse_datetime(fecha_fin)
+            if not fecha_inicio or not fecha_fin:
+                raise ValueError("Formato de fecha inválido")
+        except Exception:
+            return Response({'error': 'Formato de fecha inválido. Use formato ISO 8601 (ej. 2025-05-01T10:00:00)'}, status=status.HTTP_400_BAD_REQUEST)
+
+        movimientos = MovimientoInventario.objects.filter(
+            fecha_movimiento__range=(fecha_inicio, fecha_fin)
+        ).select_related('inventario', 'inventario__producto')
+
+        serializer = MovimientoInventarioSerializer(movimientos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Crear un nuevo movimiento
+    @staticmethod
+    def crear_movimiento(request):
+        serializer = MovimientoInventarioSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                return Response({"error": "Error al guardar el movimiento", "detalle": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

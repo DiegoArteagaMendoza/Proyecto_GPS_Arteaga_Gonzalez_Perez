@@ -59,7 +59,7 @@ class MovimientoInventario(models.Model):
     ]
 
     id_movimiento = models.AutoField(primary_key=True)
-    inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE, related_name='movimientos', verbose_name="Inventario")
+    inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE, related_name='movimientos', verbose_name="Inventario", db_column='id_inventario')
     tipo_movimiento = models.CharField(max_length=20, choices=TIPO_MOVIMIENTO_CHOICES, verbose_name="Tipo de Movimiento")
     cantidad = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)], verbose_name="Cantidad")
     fecha_movimiento = models.DateTimeField(auto_now_add=True, verbose_name="Fecha del Movimiento")

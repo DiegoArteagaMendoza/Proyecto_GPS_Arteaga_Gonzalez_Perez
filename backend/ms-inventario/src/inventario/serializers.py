@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Inventario, Producto, Bodega
+from .models import Inventario, Producto, Bodega, MovimientoInventario
 
 # serializer para producto
 class ProductoSerializer(serializers.ModelSerializer):
@@ -23,3 +23,12 @@ class InventarioSerializer(serializers.ModelSerializer):
             'id_inventario','producto', 'nombre_producto', 'bodega', 'lote', 'fecha_lote', 'fecha_vencimiento', 'cantidad', 'unidad_medida', 'costo_unitario', 'costo_promedio', 'precio_venta', 'stock_minimo'
         ]
         read_only_fields = ('id_inventario',)
+
+#serializer para movimientos inventario
+class MovimientoInventarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MovimientoInventario
+        fields = [
+            'id_movimiento', 'inventario', 'tipo_movimiento', 'cantidad', 'fecha_movimiento', 'observacion', 'usuario'
+        ]
+        read_only_fields = ('id_movimiento',)

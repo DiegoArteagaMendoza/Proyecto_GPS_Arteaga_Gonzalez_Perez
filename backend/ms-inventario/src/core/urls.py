@@ -2,6 +2,7 @@ from django.urls import path
 from inventario.views import obtener_inventario_completo, buscar_inventario_por_nombre_producto, buscar_inventario_por_lote, buscar_inventario_por_bodega, buscar_inventario_por_id_producto, obtener_inventario_bajo_stock, registrar_inventario
 from inventario.views import listar_productos, buscar_producto_por_id, buscar_producto_por_nombre, crear_producto
 from inventario.views import obtener_bodegas, buscar_bodega_id, buscar_bodega_nombre, crear_bodega
+from inventario.views import obtener_movimientos, buscar_movimiento_id, buscar_movimiento_tipo, buscar_movimiento_fecha, crear_movimiento
 
 urlpatterns = [
     # urls para productos
@@ -24,4 +25,11 @@ urlpatterns = [
     path('inventario/bajo-stock/', obtener_inventario_bajo_stock, name='inventario-bajo-stock'),
     path('inventario/buscar/bodega/', buscar_inventario_por_bodega, name='buscar-por-bodega'),
     path('inventario/registrar/', registrar_inventario, name='registrar-inventario'),
+
+    # urls para movimientos de inventario
+    path('movimientos/', obtener_movimientos, name='listar-movimientos'),
+    path('movimientos/buscar/id/', buscar_movimiento_id, name='buscar-movimiento-id'),
+    path('movimientos/buscar/tipo/', buscar_movimiento_tipo, name='buscar-movimiento-tipo'),
+    path('movimientos/buscar/fechas/', buscar_movimiento_fecha, name='buscar-movimiento-fechas'),
+    path('movimientos/crear/', crear_movimiento, name='crear-movimiento'),
 ]

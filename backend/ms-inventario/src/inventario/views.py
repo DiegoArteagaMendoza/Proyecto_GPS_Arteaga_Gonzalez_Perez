@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-from .queryset import InventarioQuerySet, ProdcutosQuerySet, BodegaQuerySet
+from .queryset import InventarioQuerySet, ProdcutosQuerySet, BodegaQuerySet, MovimientoInventarioQuerySet
 
 # Visats para productos
 @api_view(['GET'])
@@ -66,3 +66,24 @@ def buscar_inventario_por_bodega(request):
 @api_view(['POST'])
 def registrar_inventario(request):
     return InventarioQuerySet.crear_inventario(request)
+
+# Vistas para movimientos de inventario
+@api_view(['GET'])
+def obtener_movimientos(request):
+    return MovimientoInventarioQuerySet.listar_movimientos()
+
+@api_view(['GET'])
+def buscar_movimiento_id(request):
+    return MovimientoInventarioQuerySet.buscar_movimiento_por_id(request)
+
+@api_view(['GET'])
+def buscar_movimiento_tipo(request):
+    return MovimientoInventarioQuerySet.buscar_movimiento_por_tipo(request)
+
+@api_view(['GET'])
+def buscar_movimiento_fecha(request):
+    return MovimientoInventarioQuerySet.buscar_movimiento_por_fecha(request)
+
+@api_view(['POST'])
+def crear_movimiento(request):
+    return MovimientoInventarioQuerySet.crear_movimiento(request)
