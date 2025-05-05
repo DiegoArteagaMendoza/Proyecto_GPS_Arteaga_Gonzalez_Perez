@@ -29,8 +29,12 @@ jobs:
 
       - name: Configurar kubectl
         run: |
+          mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+          kubectl config use-context default
 
       - name: Desplegar a Kubernetes
         run: |
+          # Reemplazar variables en los archivos YAML si es necesario
+          sed -i "s|\${{ secrets.DOCKERHUB_USERNAME }}/ms-holamundo|$IMAGE_NAME|g" backend/ms-holamundo/k8s/deployment.yaml
           kubectl apply -f backend/ms-holamundo/k8s/
