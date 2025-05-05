@@ -3,7 +3,61 @@ from django.db import models
 from django.db.models import F, Q
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import InventarioSerializer
+from .serializers import InventarioSerializer, ProductoSerializer
+
+# consultas para producto
+"""
+Query set para realizar las consultar referentes a producto
+"""
+class ProdcutosQuerySet(models.QuerySet):
+    # Consulta todos los productos
+    @staticmethod
+    def consultar_productos():
+        Producto = apps.get_model('inventario', 'Producto')
+        productos = Producto.objects.all()
+        serializer = ProductoSerializer(productos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Consultar producto por nombre (búsqueda parcial)
+    @staticmethod
+    def consulta_producto_por_nombre(request):
+        Producto = apps.get_model('inventario', 'Producto')
+        nombre = request.query_params.get('nombre')
+
+        if not nombre:
+            return Response({'error': 'Debe proporcionar un nombre de producto'}, status=status.HTTP_400_BAD_REQUEST)
+
+        productos = Producto.objects.filter(nombre__icontains=nombre)
+        serializer = ProductoSerializer(productos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Consultar producto por id_producto
+    @staticmethod
+    def consulta_producto_por_id(request):
+        Producto = apps.get_model('inventario', 'Producto')
+        id_producto = request.query_params.get('id_producto')
+
+        if not id_producto:
+            return Response({'error': 'Debe proporcionar un ID de producto'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            producto = Producto.objects.get(id_producto=id_producto)
+            serializer = ProductoSerializer(producto)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Producto.DoesNotExist:
+            return Response({'error': 'Producto no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Crear nuevo producto
+    @staticmethod
+    def crear_producto(request):
+        serializer = ProductoSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                return Response({"error": "Error al guardar el producto", "detalle": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # consultas para inventario
 """
