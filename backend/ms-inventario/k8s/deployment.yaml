@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-inventario
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-inventario
+  template:
+    metadata:
+      labels:
+        app: ms-inventario
+    spec:
+      containers:
+      - name: ms-inventario
+        image: ${{ secrets.DOCKERHUB_USERNAME }}/ms-inventario
+        ports:
+        - containerPort: 3001
