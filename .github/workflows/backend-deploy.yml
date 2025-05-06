@@ -1,4 +1,33 @@
-name: Backend CI/CD
+# name: Backend CI
+
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     env:
+#       IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/ms-inventario
+
+#     steps:
+#       - name: Checkout del repositorio
+#         uses: actions/checkout@v3
+
+#       - name: Iniciar sesión en Docker Hub
+#         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+#       - name: Construir la imagen de Docker
+#         run: |
+#           docker build -t $IMAGE_NAME backend/ms-inventario
+
+#       - name: Enviar la imagen a Docker Hub
+#         run: docker push $IMAGE_NAME
+
+name: Backend CI
 
 on:
   push:
@@ -7,11 +36,16 @@ on:
     branches: [main]
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-all-microservices:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        # Esto buscará todas las carpetas que comiencen con ms- y las procesará en paralelo
+        microservice: [ms-inventario]
+        # Nota: Puedes generar esta lista dinámicamente con un paso previo si prefieres
+    
     env:
-      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/ms-inventario
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.microservice }}
 
     steps:
       - name: Checkout del repositorio
@@ -22,20 +56,7 @@ jobs:
 
       - name: Construir la imagen de Docker
         run: |
-          docker build -t $IMAGE_NAME backend/ms-inventario
+          docker build -t $IMAGE_NAME backend/${{ matrix.microservice }}
 
       - name: Enviar la imagen a Docker Hub
         run: docker push $IMAGE_NAME
-
-      # - name: Configurar kubectl
-      #   run: |
-      #     mkdir -p $HOME/.kube
-      #     echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-      #     kubectl config use-context minikube
-      #     kubectl config current-context
-
-      # - name: Desplegar a Kubernetes
-      #   run: |
-      #     # Reemplazar variables en los archivos YAML si es necesario
-      #     sed -i "s|\${{ secrets.DOCKERHUB_USERNAME }}/ms-inventario|$IMAGE_NAME|g" backend/ms-inventario/k8s/deployment.yaml
-      #     kubectl apply -f backend/ms-inventario/k8s/
