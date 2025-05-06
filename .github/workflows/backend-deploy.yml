@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # Esto buscará todas las carpetas que comiencen con ms- y las procesará en paralelo
         microservice: [db, ms-inventario]
     
     env:
@@ -26,7 +25,15 @@ jobs:
 
       - name: Construir la imagen de Docker
         run: |
-          docker build -t $IMAGE_NAME backend/${{ matrix.microservice }}
+          if [ "${{ matrix.microservice }}" == "db" ]; then
+            # Usa el Dockerfile específico para db
+            cd backend/db
+            docker build -t $IMAGE_NAME -f dockerfile-db-inventario .
+          else
+            # Para otros microservicios, asume que tienen un Dockerfile estándar
+            cd backend/${{ matrix.microservice }}
+            docker build -t $IMAGE_NAME .
+          fi
 
       - name: Enviar la imagen a Docker Hub
         run: docker push $IMAGE_NAME
