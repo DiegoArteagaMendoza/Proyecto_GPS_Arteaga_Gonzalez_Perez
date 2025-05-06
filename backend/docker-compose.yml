@@ -5,7 +5,7 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
     ports:
-      - "5432:5432"
+      - "54321:5432"
     volumes:
       - ./db/db_hola_mundo.sql:/docker-entrypoint-initdb.d/init.sql
   hola_mundo:
@@ -14,7 +14,7 @@ services:
       dockerfile: Dockerfile
     container_name: api-ms-holamundo
     ports:
-      - "8000:8000"
+      - "80010:8000"
     depends_on:
       db_hola_mundo:
         condition: service_started
@@ -24,7 +24,7 @@ services:
         dockerfile: Dockerfile
       container_name: api-ms-inventario
       ports:
-        - "8001:8000"
+        - "80011:8000"
       depends_on:
         db_inventario:
           condition: service_started

@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         # Esto buscará todas las carpetas que comiencen con ms- y las procesará en paralelo
-        microservice: [ms-inventario]
+        microservice: [ms-holamundo, ms-inventario]
         # Nota: Puedes generar esta lista dinámicamente con un paso previo si prefieres
     
     env:
