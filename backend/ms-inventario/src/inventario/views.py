@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-from .queryset import InventarioQuerySet, BodegaQuerySet
+from .queryset import InventarioQuerySet, ProdcutosQuerySet, BodegaQuerySet
 
 # Vistas para inventario
 @api_view(['GET'])
@@ -32,7 +32,6 @@ def buscar_inventario_por_bodega(request):
 @api_view(['POST'])
 def registrar_inventario(request):
     return InventarioQuerySet.crear_inventario(request)
-
 # Vistas para Bodega
 @api_view(['GET'])
 def obtener_bodegas(request):

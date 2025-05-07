@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Inventario,  Bodega
+from .models import Inventario, Producto, Bodega
+
 #Serializer para bodega
 class BodegaSerializer(serializers.ModelSerializer):
     class Meta:

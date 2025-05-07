@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models import F, Q
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import InventarioSerializer, BodegaSerializer
+from .serializers import InventarioSerializer, ProductoSerializer, BodegaSerializer
 
 # consultas para inventario
 """
