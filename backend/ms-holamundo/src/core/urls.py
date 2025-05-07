@@ -18,6 +18,6 @@ from django.urls import path
 from holamundo.views import PruebaView
 
 urlpatterns = [
-    path('obtenerPrueba/', PruebaView.as_view(), name='obtener-listado-prueba-completo'),
+    path('obtenPrueba/', PruebaView.as_view(), name='obtener-listado-prueba-completo'),
     path('crearPrueba/', PruebaView.as_view(), name='crear-prueba'),
 ]
