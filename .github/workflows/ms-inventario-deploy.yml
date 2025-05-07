@@ -1,0 +1,40 @@
+name: Backend CI - ms-inventario
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy-microservice:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        microservice: [ms-inventario]
+
+    env:
+      DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Leer versión del archivo VERSION
+        id: version
+        run: |
+          VERSION=$(cat backend/${{ matrix.microservice }}/VERSION)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Iniciar sesión en Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Construir la imagen de Docker con la versión
+        run: |
+          IMAGE_NAME=$DOCKER_REPO/${{ matrix.microservice }}:$VERSION
+          docker build -t $IMAGE_NAME backend/${{ matrix.microservice }}
+
+      - name: Enviar la imagen a Docker Hub
+        run: |
+          IMAGE_NAME=$DOCKER_REPO/${{ matrix.microservice }}:$VERSION
+          docker push $IMAGE_NAME

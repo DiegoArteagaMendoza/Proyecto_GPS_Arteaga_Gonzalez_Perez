@@ -7,7 +7,7 @@ services:
     ports:
       - "54321:5432"
     volumes:
-      - ./db/db_hola_mundo.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./ms-holamundo/db/db_hola_mundo.sql:/docker-entrypoint-initdb.d/init.sql
   hola_mundo:
     build:
       context: ./ms-holamundo
@@ -18,13 +18,23 @@ services:
     depends_on:
       db_hola_mundo:
         condition: service_started
-    inventario:
-      build:
-        context: ./ms-inventario
-        dockerfile: Dockerfile
-      container_name: api-ms-inventario
-      ports:
-        - "80011:8000"
-      depends_on:
-        db_inventario:
-          condition: service_started
+
+  db_inventario:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "54321:5432" # 5432 puerto base - 2 puerto para inventario
+    volumes:
+      - ./ms/inventario/db/db_inventario.sql:/docker-entrypoint-initdb.d/init.sql
+  inventario:
+    build:
+      context: ./ms-inventario
+      dockerfile: Dockerfile
+    container_name: api-ms-inventario
+    ports:
+      - "80011:8000"
+    depends_on:
+      db_inventario:
+        condition: service_started
