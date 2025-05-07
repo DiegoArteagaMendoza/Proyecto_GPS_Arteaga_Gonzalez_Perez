@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                git 'https://github.com/DiegoArteagaMendoza/Proyecto_GPS_Arteaga_Gonzalez_Perez.git'
+                git branch: 'main', url: 'https://github.com/DiegoArteagaMendoza/Proyecto_GPS_Arteaga_Gonzalez_Perez.git'
             }
         }
 
