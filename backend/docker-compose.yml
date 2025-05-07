@@ -7,7 +7,7 @@ services:
     ports:
       - "54321:5432"
     volumes:
-      - ./ms-holamundo/db/db_hola_mundo.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/db_hola_mundo.sql:/docker-entrypoint-initdb.d/init.sql
   hola_mundo:
     build:
       context: ./ms-holamundo
@@ -27,7 +27,7 @@ services:
     ports:
       - "54322:5432" # 5432 puerto base - 2 puerto para inventario
     volumes:
-      - ./ms-inventario/db/db_inventario.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/db_inventario.sql:/docker-entrypoint-initdb.d/init.sql
   inventario:
     build:
       context: ./ms-inventario
