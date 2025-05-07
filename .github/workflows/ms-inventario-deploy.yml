@@ -3,8 +3,12 @@ name: Backend CI - ms-inventario
 on:
   push:
     branches: [main]
+    paths:
+      - 'backend/ms-inventario/**'
   pull_request:
     branches: [main]
+    paths:
+      - 'backend/ms-inventario/**'
 
 jobs:
   build-and-deploy-inventario:

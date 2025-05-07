@@ -3,8 +3,12 @@ name: Backend CI - ms-holamundo
 on:
   push:
     branches: [main]
+    paths:
+      - 'backend/ms-holamundo/**'
   pull_request:
     branches: [main]
+    paths:
+      - 'backend/ms-holamundo/**'
 
 jobs:
   build-and-deploy-holamundo:
