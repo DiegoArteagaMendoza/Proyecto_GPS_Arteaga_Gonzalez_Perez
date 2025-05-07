@@ -2,42 +2,35 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'diegoarteagamendoza2002/ms-inventario:1.0.2'
-        DOCKERHUB_CREDENTIALS = 'dockerhub'
+        IMAGE_NAME = "diegoarteagamendoza2002/ms-inventario"
+        IMAGE_TAG = "1.0.2"
+        CONTAINER_NAME = "ms-inventario"
     }
 
     stages {
-        stage('Clonar repositorio') {
-            steps {
-                git branch: 'main', url: 'https://github.com/DiegoArteagaMendoza/Proyecto_GPS_Arteaga_Gonzalez_Perez.git'
-            }
-        }
-
-        stage('Construir imagen Docker') {
+        stage('Descargar imagen desde DockerHub') {
             steps {
                 script {
-                    docker.build(IMAGE_NAME)
+                    sh "docker pull ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
 
-        stage('Loguearse en DockerHub') {
+        stage('Detener contenedor anterior') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        docker.image(IMAGE_NAME).push("latest")
-                    }
+                    // Detener y eliminar el contenedor si ya existe
+                    sh "docker rm -f ${CONTAINER_NAME} || true"
                 }
             }
         }
 
-        stage('Desplegar en Docker Desktop') {
+        stage('Levantar nuevo contenedor') {
             steps {
-                sh """
-                    docker rm -f app || true
-                    docker pull $IMAGE_NAME
-                    docker run -d --name app -p 8081:80 $IMAGE_NAME
-                """
+                script {
+                    // Ejecutar el contenedor con la nueva imagen
+                    sh "docker run -d --name ${CONTAINER_NAME} -p 8080:8080 ${IMAGE_NAME}:${IMAGE_TAG}"
+                }
             }
         }
     }
