@@ -1,4 +1,4 @@
-name: Backend CI - ms-inventario
+name: Backend CI - ms-holamundo
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     branches: [main]
 
 jobs:
-  build-and-deploy-inventario:
+  build-and-deploy-holamundo:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        microservice: [ms-inventario]
+        microservice: [ms-holamundo]
 
     env:
       DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
