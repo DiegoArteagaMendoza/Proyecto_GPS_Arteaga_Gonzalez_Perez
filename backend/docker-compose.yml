@@ -25,9 +25,9 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
     ports:
-      - "54321:5432" # 5432 puerto base - 2 puerto para inventario
+      - "54322:5432" # 5432 puerto base - 2 puerto para inventario
     volumes:
-      - ./ms/inventario/db/db_inventario.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./ms-inventario/db/db_inventario.sql:/docker-entrypoint-initdb.d/init.sql
   inventario:
     build:
       context: ./ms-inventario
