@@ -115,7 +115,7 @@ class BodegaQuerySet(models.QuerySet):
         estado_bodega = request.GET.get('estado_bodega')
 
         if not estado_bodega:
-            return Response({'error': 'Debe proporcionar un estado de bodega'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Debe proporcionar un estado de la bodega'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             bodega = Bodega.objects.filter(estado=estado_bodega)
