@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import InventarioSerializer, ProductoSerializer, BodegaSerializer
 
-# consultas para inventario
+# consultas para Producto
 """
 Query set para realizar las consultar referentes al productos
 """
@@ -52,7 +52,7 @@ class ProductosQuerySet(models.QuerySet):
                 return Response({"error":"error al crear producto", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# consultas para inventario
+# consultas para Bodega
 """
 Query set para realizar las consultar referentes al bodega
 """
@@ -120,7 +120,16 @@ class BodegaQuerySet(models.QuerySet):
         try:
             bodega = Bodega.objects.filter(estado=estado_bodega)
             serializer = BodegaSerializer(bodega, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+
+            data = serializer.data
+
+            for item in data:
+                if item.get("estado") == "1.00":
+                    item["estado"] = "Activo"
+                elif item.get("estado") == "0.00":
+                    item["estado"] = "Inactivo"
+
+            return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
