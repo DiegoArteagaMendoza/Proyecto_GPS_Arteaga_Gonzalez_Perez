@@ -28,7 +28,7 @@ CREATE TABLE bodegas (
     nombre         VARCHAR(255) NOT NULL,
     ubicacion      TEXT,
     estado         DECIMAL(10,2)    DEFAULT 1
-);
+); 
 
 -- 3. Tabla principal de inventario
 
