@@ -30,7 +30,7 @@ jobs:
       - name: Construir la imagen de Docker
         run: |
           IMAGE_NAME=${{ env.DOCKER_REPO }}/${{ matrix.microservice }}:latest
-          docker build -t $IMAGE_NAME backend/${{ matrix.microservice }}
+          docker build -t $IMAGE_NAME backend/db/${{ matrix.microservice }}
 
       - name: Enviar la imagen a Docker Hub
         run: |
