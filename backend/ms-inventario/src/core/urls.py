@@ -16,7 +16,6 @@ urlpatterns = [
     path('bodegas/buscar/nombre/', obtener_bodega_por_nombre, name="listar-bodega-por-nombre"),
     path('bodegas/buscar/ubicacion/', obtener_bodega_por_ubicacion, name="listar-bodega-por-ubicacion"),
     path('bodegas/buscar/estado/', obtener_bodega_por_estado, name="listar-bodega-por-estado"),
-    path('bodegas/', obtener_bodegas, name="listar-todas-las-bodegas"),
     path('bodegas/registrar/', registrar_bodega, name="registrar-bodega"),
 
     # urls para inventario
