@@ -9,6 +9,18 @@ class BodegaSerializer(serializers.ModelSerializer):
             'id_bodega', 'nombre', 'ubicacion', 'estado'
         ]
         read_only_fields = ('id_bodega',)
+from .models import Inventario,  Producto
+#serializer para producto
+
+class ProductoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = [
+            'id_producto', 'nombre', 'descripcion'
+        ]
+        read_only_fields = ('id_producto',)
+
+
 # serializer para inventario
 class InventarioSerializer(serializers.ModelSerializer):
     class Meta:

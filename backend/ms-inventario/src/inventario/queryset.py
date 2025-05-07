@@ -9,7 +9,48 @@ from .serializers import InventarioSerializer, ProductoSerializer, BodegaSeriali
 """
 Query set para realizar las consultar referentes al productos
 """
+class ProductosQuerySet(models.QuerySet):
+    @staticmethod
+    def listar_productos():
+        Producto = apps.get_model('inventario', 'Producto') #el primero es el nombre de la app y el segundo el nombre del modelo
+        respuesta = Producto.objects.all()
+        serializer = ProductoSerializer(respuesta, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @staticmethod
+    def listar_producto_por_nombre(request):
+        Producto = apps.get_model('inventario', 'Producto')
+        nombre_producto = request.GET.get('nombre_producto')
+        if not nombre_producto:
+            return Response({'error': 'Debe proporcionar un nombre de producto'}, status=status.HTTP_400_BAD_REQUEST)
+        respuesta = Producto.objects.filter(nombre__icontains=nombre_producto) 
+        serializer = ProductoSerializer(respuesta, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @staticmethod
+    def consultar_producto_por_id(request):
+        Producto = apps.get_model('inventario', 'Producto')
+        id_producto = request.GET.get('id_producto')
+        if not id_producto:
+            return Response({'error': 'Debe proporcionar un ID de producto'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            producto = Producto.objects.filter(id_producto=id_producto)
+            serializer = ProductoSerializer(producto, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
+    @staticmethod
+    def crear_producto(request):
+        serializer = ProductoSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                return Response({"error":"error al crear producto", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # consultas para inventario
 """
