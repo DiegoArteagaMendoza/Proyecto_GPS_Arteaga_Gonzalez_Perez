@@ -3,6 +3,23 @@ from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
 from .queryset import InventarioQuerySet, ProdcutosQuerySet
+#Vistas para productos
+
+@api_view(['GET'])
+def listar_productos(request):
+    return ProdcutosQuerySet.listar_productos()
+
+@api_view(['GET'])
+def listar_producto_por_nombre(request):
+    return ProdcutosQuerySet.listar_producto_por_nombre(request)
+
+@api_view(['GET'])
+def consultar_producto_por_id(request):
+    return ProdcutosQuerySet.consultar_producto_por_id(request)
+
+@api_view(['POST'])
+def crear_producto(request):
+    return ProdcutosQuerySet.crear_producto(request)
 
 # Vistas para inventario
 @api_view(['GET'])

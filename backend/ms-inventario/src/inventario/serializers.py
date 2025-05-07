@@ -1,5 +1,15 @@
 from rest_framework import serializers
 from .models import Inventario,  Producto
+#serializer para producto
+
+class ProductoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = [
+            'id_producto', 'nombre', 'descripcion'
+        ]
+        read_only_fields = ('id_producto',)
+
 
 # serializer para inventario
 class InventarioSerializer(serializers.ModelSerializer):
