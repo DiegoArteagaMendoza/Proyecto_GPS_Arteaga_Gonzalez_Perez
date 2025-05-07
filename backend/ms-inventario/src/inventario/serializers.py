@@ -1,6 +1,13 @@
 from rest_framework import serializers
-from .models import Inventario,  Producto
-
+from .models import Inventario,  Bodega
+#Serializer para bodega
+class BodegaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bodega
+        fields = [
+            'id_bodega', 'nombre', 'ubicacion', 'estado'
+        ]
+        read_only_fields = ('id_bodega',)
 # serializer para inventario
 class InventarioSerializer(serializers.ModelSerializer):
     class Meta:
