@@ -7,6 +7,18 @@ from .serializers import InventarioSerializer, ProductoSerializer
 
 # consultas para inventario
 """
+Query set para realizar las consultar referentes al productos
+"""
+
+
+# consultas para inventario
+"""
+Query set para realizar las consultar referentes al bodega
+"""
+
+
+# consultas para inventario
+"""
 Query set para realizar las consultar referentes al inventario
 """
 class InventarioQuerySet(models.QuerySet):

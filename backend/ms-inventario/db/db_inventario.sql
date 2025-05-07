@@ -26,7 +26,8 @@ CREATE TABLE productos (
 CREATE TABLE bodegas (
     id_bodega      SERIAL PRIMARY KEY,
     nombre         VARCHAR(255) NOT NULL,
-    ubicacion      TEXT
+    ubicacion      TEXT,
+    estado         DECIMAL(10,2)    DEFAULT 1
 );
 
 -- 3. Tabla principal de inventario

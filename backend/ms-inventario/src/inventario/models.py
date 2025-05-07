@@ -18,6 +18,7 @@ class Bodega(models.Model):
     id_bodega = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255, verbose_name="Nombre")
     ubicacion = models.TextField(blank=True, null=True, verbose_name="Ubicación")
+    estado = models.DecimalField(max_digits=10, decimal_places=2, default=1)
 
     def __str__(self):
         return f"{self.nombre} - {self.ubicacion}"
