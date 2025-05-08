@@ -1,0 +1,19 @@
+<div class="dashboard-container">
+  <div class="main-content">
+    <app-side-menu></app-side-menu>
+
+    <div class="content">
+      <h2 >Bienvenid&#64; al sistema de inventario</h2>
+      <h3 >Farmacia {{nombreFarmacia}}</h3>
+      <p class="acciones-label">Acciones:</p>
+
+      <div class="acciones">
+        <div class="accion" *ngFor="let item of botones">
+          <i class='bx' [ngClass]="item.icon"></i>
+          <span>{{ item.texto }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
