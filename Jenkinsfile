@@ -3,26 +3,19 @@ pipeline {
   agent any
 
   stages {
-
-    stage("build") {
+    
+    stage("Pull Image") {
 
       steps {
-        echo 'construyendo la app'
+        echo 'Descagando la imagen'
+
+        script {
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-creds') {
+            docker.image('diegoarteagamendoza2002/ms-inventario:1.0.2').pull()
+          }
+        }
       }
     }
 
-    stage("test") {
-
-      steps {
-        echo 'probando la app'
-      }
-    }
-
-    stage("deploy") {
-
-      steps {
-        echo 'deploying la app'
-      }
-    }
   }
 }
