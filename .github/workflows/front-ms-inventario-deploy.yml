@@ -1,4 +1,4 @@
-name: Frontend CI - ms-inventario
+name: Frontend CI - ms-inventario-front
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        microservice: [ms-inventario-front]
+        microservice: [ms-inventario]
 
     env:
       DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
