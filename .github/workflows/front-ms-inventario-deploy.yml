@@ -36,7 +36,7 @@ jobs:
       - name: Construir la imagen de Docker con la versión
         run: |
           IMAGE_NAME=${{ env.DOCKER_REPO }}/${{ matrix.microservice }}:${{ env.VERSION }}
-          docker build -t $IMAGE_NAME frontend/${{ matrix.microservice }}
+          docker build -t $IMAGE_NAME frontend/${{ matrix.microservicioname }}
 
       - name: Enviar la imagen a Docker Hub
         run: |
