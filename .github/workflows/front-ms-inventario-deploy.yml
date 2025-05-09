@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        microservice: [ms-inventario]
+        microservice: [ms-inventario-front]
 
     env:
       DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
