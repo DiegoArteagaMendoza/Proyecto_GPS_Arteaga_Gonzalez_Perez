@@ -5,7 +5,7 @@ from inventario.views import obtener_bodegas, obtener_bodega_por_id, obtener_bod
 
 urlpatterns = [
     # urls para productos
-    path('productos/', listar_productos, name="listar-todos-los-productos"),
+    path('productos/', listar_productos, name="listar-todos-productos"),
     path('productos/buscar/nombre/', listar_producto_por_nombre, name="listar-producto-por-nombre"),
     path('productos/buscar/id/', consultar_producto_por_id, name="listar-productos-por-id"),
     path('productos/registrar/', crear_producto, name="registrar-producto"),
