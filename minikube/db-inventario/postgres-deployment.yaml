@@ -19,7 +19,7 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_DB
-              value: "db_inventario"
+              value: "db-inventario"
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
