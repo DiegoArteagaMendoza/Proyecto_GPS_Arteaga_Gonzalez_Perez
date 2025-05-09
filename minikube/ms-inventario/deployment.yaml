@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: ms-inventario
-          image: "diegoarteagamendoza2002/ms-inventario:latest"
+          image: "diegoarteagamendoza2002/ms-inventario:1.0.2"
           ports:
             - containerPort: 8000
