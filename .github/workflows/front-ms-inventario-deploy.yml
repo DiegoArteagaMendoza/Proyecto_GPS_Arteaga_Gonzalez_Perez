@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        microservice: [ms-inventario]
+        microservice: [ms-inventario-front]
+        microservicioname: [ms-inventario]
 
     env:
       DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -27,7 +28,7 @@ jobs:
       - name: Leer versión del archivo VERSION
         id: version
         run: |
-          echo "VERSION=$(cat frontend/${{ matrix.microservice }}/VERSION)" >> $GITHUB_ENV
+          echo "VERSION=$(cat frontend/${{ matrix.microservicioname }}/VERSION)" >> $GITHUB_ENV
 
       - name: Iniciar sesión en Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
