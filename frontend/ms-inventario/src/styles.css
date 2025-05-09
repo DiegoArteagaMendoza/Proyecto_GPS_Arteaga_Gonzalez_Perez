@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #DEF4FE;
+  height: 100%;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+app-side-menu {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.main-content {
+  margin-left: 250px; /* igual al ancho del menú */
+  width: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+}
+

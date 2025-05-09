@@ -1,0 +1,9 @@
+services:
+  inventario_frontend:
+    build:
+      context: ./ms-inventario
+      dockerfile: Dockerfile
+    container_name: frontend-ms-inventario
+    ports:
+      - "4200:80"
+    #depends_on: [el backend del inventairo]
