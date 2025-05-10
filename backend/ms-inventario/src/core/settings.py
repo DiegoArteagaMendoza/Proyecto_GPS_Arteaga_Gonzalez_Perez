@@ -82,7 +82,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db_inventario',
+        'HOST': 'db-inventario',
         # 'PORT': '54321',
         'PORT': '5432',
     }
