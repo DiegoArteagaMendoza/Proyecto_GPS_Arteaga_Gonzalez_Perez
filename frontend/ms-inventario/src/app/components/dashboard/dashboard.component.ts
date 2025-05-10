@@ -23,7 +23,7 @@ export class DashboardComponent {
 
   botones = [
     { texto: 'Listar Inventario', icon: 'bx-list-ul', ruta: '/listar-productos' },
-    { texto: 'Subir Producto', icon: 'bx-upload' },
+    { texto: 'Subir Producto', icon: 'bx-upload', ruta: '/subir-producto' },
     { texto: 'Actualizar Inventario', icon: 'bx-edit' },
     { texto: 'Eliminar Producto', icon: 'bx-trash' }
   ];
