@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-inventario-frontend
+  labels:
+    app: ms-inventario-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-inventario-frontend
+  template:
+    metadata:
+      labels:
+        app: ms-inventario-frontend
+    spec:
+      containers:
+        - name: ms-inventario-frontend
+          image: "diegoarteagamendoza2002/ms-inventario-frontend:1.0.0"
+          ports:
+            - containerPort: 80
