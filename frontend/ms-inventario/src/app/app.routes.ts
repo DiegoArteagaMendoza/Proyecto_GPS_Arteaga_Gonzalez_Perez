@@ -3,11 +3,17 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { ProductListComponent } from './components/product-list/product-list.component'; 
 import { ProductUploadComponent } from './components/product-upload/product-upload.component';
+import { API_URL } from '../../app.config';
+
+const authGuard = () => {
+  console.log('API_URL en guardia:', API_URL);
+  return true;
+};
 
 export const routes: Routes = [
-  { path: '', component: DashboardComponent }, // Ruta raíz
-  { path: 'listar-productos', component: ProductListComponent }, // Ruta para listar productos
-  {path: 'subir-producto', component: ProductUploadComponent}, // Ruta para subir productos
+  { path: '', component: DashboardComponent, canActivate: [authGuard] }, // Ruta raíz
+  { path: 'productos/', component: ProductListComponent, canActivate: [authGuard] }, // Ruta para listar productos
+  { path: 'productos/registrar/', component: ProductUploadComponent, canActivate: [authGuard] }, // Ruta para subir productos
 ];
 
 @NgModule({

@@ -7,7 +7,6 @@
 -- ====================================================
 
 -- 1. Crear la base de datos
-/*
 DROP DATABASE IF EXISTS inventario;
 CREATE DATABASE inventario
      WITH ENCODING 'UTF8'
@@ -15,7 +14,7 @@ CREATE DATABASE inventario
           LC_CTYPE  = 'en_US.utf8'
           TEMPLATE   = template0;
 \connect inventario;
-*/
+
 -- 2. Tablas base referenciadas
 
 CREATE TABLE productos (
