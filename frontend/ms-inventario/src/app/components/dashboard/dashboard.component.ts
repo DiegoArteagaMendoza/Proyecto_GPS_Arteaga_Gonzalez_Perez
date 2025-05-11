@@ -22,7 +22,7 @@ export class DashboardComponent {
   nombreFarmacia = 'San José'; // Esto se actualizará según quién inicie sesión
 
   botones = [
-    { texto: 'Listar Inventario', icon: 'bx-list-ul', ruta: 'productos/' },
+    { texto: 'Listar Inventario', icon: 'bx-list-ul', ruta: '/productos' },
     { texto: 'Subir Producto', icon: 'bx-upload', ruta: '/subir-producto' },
     { texto: 'Actualizar Inventario', icon: 'bx-edit' },
     { texto: 'Eliminar Producto', icon: 'bx-trash' }

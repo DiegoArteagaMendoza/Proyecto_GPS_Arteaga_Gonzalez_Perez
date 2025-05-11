@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: ms-inventario-frontend
-          image: "diegoarteagamendoza2002/ms-inventario-front:1.0.6"
+          image: "diegoarteagamendoza2002/ms-inventario-front:1.0.7"
           ports:
             - containerPort: 8083

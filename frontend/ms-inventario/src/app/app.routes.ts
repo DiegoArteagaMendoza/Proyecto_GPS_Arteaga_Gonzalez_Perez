@@ -12,7 +12,7 @@ const authGuard = () => {
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [authGuard] }, // Ruta raíz
-  { path: 'productos/', component: ProductListComponent, canActivate: [authGuard] }, // Ruta para listar productos
+  { path: '/productos', component: ProductListComponent, canActivate: [authGuard] }, // Ruta para listar productos
   { path: 'productos/registrar/', component: ProductUploadComponent, canActivate: [authGuard] }, // Ruta para subir productos
 ];
 
