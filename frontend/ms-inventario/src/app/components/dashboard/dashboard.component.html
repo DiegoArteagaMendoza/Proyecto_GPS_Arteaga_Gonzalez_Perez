@@ -8,10 +8,18 @@
       <p class="acciones-label">Acciones:</p>
 
       <div class="acciones">
-        <div class="accion" *ngFor="let item of botones">
-          <i class='bx' [ngClass]="item.icon"></i>
-          <span>{{ item.texto }}</span>
+        <div class="acciones">
+          <a 
+            class="accion" 
+            *ngFor="let item of botones" 
+            [routerLink]="item.ruta" 
+            style="text-decoration: none; color: inherit;">
+            
+            <i class='bx' [ngClass]="item.icon"></i>
+            <span>{{ item.texto }}</span>
+          </a>
         </div>
+
       </div>
     </div>
   </div>
