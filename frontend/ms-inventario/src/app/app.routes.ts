@@ -3,7 +3,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { ProductListComponent } from './components/product-list/product-list.component'; 
 import { ProductUploadComponent } from './components/product-upload/product-upload.component';
-import { API_URL } from 'app.config';
+import { API_URL } from '../app/app.config';
 
 const authGuard = () => {
   console.log('API_URL en guardia:', API_URL);
