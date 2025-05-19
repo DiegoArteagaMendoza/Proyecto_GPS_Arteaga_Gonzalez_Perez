@@ -27,6 +27,7 @@ CREATE TABLE bodegas (
     id_bodega      SERIAL PRIMARY KEY,
     nombre         VARCHAR(255) NOT NULL,
     ubicacion      TEXT,
+    farmacia       VARCHAR(255) NOT NULL,
     estado         DECIMAL(10,2)    DEFAULT 1
 ); 
 
@@ -37,6 +38,7 @@ CREATE TABLE inventario (
     id_producto          INTEGER NOT NULL REFERENCES productos(id_producto),
     nombre_producto      VARCHAR(255),
     id_bodega            INTEGER NOT NULL REFERENCES bodegas(id_bodega),
+    farmacia             VARCHAR(255) NOT NULL,
     lote                 VARCHAR(100),
     fecha_lote           DATE,
     fecha_vencimiento    DATE,
