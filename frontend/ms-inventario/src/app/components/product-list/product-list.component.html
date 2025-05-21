@@ -1,0 +1,44 @@
+<br>
+<br>
+
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h2>Listado de Productos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>IMAGEN</th>
+      <th>LABORATORIO</th>
+      <th>LOTE</th>
+      <th>BODEGA</th>
+      <th>TIPO DE VENTA</th>
+      <th>FECHA DE VENCIMIENTO</th>
+      <th>PRECIO</th>
+      <th>STOCK</th>
+      <th>ACCIONES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productos">
+      <td>{{ producto.id }}</td>
+      <td>{{ producto.imagen }}</td>
+      <td>{{ producto.laboratorio }}</td>
+      <td>{{ producto.lote }}</td>
+      <td>{{ producto.bodega }}</td>
+      <td>{{ producto.tipoVenta }}</td>
+      <td>{{ producto.fechaVencimiento }}</td>
+      <td>{{ producto.precio }}</td>
+      <td>{{ producto.stock }}</td>
+      <td><button>Acción</button></td>
+    </tr>
+  </tbody>
+</table>

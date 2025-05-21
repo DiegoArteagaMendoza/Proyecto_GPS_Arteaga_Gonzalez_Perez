@@ -1,11 +1,11 @@
 from django.urls import path
-from inventario.views import obtener_inventario_completo, buscar_inventario_por_nombre_producto, buscar_inventario_por_lote, buscar_inventario_por_bodega, buscar_inventario_por_id_producto, obtener_inventario_bajo_stock, registrar_inventario
+from inventario.views import obtener_inventario_completo, buscar_inventario_por_nombre_producto, buscar_inventario_por_lote, buscar_inventario_por_bodega, buscar_inventario_por_id_producto, obtener_inventario_bajo_stock, registrar_inventario, obtener_disponibilidad_por_farmacia
 from inventario.views import listar_productos, listar_producto_por_nombre, consultar_producto_por_id, crear_producto
 from inventario.views import obtener_bodegas, obtener_bodega_por_id, obtener_bodega_por_nombre, obtener_bodega_por_ubicacion, obtener_bodega_por_estado, registrar_bodega
 
 urlpatterns = [
     # urls para productos
-    path('productos/', listar_productos, name="listar-todos-los-productos"),
+    path('productos/', listar_productos, name="listar-todos-productos"),
     path('productos/buscar/nombre/', listar_producto_por_nombre, name="listar-producto-por-nombre"),
     path('productos/buscar/id/', consultar_producto_por_id, name="listar-productos-por-id"),
     path('productos/registrar/', crear_producto, name="registrar-producto"),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('inventario/buscar/lotes/', buscar_inventario_por_lote, name='buscar-por-lote'),
     path('inventario/bajo-stock/', obtener_inventario_bajo_stock, name='inventario-bajo-stock'),
     path('inventario/buscar/bodega/', buscar_inventario_por_bodega, name='buscar-por-bodega'),
+    path('inventario/buscar/farmacia/', obtener_disponibilidad_por_farmacia, name='buscar-por-farmacia'),
     path('inventario/registrar/', registrar_inventario, name='registrar-inventario'),
 ]

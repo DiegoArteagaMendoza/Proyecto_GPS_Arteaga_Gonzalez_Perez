@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&@hxs2@te@zo+x1%d$m#fs&jyeonsxd&-b-a#t0nbkr#jeuj8&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'pytest',
     'pytest-django',
     'coverage',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8083",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -85,7 +91,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db_inventario',
+        'HOST': 'db-inventario',
         # 'PORT': '54321',
         'PORT': '5432',
     }

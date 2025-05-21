@@ -46,6 +46,10 @@ def obtener_inventario_bajo_stock(request):
 def buscar_inventario_por_bodega(request):
     return InventarioQuerySet.consulta_inventario_por_bodega(request)
 
+@api_view(['GET'])
+def obtener_disponibilidad_por_farmacia(request):
+    return InventarioQuerySet.consultar_inventario_por_farmacia(request)
+
 @api_view(['POST'])
 def registrar_inventario(request):
     return InventarioQuerySet.crear_inventario(request)

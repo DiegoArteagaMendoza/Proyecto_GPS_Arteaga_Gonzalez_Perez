@@ -219,6 +219,16 @@ class InventarioQuerySet(models.QuerySet):
         serializer = InventarioSerializer(inventario, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    # Consultar inventario por farmacia
+    @staticmethod
+    def consultar_inventario_por_farmacia(request):
+        farmacia = request.GET.get('farmacia')
+        Inventario = apps.get_model('inventario', 'Inventario')
+
+        inventario = Inventario.objects.filter(bodega__farmacia=farmacia)
+        serializer = InventarioSerializer(inventario, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
     # Crear inventario
     @staticmethod
     def crear_inventario(request):

@@ -7,6 +7,6 @@ spec:
     app: ms-inventario-frontend
   ports:
     - protocol: TCP
-      port: 80
+      port: 8083
       targetPort: 80
   type: ClusterIP
