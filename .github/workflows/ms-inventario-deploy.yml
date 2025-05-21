@@ -29,6 +29,12 @@ jobs:
         run: |
           echo "VERSION=$(cat backend/${{ matrix.microservice }}/VERSION)" >> $GITHUB_ENV
 
+      - name: Probar tests
+        run: |
+          cd backend/${{ matrix.microservice }}
+          pytest 
+
+
       - name: Iniciar sesión en Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
