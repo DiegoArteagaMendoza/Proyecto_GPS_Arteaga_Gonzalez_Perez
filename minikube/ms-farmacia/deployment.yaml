@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-farmacia
+  labels:
+    app: ms-farmacia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-farmacia
+  template:
+    metadata:
+      labels:
+        app: ms-farmacia
+    spec:
+      containers:
+        - name: ms-farmacia
+          image: "diegoarteagamendoza2002/ms-farmacia:1.0.0"
+          ports:
+            - containerPort: 8008
