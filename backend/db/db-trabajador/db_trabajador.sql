@@ -28,15 +28,7 @@ CREATE TABLE trabajador (
     telefono          VARCHAR(20),
     correo_electronico VARCHAR(255),
     fecha_contratacion DATE DEFAULT CURRENT_DATE,
-    estado            BOOLEAN DEFAULT TRUE
-);
-
--- 5. Tabla intermedia: Asignación de Roles
--- Permite múltiples roles por trabajador y seguimiento temporal
-CREATE TABLE asignacion_rol (
-    id_trabajador INTEGER NOT NULL REFERENCES trabajador(id_trabajador),
-    id_rol        INTEGER NOT NULL REFERENCES rol(id_rol),
-    fecha_inicio  DATE DEFAULT CURRENT_DATE,
-    fecha_fin     DATE,
-    activo        BOOLEAN DEFAULT TRUE
+    estado            BOOLEAN DEFAULT TRUE,
+    rol               VARCHAR(100) NOT NULL,
+    contrasena        VARCHAR(255)
 );

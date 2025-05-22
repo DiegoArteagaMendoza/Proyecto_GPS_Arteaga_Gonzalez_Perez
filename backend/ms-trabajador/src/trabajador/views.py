@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-from .queryset import RolesQuerySet, TrabajadorQuerySet
+from .queryset import RolesQuerySet, TrabajadorQuerySet, IniciarSesionQuerySet
 
 """
 Vistas para roles
@@ -42,33 +42,13 @@ def actualizar_trabajador(request):
 def desactivar_trabajador(request):
     return TrabajadorQuerySet.desactivar_trabajador(request)
 
+@api_view(['POST'])
+def crear_trabajador(request):
+    return TrabajadorQuerySet.crear_trabajador(request)
+
 """
-Vistas para Asignacion de roles
+Login
 """
-@api_view(['POST'])
-def crear_asignacion(request):
-    return AsignacionRolQuerySet.crear_asignacion(request)
-
 @api_view(['GET'])
-def listar_todas(request):
-    return AsignacionRolQuerySet.listar_todas(request)
-
-@api_view(['GET'])
-def listar_activas(request):
-    return AsignacionRolQuerySet.listar_activas(request)
-
-@api_view(['GET'])
-def listar_inactivas(request):
-    return AsignacionRolQuerySet.listar_inactivas(request)
-
-@api_view(['PUT'])
-def actualizar_asignacion(request):
-    return AsignacionRolQuerySet.actualizar_asignacion(request)
-
-@api_view(['POST'])
-def desactivar_asignacion(request):
-    return AsignacionRolQuerySet.desactivar_asignacion(request)
-
-@api_view(['POST'])
-def reactivar_asignacion(request):
-    return AsignacionRolQuerySet.reactivar_asignacion(request)
+def login(request):
+    return IniciarSesionQuerySet.login(request)

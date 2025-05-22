@@ -26,23 +26,12 @@ class Trabajador(models.Model):
     correo_electronico = models.EmailField(max_length=255, blank=True, null=True, verbose_name="Correo Electrónico")
     fecha_contratacion = models.DateField(auto_now_add=True, verbose_name="Fecha de Contratación")
     estado = models.BooleanField(default=True, verbose_name="Estado")
+    rol = models.CharField(max_length=100, null=False)
+    contrasena = models.CharField(max_length=255, null=True, verbose_name="Contrasena")
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
     class Meta:
         db_table = 'trabajador'
-        managed = False
-
-
-# Modelo intermedio: Asignación de Roles
-class AsignacionRol(models.Model):
-    id_trabajador = models.ForeignKey(Trabajador, on_delete=models.CASCADE, db_column='id_trabajador')
-    id_rol = models.ForeignKey(Rol, on_delete=models.CASCADE, db_column='id_rol')
-    fecha_inicio = models.DateField(auto_now_add=True, verbose_name="Fecha de Inicio")
-    fecha_fin = models.DateField(null=True, blank=True, verbose_name="Fecha de Fin")
-    activo = models.BooleanField(default=True, verbose_name="Activo")
-
-    class Meta:
-        db_table = 'asignacion_rol'
         managed = False

@@ -3,7 +3,8 @@ from django.db import models
 from django.db.models import F, Q
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import RolSerializer, TrabajadorSerializer, AsignacionRolSerializer
+from .serializers import RolSerializer, TrabajadorSerializer
+from django.contrib.auth.hashers import make_password, check_password
    
 """
 Querys para roles
@@ -27,20 +28,66 @@ class RolesQuerySet(models.QuerySet):
         serializer = RolSerializer(respuesta, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    @staticmethod
+    def buscar_rol(rol):
+        Rol = apps.get_model('trabajador', 'Rol')
+        return Rol.objects.filter(nombre_rol=rol).exists()
+
+            
 """
 Query para trabajadores
 """
 class TrabajadorQuerySet(models.QuerySet):
+
     @staticmethod
     def crear_trabajador(request):
-        serializer = TrabajadorSerializer(data=request.data)
+        Trabajador = apps.get_model('trabajador', 'Trabajador')
+        rol_nombre = request.data.get("rol")
+        correo = request.data.get("correo_electronico")
+
+        if not rol_nombre:
+            return Response(
+                {"error": "El parámetro 'rol' es obligatorio."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not correo:
+            return Response(
+                {"error": "El parámetro 'correo' es obligatorio"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        rol_obj = RolesQuerySet.buscar_rol(rol_nombre)
+        if not rol_obj:
+            return Response(
+                {"error": f"El rol '{rol_nombre}' no existe."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        correo_obj = Trabajador.objects.filter(correo_electronico=correo).first()
+        if correo_obj is not None:
+            return Response(
+                {"error": f"El correo '{correo}' ya se encuentra registrado"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        data = request.data.copy()
+        if 'contrasena' in data:
+            data['contrasena'] = make_password(data['contrasena'])
+
+        serializer = TrabajadorSerializer(data=data)
         if serializer.is_valid():
             try:
-                serializer.save()
+                trabajador = serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except Exception as e:
-                return Response({"error":"error al crear un trabajador", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(
+                    {"error": "Error al crear el trabajador", "details": str(e)},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
     @staticmethod
     def buscar_por_rut(request):
@@ -165,6 +212,39 @@ class TrabajadorQuerySet(models.QuerySet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-"""
-Query set para asignacion de roles
-"""
+class IniciarSesionQuerySet(models.QuerySet):
+    @staticmethod
+    def login(request):
+        Trabajador = apps.get_model('trabajador', 'Trabajador')
+        rut = request.data.get("rut", None)
+        contrasena = request.data.get("contrasena", None)
+
+        if not rut or not contrasena:
+            return Response(
+                {"error": "Debe proporcionar RUT y contraseña"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            trabajador = Trabajador.objects.get(rut=rut)
+        except Trabajador.DoesNotExist:
+            return Response(
+                {"error": "Trabajador no encontrado"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        if not trabajador.estado:
+            return Response(
+                {"error": "El trabajador está desactivado"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # Verificar contraseña con check_password
+        if check_password(contrasena, trabajador.contrasena):
+            serializer = TrabajadorSerializer(trabajador)
+            return Response("Login exitoso", status=status.HTTP_200_OK)
+        else:
+            return Response(
+                {"error": "Contraseña incorrecta"},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
