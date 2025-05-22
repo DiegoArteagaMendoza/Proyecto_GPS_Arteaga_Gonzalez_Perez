@@ -1,7 +1,49 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: postgres
+#   namespace: backend
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: postgres
+#   template:
+#     metadata:
+#       labels:
+#         app: postgres
+#     spec:
+#       containers:
+#         - name: postgres
+#           image: diegoarteagamendoza2002/db-inventario:latest
+#           ports:
+#             - containerPort: 5432
+#           env:
+#             - name: POSTGRES_DB
+#               value: "db-inventario"
+#             - name: POSTGRES_USER
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: postgres-credentials
+#                   key: username
+#             - name: POSTGRES_PASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: postgres-credentials
+#                   key: password
+#           volumeMounts:
+#             - name: postgres-storage
+#               mountPath: /var/lib/postgresql/data
+#       volumes:
+#         - name: postgres-storage
+#           persistentVolumeClaim:
+#             claimName: postgres-pvc
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
+  namespace: backend
 spec:
   replicas: 1
   selector:
@@ -13,27 +55,27 @@ spec:
         app: postgres
     spec:
       containers:
-        - name: postgres
-          image: diegoarteagamendoza2002/db-inventario:latest
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: "db-inventario"
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: password
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql/data
-      volumes:
+      - name: postgres
+        image: diegoarteagamendoza2002/db-inventario:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "db-inventario"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: password
+        volumeMounts:
         - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-pvc
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc
