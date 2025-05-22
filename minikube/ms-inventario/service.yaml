@@ -1,13 +1,28 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: ms-inventario
+# spec:
+#   selector:
+#     app: ms-inventario
+#   ports:
+#     - protocol: TCP
+#       port: 8000
+#       targetPort: 8000
+#   type: ClusterIP 
+#   # loadbalancer
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: ms-inventario
+  name: ms-inventario-svc
+  namespace: inventario
 spec:
+  type: NodePort
   selector:
     app: ms-inventario
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
-  type: ClusterIP 
-  # loadbalancer
+      nodePort: 30080   # Puerto externo accesible
