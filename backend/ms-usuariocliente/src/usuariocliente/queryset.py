@@ -41,8 +41,7 @@ class productoQuerySet:
         respuesta = Producto.objects.filter(nombre__icontains=nombre)
         serializer = ProductoSerializer(respuesta, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
+    
 class FarmaciaQuerySet:
     @staticmethod
     def listar_farmacias():
