@@ -11,6 +11,11 @@ def listar_productos(request):
 def consulta_nombre_producto(request):
     return productoQuerySet.consulta_nombre_producto(request)
 
+# Vista para consultar farmacias donde un producto está disponible
+@api_view(['GET'])
+def farmacias_con_producto_disponible(request):
+    return productoQuerySet.farmacias_con_producto_disponible(request)
+
 # Vistas para usuarios
 @api_view(['GET'])
 def listar_usuarios(request):

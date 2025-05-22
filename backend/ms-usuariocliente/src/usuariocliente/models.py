@@ -81,6 +81,21 @@ class Producto(models.Model):
 # ----------------------------
 # Tabla: ProductosFarmacia
 # ----------------------------
+class ProductoFarmacia(models.Model):
+    id_producto_farmacia = models.AutoField(primary_key=True)
+    id_producto = models.ForeignKey('Producto', on_delete=models.CASCADE, db_column='id_producto', related_name='farmacias')
+    id_farmacia = models.ForeignKey('Farmacia', on_delete=models.CASCADE, db_column='id_farmacia', related_name='productos')
+    stock = models.IntegerField()
+    disponible = models.BooleanField(default=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.producto.nombre} en {self.farmacia.nombre}"
+
+    class Meta:
+        db_table = 'productos_farmacia'
+        unique_together = ('producto', 'farmacia')
+        managed = False
 
 
 # ----------------------------

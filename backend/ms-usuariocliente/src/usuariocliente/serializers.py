@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Usuario, Farmacia, UsuarioFarmacia, Producto, MedicamentoCliente
+from .models import Usuario, Farmacia, UsuarioFarmacia, Producto, MedicamentoCliente, ProductoFarmacia
 
 # Serializador para la tabla usuarios
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -45,3 +45,23 @@ class MedicamentoClienteSerializer(serializers.ModelSerializer):
             'id_medicamento_cliente', 'usuario', 'producto', 'fecha_asignacion', 'retiro', 'fecha_retiro'
         ]
         read_only_fields = ('id_medicamento_cliente',)
+
+# Serializador para la tabla productos_farmacia
+class ProductoFarmaciaSerializer(serializers.ModelSerializer):
+    nombre_producto = serializers.CharField(source='id_producto.nombre', read_only=True)
+    nombre_farmacia = serializers.CharField(source='id_farmacia.nombre', read_only=True)
+
+    class Meta:
+        model = ProductoFarmacia
+        fields = [
+            'id_producto_farmacia',
+            'id_producto',
+            'nombre_producto',
+            'id_farmacia',
+            'nombre_farmacia',
+            'stock',
+            'disponible',
+            'fecha_actualizacion'
+        ]
+        read_only_fields = ('id_producto_farmacia',)
+
