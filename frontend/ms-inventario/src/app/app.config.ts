@@ -7,4 +7,4 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
 };
 
-export const API_URL = 'http://localhost:8082/'
+export const API_URL = 'http://localhost:8082'
