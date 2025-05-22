@@ -2,22 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-from .queryset import FarmaicaQuerySet, RolesQuerySet, TrabajadorQuerySet, AsignacionRolQuerySet
-
-"""
-Vistas para farmacias
-"""
-@api_view(['GET'])
-def listar_farmacias(request):
-    return FarmaicaQuerySet.listar_farmacias()
-
-@api_view(['GET'])
-def listar_farmacias_por_nombre(request):
-    return FarmaicaQuerySet.listar_farmacias_por_nombre(request)
-
-@api_view(['POST'])
-def crear_farmacia(request):
-    return FarmaicaQuerySet.crear_farmacia(request)
+from .queryset import RolesQuerySet, TrabajadorQuerySet
 
 """
 Vistas para roles

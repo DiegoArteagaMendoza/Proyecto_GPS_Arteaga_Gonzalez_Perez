@@ -1,10 +1,3 @@
--- ====================================================
--- Script completo para PostgreSQL: Base de datos "trabajadores"
--- Incluye:
---   • Creación de la base de datos
---   • Tablas: trabajador, rol, asignacion_rol, departamento, supervision
--- ====================================================
-
 -- 1. Eliminar y crear la base de datos si ya existe
 DROP DATABASE IF EXISTS trabajadores;
 CREATE DATABASE trabajadores
@@ -14,13 +7,6 @@ CREATE DATABASE trabajadores
          TEMPLATE  = template0;
 
 \connect trabajadores;
-
--- 2. Tabla: Farmacia
--- Si necesitas organizar roles o trabajadores por farmacia
-CREATE TABLE farmacia (
-    id_departamento SERIAL PRIMARY KEY,
-    nombre          VARCHAR(255) NOT NULL
-);
 
 -- 3. Tabla: Rol
 -- Define los distintos roles que puede tener un trabajador
@@ -42,8 +28,7 @@ CREATE TABLE trabajador (
     telefono          VARCHAR(20),
     correo_electronico VARCHAR(255),
     fecha_contratacion DATE DEFAULT CURRENT_DATE,
-    estado            BOOLEAN DEFAULT TRUE,
-    id_departamento   INTEGER REFERENCES farmacia(id_departamento)
+    estado            BOOLEAN DEFAULT TRUE
 );
 
 -- 5. Tabla intermedia: Asignación de Roles

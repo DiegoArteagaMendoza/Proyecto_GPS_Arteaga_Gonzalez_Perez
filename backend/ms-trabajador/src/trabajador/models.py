@@ -1,19 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
-# Create your models here.
-# Modelo Farmacia
-class Farmacia(models.Model):
-    id_departamento = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=255, null=False, verbose_name="Nombre")
-
-    def __str__(self):
-        return self.nombre
-    
-    class Meta:
-        db_table = 'farmacia'
-        managed = False
-
 # Modelo rol
 class Rol (models.Model):
     id_rol = models.AutoField(primary_key=True)
@@ -39,7 +26,6 @@ class Trabajador(models.Model):
     correo_electronico = models.EmailField(max_length=255, blank=True, null=True, verbose_name="Correo Electrónico")
     fecha_contratacion = models.DateField(auto_now_add=True, verbose_name="Fecha de Contratación")
     estado = models.BooleanField(default=True, verbose_name="Estado")
-    id_departamento = models.ForeignKey(Farmacia, on_delete=models.CASCADE, db_column='id_departamento', verbose_name="Departamento")
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"

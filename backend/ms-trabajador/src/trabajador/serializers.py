@@ -1,13 +1,5 @@
 from rest_framework import serializers
-from .models import Farmacia, Rol, Trabajador, AsignacionRol
-
-class FarmaciaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Farmacia
-        fields = [
-            'id_departamento', 'nombre'
-        ]
-        read_only_fields = ('id_departamento',)
+from .models import Rol, Trabajador, AsignacionRol
 
 class RolSerializer(serializers.ModelSerializer):
     class Meta:

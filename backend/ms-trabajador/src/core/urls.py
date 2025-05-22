@@ -15,17 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from trabajador.views import crear_farmacia, listar_farmacias, listar_farmacias_por_nombre
 from trabajador.views import crear_rol, listar_roles
 from trabajador.views import listar_trabajadores, buscar_trabajador_rut, buscar_trabajador_nombre, buscar_por_correo, actualizar_trabajador, desactivar_trabajador
 from trabajador.views import crear_asignacion, listar_todas, listar_activas, listar_inactivas, actualizar_asignacion, desactivar_asignacion, reactivar_asignacion
 
 urlpatterns = [
-    # urls para farmacias
-    path('farmacias/', listar_farmacias, name="listar-todas-las-farmacias-posibles-para-trabajadores"),
-    path('farmacias/nombre/', listar_farmacias_por_nombre, name="listar-farmacias-posibles-trabajadores-por-nombre"),
-    path('farmacias/registrar/', crear_farmacia, name="crear-farmacia"),
-
     # urls para roles
     path('roles/', listar_roles, name="listar-roles-disponibles"),
     path('roles/crear/', crear_rol, name="crear-nuevo-rol"),

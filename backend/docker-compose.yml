@@ -4,7 +4,6 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
-      # POSTGRES_DB: inventario
     ports:
       - "54322:5432" # 5432 puerto base - 2 puerto para inventario
     volumes:
@@ -26,7 +25,6 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
-      # POSTGRES_DB: trabajadores
     ports:
       - "54323:5432" # 5432 puerto base - 3 puerto para trabajador
     volumes:
@@ -41,4 +39,25 @@ services:
       - "8003:8000"
     depends_on:
       db_trabajador:
+        condition: service_started
+
+  db_farmacia:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "54326:5432" # 5432 puerto base - 3 puerto para farmacia
+    volumes:
+      - ./db/db-farmacia/db_farmacia.sql:/docker-entrypoint-initdb.d/init.sql
+
+  farmacia:
+    build:
+      context: ./ms-farmacia
+      dockerfile: Dockerfile
+    container_name: api-ms-farmacia
+    ports:
+      - "8006:8000"
+    depends_on:
+      db_farmacia:
         condition: service_started
