@@ -6,7 +6,7 @@ ENV POSTGRES_USER=admin
 ENV POSTGRES_PASSWORD=secret
 
 # Copiar el archivo SQL al directorio de inicialización
-COPY db_trabajador.sql /docker-entrypoint-initdb.d/
+COPY db_farmacia.sql /docker-entrypoint-initdb.d/
 
 # Puerto expuesto (opcional, ya que PostgreSQL lo expone por defecto)
 EXPOSE 5432
