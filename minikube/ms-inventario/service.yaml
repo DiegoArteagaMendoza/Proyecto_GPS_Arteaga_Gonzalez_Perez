@@ -25,4 +25,4 @@ spec:
     - protocol: TCP
       port: 8002
       targetPort: 8002
-      nodePort: 30080   # Puerto externo accesible
+      nodePort: 30082   # Puerto externo accesible
