@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&@hxs2@te@zo+x1%d$m#fs&jyeonsxd&-b-a#t0nbkr#jeuj8&'
+SECRET_KEY = 'django-insecure-d#6azjfxyf^jk6i97bgrw@ipy5#%!xl#v6my4p6k&65n=o48*b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,11 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'inventario',
+    'usuariocliente',
     'rest_framework',
-    # 'pytest',
-    # 'pytest-django',
-    'coverage',
     'corsheaders',
 ]
 
@@ -53,11 +50,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8083",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -87,11 +79,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'inventario',
+        'NAME': 'usuarios_farmacia',
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db_inventario',
+        'HOST': 'db_cliente',
         # 'PORT': '54321',
         'PORT': '5432',
     }

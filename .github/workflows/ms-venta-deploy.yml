@@ -1,21 +1,21 @@
-name: Backend CI - ms-inventario
+name: Backend CI - ms-venta
 
 on:
   push:
     branches: [main]
     paths:
-      - 'backend/ms-inventario/**'
+      - 'backend/ms-venta/**'
   pull_request:
     branches: [main]
     paths:
-      - 'backend/ms-inventario/**'
+      - 'backend/ms-venta/**'
 
 jobs:
   build-and-deploy-inventario:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        microservice: [ms-inventario]
+        microservice: [ms-venta]
 
     env:
       DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
