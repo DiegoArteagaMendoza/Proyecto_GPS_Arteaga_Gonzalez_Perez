@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-usuariocliente
+  labels:
+    app: ms-usuariocliente
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-usuariocliente
+  template:
+    metadata:
+      labels:
+        app: ms-usuariocliente
+    spec:
+      containers:
+        - name: ms-usuariocliente
+          image: "diegoarteagamendoza2002/ms-usuariocliente:1.0.0"
+          ports:
+            - containerPort: 8004
