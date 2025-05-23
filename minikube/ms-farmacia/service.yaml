@@ -7,7 +7,7 @@ spec:
     app: ms-farmacia
   ports:
     - protocol: TCP
-      port: 8008
-      targetPort: 8008
+      port: 8006
+      targetPort: 8006
   type: ClusterIP 
   # loadbalancer

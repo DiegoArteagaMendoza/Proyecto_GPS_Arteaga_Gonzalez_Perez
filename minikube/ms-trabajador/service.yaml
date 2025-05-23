@@ -7,7 +7,7 @@ spec:
     app: ms-trabajador
   ports:
     - protocol: TCP
-      port: 8008
-      targetPort: 8009
+      port: 8003
+      targetPort: 8003
   type: ClusterIP 
   # loadbalancer

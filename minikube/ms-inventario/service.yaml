@@ -23,6 +23,6 @@ spec:
     app: ms-inventario
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 8002
+      targetPort: 8002
       nodePort: 30080   # Puerto externo accesible

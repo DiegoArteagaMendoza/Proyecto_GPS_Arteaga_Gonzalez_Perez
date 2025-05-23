@@ -16,7 +16,7 @@ spec:
         - name: postgres
           image: diegoarteagamendoza2002/db-farmacia:latest
           ports:
-            - containerPort: 5432
+            - containerPort: 54326
           env:
             - name: POSTGRES_DB
               value: "db-farmacia"

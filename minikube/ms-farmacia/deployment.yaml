@@ -18,4 +18,4 @@ spec:
         - name: ms-farmacia
           image: "diegoarteagamendoza2002/ms-farmacia:1.0.0"
           ports:
-            - containerPort: 8008
+            - containerPort: 8006

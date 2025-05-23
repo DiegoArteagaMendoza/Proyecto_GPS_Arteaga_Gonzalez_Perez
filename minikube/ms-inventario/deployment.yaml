@@ -40,4 +40,4 @@ spec:
       - name: ms-inventario
         image: diegoarteagamendoza2002/ms-inventario:1.0.10
         ports:
-        - containerPort: 8000
+        - containerPort: 8002

@@ -18,4 +18,4 @@ spec:
         - name: ms-trabajador
           image: "diegoarteagamendoza2002/ms-trabajador:1.0.0"
           ports:
-            - containerPort: 8009
+            - containerPort: 8003

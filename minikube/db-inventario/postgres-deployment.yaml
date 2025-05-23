@@ -58,7 +58,7 @@ spec:
       - name: postgres
         image: diegoarteagamendoza2002/db-inventario:latest
         ports:
-        - containerPort: 5432
+        - containerPort: 54322
         env:
         - name: POSTGRES_DB
           value: "db-inventario"
