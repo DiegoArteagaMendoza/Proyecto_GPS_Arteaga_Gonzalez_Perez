@@ -1,0 +1,38 @@
+name: Backend CI - db-farmacia
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/db/db-farmacia/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'backend/db/db-farmacia/**'
+
+jobs:
+  build-and-deploy-farmacia:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        microservice: [db-farmacia]
+
+    env:
+      DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Iniciar sesión en Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Construir la imagen de Docker
+        run: |
+          IMAGE_NAME=${{ env.DOCKER_REPO }}/${{ matrix.microservice }}:latest
+          docker build -t $IMAGE_NAME backend/db/${{ matrix.microservice }}
+
+      - name: Enviar la imagen a Docker Hub
+        run: |
+          IMAGE_NAME=${{ env.DOCKER_REPO }}/${{ matrix.microservice }}:latest
+          docker push $IMAGE_NAME
