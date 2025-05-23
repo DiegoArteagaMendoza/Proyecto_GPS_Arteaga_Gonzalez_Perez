@@ -1,30 +1,10 @@
 services:
-  db_hola_mundo:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: secret
-    ports:
-      - "54321:5432"
-    volumes:
-      - ./db/db_hola_mundo.sql:/docker-entrypoint-initdb.d/init.sql
-  hola_mundo:
-    build:
-      context: ./ms-holamundo
-      dockerfile: Dockerfile
-    container_name: api-ms-holamundo
-    ports:
-      - "8001:8000"
-    depends_on:
-      db_hola_mundo:
-        condition: service_started
-
   db_inventario:
     image: postgres:13
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
-      #POSTGRES_DB: inventario
+      ##POSTGRES_DB: inventario
     ports:
       - "54322:5432" # 5432 puerto base - 2 puerto para inventario
     volumes:
@@ -38,25 +18,4 @@ services:
       - "8002:8000"
     depends_on:
       db_inventario:
-        condition: service_started
-  
-  db_venta:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: secret
-      #POSTGRES_DB: venta
-    ports:
-      - "54325:5432" # 5432 puerto base - 2 puerto para inventario
-    volumes:
-      - ./db/db-venta/db_venta.sql:/docker-entrypoint-initdb.d/init.sql
-  venta:
-    build:
-      context: ./ms-venta
-      dockerfile: Dockerfile
-    container_name: api-ms-venta
-    ports:
-      - "8005:8000"
-    depends_on:
-      db_venta:
         condition: service_started
