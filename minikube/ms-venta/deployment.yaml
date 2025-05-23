@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ms-venta
-  labels:
-    app: ms-venta
+  namespace: backend
 spec:
   replicas: 1
   selector:
