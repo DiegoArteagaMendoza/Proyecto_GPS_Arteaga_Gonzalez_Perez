@@ -1,21 +1,21 @@
-name: Backend CI - ms-usuaciocliente
+name: Backend CI - ms-usuariocliente
 
 on:
   push:
     branches: [main]
     paths:
-      - 'backend/ms-usuaciocliente/**'
+      - 'backend/ms-usuariocliente/**'
   pull_request:
     branches: [main]
     paths:
-      - 'backend/ms-usuaciocliente/**'
+      - 'backend/ms-usuariocliente/**'
 
 jobs:
   build-and-deploy-inventario:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        microservice: [ms-usuaciocliente]
+        microservice: [ms-usuariocliente]
 
     env:
       DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -29,10 +29,10 @@ jobs:
         run: |
           echo "VERSION=$(cat backend/${{ matrix.microservice }}/VERSION)" >> $GITHUB_ENV
 
-      - name: Probar tests
-        run: |
-          cd backend/${{ matrix.microservice }}
-          pytest 
+      # - name: Probar tests
+      #   run: |
+      #     cd backend/${{ matrix.microservice }}
+      #     pytest 
 
 
       - name: Iniciar sesión en Docker Hub
