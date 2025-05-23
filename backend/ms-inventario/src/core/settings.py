@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inventario',
     'rest_framework',
-    'pytest',
-    'pytest-django',
+    # 'pytest',
+    # 'pytest-django',
     'coverage',
     'corsheaders',
 ]
