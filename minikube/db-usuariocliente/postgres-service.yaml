@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: db-farmacia
+  name: db-usuariocliente
 spec:
   type: NodePort
   selector:
     app: postgres
   ports:
     - protocol: TCP
-      port: 54326
-      targetPort: 54326
+      port: 54324
+      targetPort: 54324
       nodePort: 30432
