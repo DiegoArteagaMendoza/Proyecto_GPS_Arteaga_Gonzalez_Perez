@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ms-farmacia
-  labels:
-    app: ms-farmacia
+  namespace: backend
 spec:
   replicas: 1
   selector:
@@ -16,6 +15,6 @@ spec:
     spec:
       containers:
         - name: ms-farmacia
-          image: "diegoarteagamendoza2002/ms-farmacia:1.0.0"
+          image: "diegoarteagamendoza2002/ms-farmacia:1.0.1"
           ports:
             - containerPort: 8006

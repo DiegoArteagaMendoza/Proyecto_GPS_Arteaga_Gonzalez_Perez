@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ms-trabajador
-  labels:
-    app: ms-trabajador
+  namespace: backend
 spec:
   replicas: 1
   selector:
@@ -16,6 +15,6 @@ spec:
     spec:
       containers:
         - name: ms-trabajador
-          image: "diegoarteagamendoza2002/ms-trabajador:1.0.0"
+          image: "diegoarteagamendoza2002/ms-trabajador:1.0.1"
           ports:
             - containerPort: 8003

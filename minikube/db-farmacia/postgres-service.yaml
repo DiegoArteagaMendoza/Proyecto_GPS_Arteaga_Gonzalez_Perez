@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: db-farmacia
+  namespace: database
 spec:
   type: NodePort
   selector:
@@ -10,4 +11,4 @@ spec:
     - protocol: TCP
       port: 54326
       targetPort: 54326
-      nodePort: 30432
+      nodePort: 30436
