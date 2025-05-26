@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: ms-venta
-          image: "diegoarteagamendoza2002/ms-venta:1.0.0"
+          image: "diegoarteagamendoza2002/ms-venta:1.0.1"
           ports:
             - containerPort: 8005
