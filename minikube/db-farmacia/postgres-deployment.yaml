@@ -37,4 +37,4 @@ spec:
       volumes:
         - name: postgres-storage-farmacia
           persistentVolumeClaim:
-            claimName: postgres-pvc
+            claimName: postgres-pvc-farmacia
