@@ -83,7 +83,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db_trabajador',
+        'HOST': 'db-trabajador-trabajador.database.svc.cluster.local',
         # 'PORT': '54321',
         'PORT': '5432',
     }

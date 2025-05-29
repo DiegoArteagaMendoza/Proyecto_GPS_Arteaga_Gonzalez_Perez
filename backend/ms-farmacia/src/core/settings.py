@@ -83,7 +83,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db_farmacia',
+        'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
         # 'PORT': '54321',
         'PORT': '5432',
     }

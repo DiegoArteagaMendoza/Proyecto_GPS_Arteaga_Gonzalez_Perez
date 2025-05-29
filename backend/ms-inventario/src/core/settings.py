@@ -91,7 +91,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db_inventario',
+        'HOST': 'db-inventario-inventario.database.svc.cluster.local',
         # 'PORT': '54321',
         'PORT': '5432',
     }
