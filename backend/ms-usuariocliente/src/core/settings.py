@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-d#6azjfxyf^jk6i97bgrw@ipy5#%!xl#v6my4p6k&65n=o48*b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -51,10 +51,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = True
-
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -86,7 +86,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db_cliente',
+        'HOST': 'db-usuariocliente-usuariocliente.database.svc.cluster.local',
         # 'PORT': '54321',
         'PORT': '5432',
     }

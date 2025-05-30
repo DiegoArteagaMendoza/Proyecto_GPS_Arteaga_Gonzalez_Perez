@@ -4,11 +4,11 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
-      #POSTGRES_DB: inventario
     ports:
       - "54322:5432" # 5432 puerto base - 2 puerto para inventario
     volumes:
       - ./db/db-inventario/db_inventario.sql:/docker-entrypoint-initdb.d/init.sql
+  
   inventario:
     build:
       context: ./ms-inventario
@@ -20,6 +20,48 @@ services:
       db_inventario:
         condition: service_started
   
+  db_trabajador:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "54323:5432" # 5432 puerto base - 3 puerto para trabajador
+    volumes:
+      - ./db/db-trabajador/db_trabajador.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  trabajador:
+    build:
+      context: ./ms-trabajador
+      dockerfile: Dockerfile
+    container_name: api-ms-trabajador
+    ports:
+      - "8003:8000"
+    depends_on:
+      db_trabajador:
+        condition: service_started
+
+  db_farmacia:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "54326:5432" # 5432 puerto base - 3 puerto para farmacia
+    volumes:
+      - ./db/db-farmacia/db_farmacia.sql:/docker-entrypoint-initdb.d/init.sql
+
+  farmacia:
+    build:
+      context: ./ms-farmacia
+      dockerfile: Dockerfile
+    container_name: api-ms-farmacia
+    ports:
+      - "8006:8000"
+    depends_on:
+      db_farmacia:
+        condition: service_started
+
   db_cliente:
     image: postgres:13
     environment:
@@ -39,4 +81,25 @@ services:
       - "8004:8000"
     depends_on:
       db_cliente:
+        condition: service_started
+
+  db_venta:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      #POSTGRES_DB: venta
+    ports:
+      - "54325:5432" # 5432 puerto base - 2 puerto para inventario
+    volumes:
+      - ./db/db-venta/db_venta.sql:/docker-entrypoint-initdb.d/init.sql
+  venta:
+    build:
+      context: ./ms-venta
+      dockerfile: Dockerfile
+    container_name: api-ms-venta
+    ports:
+      - "8005:8000"
+    depends_on:
+      db_venta:
         condition: service_started
