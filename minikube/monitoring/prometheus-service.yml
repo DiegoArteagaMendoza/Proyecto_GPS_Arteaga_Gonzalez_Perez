@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+  namespace: monitoring
+  labels:
+    app: prometheus
+spec:
+  selector:
+    app: prometheus
+  ports:
+    - protocol: TCP
+      port: 9090       # Puerto del servicio dentro del clúster
+      targetPort: 9090 # Puerto del contenedor de Prometheus
+  # type: NodePort # Opcional: si quieres acceder a Prometheus UI directamente desde tu máquina (Minikube)

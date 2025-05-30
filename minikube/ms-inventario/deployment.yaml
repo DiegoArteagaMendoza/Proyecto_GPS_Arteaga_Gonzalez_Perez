@@ -19,3 +19,4 @@ spec:
           image: "diegoarteagamendoza2002/ms-inventario:1.0.7"
           ports:
             - containerPort: 8000
+          args: ["python", "manage.py", "runserver", "0.0.0.0:8000"]

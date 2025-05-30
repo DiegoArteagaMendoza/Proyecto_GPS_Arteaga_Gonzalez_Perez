@@ -1,0 +1,43 @@
+#le dice a Prometheus qué y cómo "scrapear" (recolectar) las métricas. 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'kubernetes-services'
+        kubernetes_sd_configs:
+          - role: service # Descubre servicios
+        relabel_configs:
+          # Solo recolecta de servicios con la anotación prometheus.io/scrape=true
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          # Usa el scheme (http/https) de la anotación del servicio
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
+            action: replace
+            target_label: __scheme__
+            regex: (https?)
+          # Usa el path de la anotación del servicio
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+          # Construye la dirección de scrape usando el nombre del servicio, namespace y el puerto de la anotación
+          - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+            action: replace
+            target_label: __address__
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+          # Etiqueta con el namespace del servicio
+          - source_labels: [__meta_kubernetes_namespace]
+            action: replace
+            target_label: kubernetes_namespace
+          # Etiqueta con el nombre del servicio
+          - source_labels: [__meta_kubernetes_service_name]
+            action: replace
+            target_label: kubernetes_name
