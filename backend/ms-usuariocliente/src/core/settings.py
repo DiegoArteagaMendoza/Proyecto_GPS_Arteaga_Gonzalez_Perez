@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vb6)ih=w5f_fzb$o6zx@#0r4s&v($56nv14odr0()+6l+!lz+('
+SECRET_KEY = 'django-insecure-d#6azjfxyf^jk6i97bgrw@ipy5#%!xl#v6my4p6k&65n=o48*b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'usuariocliente',
     'rest_framework',
     'corsheaders',
-    'farmacia',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
-
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -83,11 +82,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'farmacias',
+        'NAME': 'usuarios_farmacia',
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
+        'HOST': 'db-usuariocliente-usuariocliente.database.svc.cluster.local',
         # 'PORT': '54321',
         'PORT': '5432',
     }

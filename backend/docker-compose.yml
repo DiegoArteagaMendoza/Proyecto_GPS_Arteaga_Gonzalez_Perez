@@ -83,3 +83,45 @@ services:
     depends_on:
       db_farmacia:
         condition: service_started
+
+  db_cliente:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "54324:5432" # 5432 puerto base - 3 puerto para cliente
+    volumes:
+      - ./db/db-usuariocliente/db_usuariocliente.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  usuariocliente:
+    build:
+      context: ./ms-usuariocliente
+      dockerfile: Dockerfile
+    container_name: api-ms-usuariocliente
+    ports:
+      - "8004:8000"
+    depends_on:
+      db_cliente:
+        condition: service_started
+
+  db_venta:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      #POSTGRES_DB: venta
+    ports:
+      - "54325:5432" # 5432 puerto base - 2 puerto para inventario
+    volumes:
+      - ./db/db-venta/db_venta.sql:/docker-entrypoint-initdb.d/init.sql
+  venta:
+    build:
+      context: ./ms-venta
+      dockerfile: Dockerfile
+    container_name: api-ms-venta
+    ports:
+      - "8005:8000"
+    depends_on:
+      db_venta:
+        condition: service_started

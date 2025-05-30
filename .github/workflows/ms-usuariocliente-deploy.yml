@@ -1,21 +1,21 @@
-name: Backend CI - ms-venta
+name: Backend CI - ms-usuariocliente
 
 on:
   push:
     branches: [main]
     paths:
-      - 'backend/ms-venta/**'
+      - 'backend/ms-usuariocliente/**'
   pull_request:
     branches: [main]
     paths:
-      - 'backend/ms-venta/**'
+      - 'backend/ms-usuariocliente/**'
 
 jobs:
   build-and-deploy-inventario:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        microservice: [ms-venta]
+        microservice: [ms-usuariocliente]
 
     env:
       DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
