@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="../css/listarUsuario.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Inicio</a>
+        <a href="/frontend/ms-usuariocliente/html/crearUsuario.html">Crear Usuario</a>
+        <a href="./listarFarmacia.html" >Listar Farmacias</a>
+    </div>
+
+    <div class="container">
+        <h1>Usuarios Registrados</h1>
+        <table id="usuariosTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>RUT</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Fecha de Registro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Se insertarán dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="../js/listarUsuario.js"></script>
+</body>
+</html>
