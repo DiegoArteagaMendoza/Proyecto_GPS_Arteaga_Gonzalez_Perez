@@ -94,7 +94,7 @@ class ProductoFarmacia(models.Model):
 
     class Meta:
         db_table = 'productos_farmacia'
-        unique_together = ('producto', 'farmacia')
+        # unique_together = ('producto', 'farmacia')
         managed = False
 
 
@@ -114,5 +114,5 @@ class MedicamentoCliente(models.Model):
 
     class Meta:
         db_table = 'medicamentos_cliente'
-        unique_together = ('usuario', 'producto')
+        # unique_together = ('usuario', 'producto')
         managed = False
