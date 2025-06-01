@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib import admin
-from django_prometheus import exports # type: ignore
+# from django_prometheus import exports
 from django.urls import path
 from inventario.views import obtener_inventario_completo, buscar_inventario_por_nombre_producto, buscar_inventario_por_lote, buscar_inventario_por_bodega, buscar_inventario_por_id_producto, obtener_inventario_bajo_stock, registrar_inventario, obtener_disponibilidad_por_farmacia
 from inventario.views import listar_productos, listar_producto_por_nombre, consultar_producto_por_id, crear_producto
