@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vb6)ih=w5f_fzb$o6zx@#0r4s&v($56nv14odr0()+6l+!lz+('
+SECRET_KEY = 'django-insecure-62hoht90doq*fq$10b8d-8&ex&qurri&mk+aw!7=d5mv4jss0q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'farmacia',
+    'venta',
 ]
 
 MIDDLEWARE = [
@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'farmacias',
+        'NAME': 'venta',
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
+        'HOST': 'db-venta-venta.database.svc.cluster.local',
         # 'PORT': '54321',
         'PORT': '5432',
     }
