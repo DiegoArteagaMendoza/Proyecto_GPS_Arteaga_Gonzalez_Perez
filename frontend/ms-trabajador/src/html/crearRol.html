@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Rol</title>
+    <link rel="stylesheet" href="../css/crearRol.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="../../../ms-farmacia/src/html/listarFarmacias.html" class="active">Farmacias</a>
+        <a href="../../../ms-farmacia/src/html/crearFarmacia.html">Crear farmacia</a>
+        <a href="../../../ms-trabajador/src/html/crearTrabajador.html">Ingresar Trabajador</a>
+        <a href="../../../ms-trabajador/src/html/crearRol.html">Crear Rol</a>
+        <a href="../../../ms-trabajador/src/html/trabajadores.html">Trabajadores farmacia</a>
+        <a href="#">Orders</a>
+    </div>
+
+    <div class="container">
+        <h1>Crear Nuevo Rol</h1>
+        <form id="roleForm">
+            <div class="form-group">
+                <label for="nombreRol">Nombre del Rol*</label>
+                <input type="text" id="nombreRol" placeholder="Ingrese nombre del rol" required>
+                <small class="error-message" id="nombreRolError"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" placeholder="Ingrese descripción del rol (opcional)" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Crear Rol</button>
+        </form>
+    </div>
+
+    <script src="../js/crearRol.js"></script>
+</body>
+
+</html>
