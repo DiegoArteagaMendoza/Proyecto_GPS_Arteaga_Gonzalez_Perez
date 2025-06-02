@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-deployment
+  namespace: monitoring
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana-oss:10.4.2 # Revisa la última versión estable
+          ports:
+            - containerPort: 3000
+          # volumeMounts: # Opcional: para persistencia de dashboards y configuración
+          #   - name: grafana-storage
+          #     mountPath: /var/lib/grafana
+      # volumes: # Opcional
+      #   - name: grafana-storage
+      #     emptyDir: {} # Para persistencia básica, considera PersistentVolumeClaims
