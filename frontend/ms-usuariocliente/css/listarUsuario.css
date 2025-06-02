@@ -1,11 +1,11 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
     margin: 0;
     padding: 0;
-}
+} */
 
-.navbar {
+/* .navbar {
     background-color: #003366;
     overflow: hidden;
     padding: 1em;
@@ -21,7 +21,7 @@ body {
 
 .navbar a:hover, .navbar a.active {
     background-color: #0055aa;
-}
+} */
 
 .container {
     padding: 2em;
