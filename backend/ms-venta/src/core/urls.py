@@ -31,5 +31,5 @@ urlpatterns = [
     #boleta
     path('listar/boleta/', listar_boletas, name='listar-boletas'),
     path('realizar/boleta/', realizar_boleta, name='realizar-boleta'),
-    path('listar/boleta/rut/', listar_boleta_por_rut, name='listar-boleta-por-rut'),
+    path('RutaPrueba/', listar_boleta_por_rut, name='listar-boleta-por-rut'),
 ]
