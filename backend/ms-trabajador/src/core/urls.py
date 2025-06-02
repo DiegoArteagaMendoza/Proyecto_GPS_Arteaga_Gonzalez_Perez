@@ -14,12 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path, include
+from django.contrib import admin
 from trabajador.views import crear_rol, listar_roles
 from trabajador.views import listar_trabajadores, buscar_trabajador_rut, buscar_trabajador_nombre, buscar_por_correo, actualizar_trabajador, desactivar_trabajador, crear_trabajador
 from trabajador.views import login
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('django_prometheus.urls')),
     # urls para roles
     path('roles/', listar_roles, name="listar-roles-disponibles"),
     path('roles/crear/', crear_rol, name="crear-nuevo-rol"),
