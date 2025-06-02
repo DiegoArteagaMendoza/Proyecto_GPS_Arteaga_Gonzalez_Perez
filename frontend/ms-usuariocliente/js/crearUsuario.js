@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
             correo: document.getElementById('correo').value.trim(),
             contraseña: document.getElementById('contrasena').value,
             telefono: document.getElementById('telefono').value.trim() || null,
-            rol: document.getElementById('rol').value
+            rol: "cliente"
         };
 
         try {
