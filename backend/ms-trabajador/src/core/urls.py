@@ -38,4 +38,6 @@ urlpatterns = [
 
     # urls para login
     path('login/', login, name="login"),
+    path('logout/', login, name="logout"),
+
 ]
