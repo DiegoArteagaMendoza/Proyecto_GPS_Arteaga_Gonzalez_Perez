@@ -11,9 +11,20 @@
     /* Controlar el tamaño de los elementos */
 }
 
+.navbar a {
+    color: white;
+    /* Color principal de los enlaces */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
 .navbar a,
 .navbar .dropbtn {
-    color: #3498db;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
