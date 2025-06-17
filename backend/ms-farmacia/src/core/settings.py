@@ -85,24 +85,25 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default="postgresql://postgres:zofTwVrfFbmnwcqqwzOjfuFMUdPaKWBp@ballast.proxy.rlwy.net:38687/railway"
-    )
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'farmacias',
-#         'USER': 'admin',
-#         'PASSWORD': 'secret',
-#         # 'HOST': 'localhost',
-#         'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
-#         # 'PORT': '54321',
-#         'PORT': '5432',
-#     }
+#     'default': dj_database_url.config(
+#         default="postgresql://postgres:zofTwVrfFbmnwcqqwzOjfuFMUdPaKWBp@ballast.proxy.rlwy.net:38687/railway"
+#     )
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'farmacias',
+        'USER': 'admin',
+        'PASSWORD': 'secret',
+        # 'HOST': 'localhost',
+        # 'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
+        'HOST': 'db-farmacia-production.up.railway.app',
+        # 'PORT': '54321',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
