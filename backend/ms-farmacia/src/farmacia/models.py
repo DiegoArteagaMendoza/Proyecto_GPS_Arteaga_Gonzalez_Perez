@@ -13,4 +13,4 @@ class Farmacia(models.Model):
     
     class Meta:
         db_table = 'farmacia'
-        managed = True
+        managed = False
