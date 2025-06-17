@@ -90,7 +90,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db-venta-venta.database.svc.cluster.local',
+        'HOST': 'db-venta-production.up.railway.app',
         # 'PORT': '54321',
         'PORT': '5432',
     }

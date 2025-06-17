@@ -89,7 +89,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'secret',
         # 'HOST': 'localhost',
-        'HOST': 'db-usuariocliente-usuariocliente.database.svc.cluster.local',
+        'HOST': 'db-usuariocliente-production.up.railway.app',
         # 'PORT': '54321',
         'PORT': '5432',
     }
