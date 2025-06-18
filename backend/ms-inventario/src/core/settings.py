@@ -88,16 +88,29 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'inventario',
+#         'USER': 'admin',
+#         'PASSWORD': 'secret',
+#         # 'HOST': 'localhost',
+#         'HOST': 'db-inventario-production.up.railway.app',
+#         # 'PORT': '54321',
+#         'PORT': '5432',
+#     }
+# }
+
+import os
+# Configuración de la base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'inventario',
-        'USER': 'admin',
-        'PASSWORD': 'secret',
-        # 'HOST': 'localhost',
-        'HOST': 'db-inventario-production.up.railway.app',
-        # 'PORT': '54321',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'inventario'),      # Valor por defecto: 'farmacias'
+        'USER': os.getenv('DB_USER', 'admin'),          # Valor por defecto: 'admin'
+        'PASSWORD': os.getenv('DB_PASSWORD', 'secret'), # Valor por defecto: 'secret'
+        'HOST': os.getenv('DB_HOST', 'db-inventario.database.svc.cluster.local'), # Defecto: tu HOST actual
+        'PORT': os.getenv('DB_PORT', '5432'),           # Valor por defecto: '5432'
     }
 }
 
