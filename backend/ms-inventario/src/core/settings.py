@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&@hxs2@te@zo+x1%d$m#fs&jyeonsxd&-b-a#t0nbkr#jeuj8&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -86,16 +88,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'inventario',
+#         'USER': 'admin',
+#         'PASSWORD': 'secret',
+#         # 'HOST': 'localhost',
+#         'HOST': 'db-inventario-production.up.railway.app',
+#         # 'PORT': '54321',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
-    'default': {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'inventario',
-        'USER': 'admin',
-        'PASSWORD': 'secret',
-        # 'HOST': 'localhost',
-        'HOST': 'db-inventario-production.up.railway.app',
-        # 'PORT': '54321',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
