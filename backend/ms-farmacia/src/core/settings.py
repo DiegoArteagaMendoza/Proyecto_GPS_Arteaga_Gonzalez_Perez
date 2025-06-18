@@ -89,17 +89,29 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     )
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'farmacias',
+#         'USER': 'admin',
+#         'PASSWORD': 'secret',
+#         # 'HOST': 'localhost',
+#         'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
+#         # 'PORT': '54321',
+#         'PORT': '5432',
+#     }
+# }
+
+import os
+# Configuración de la base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'farmacias',
-        'USER': 'admin',
-        'PASSWORD': 'secret',
-        # 'HOST': 'localhost',
-        # 'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
-        'HOST': 'db-farmacia-production.up.railway.app',
-        # 'PORT': '54321',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'farmacias'),      # Valor por defecto: 'farmacias'
+        'USER': os.getenv('DB_USER', 'admin'),          # Valor por defecto: 'admin'
+        'PASSWORD': os.getenv('DB_PASSWORD', 'secret'), # Valor por defecto: 'secret'
+        'HOST': os.getenv('DB_HOST', 'db-farmacia-farmacia.database.svc.cluster.local'), # Defecto: tu HOST actual
+        'PORT': os.getenv('DB_PORT', '5432'),           # Valor por defecto: '5432'
     }
 }
 
