@@ -12,7 +12,7 @@ COPY start.sh /start.sh
 # Damos permiso de ejecución
 RUN chmod +x /start.sh
 
-EXPOSE 8000
+EXPOSE 8080
 
 # Usamos el script como punto de entrada
 CMD ["/start.sh"]
