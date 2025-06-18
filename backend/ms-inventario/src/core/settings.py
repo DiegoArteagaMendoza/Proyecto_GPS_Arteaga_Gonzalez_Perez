@@ -88,18 +88,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'inventario',
-#         'USER': 'admin',
-#         'PASSWORD': 'secret',
-#         # 'HOST': 'localhost',
-#         'HOST': 'db-inventario-production.up.railway.app',
-#         # 'PORT': '54321',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'inventario',
+        'USER': 'admin',
+        'PASSWORD': 'secret',
+        # 'HOST': 'localhost',
+        'HOST': 'db-inventario-production.up.railway.app',
+        # 'PORT': '54321',
+        'PORT': '5432',
+    }
+}
 
 DATABASES = {
         'default': {
