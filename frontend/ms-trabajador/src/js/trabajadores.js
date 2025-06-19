@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadWorkers();
     setupEventListeners();
 
-    function setupEventListeners() {
+    function setupEventListeners() {1
         searchInput.addEventListener('input', filterWorkers);
         refreshBtn.addEventListener('click', loadWorkers);
         prevBtn.addEventListener('click', () => {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show loading state
             workersTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Cargando trabajadores...</td></tr>';
 
-            const response = await fetch('http://localhost:8003/trabajador/');
+            const response = await fetch('http://ms-trabajador-production-f278.up.railway.app/trabajador/');
             if (!response.ok) {
                 throw new Error('Error al cargar los trabajadores');
             }
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function confirmDelete(workerId) {
         if (confirm('¿Está seguro que desea eliminar este trabajador?')) {
             try {
-                const response = await fetch(`http://localhost:8003/trabajador/${workerId}/`, {
+                const response = await fetch(`http://ms-trabajador-production-f278.up.railway.app/trabajador/${workerId}/`, {
                     method: 'DELETE'
                 });
 

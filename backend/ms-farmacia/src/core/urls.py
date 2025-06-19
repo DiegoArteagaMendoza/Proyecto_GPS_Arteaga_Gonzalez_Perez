@@ -7,4 +7,5 @@ urlpatterns = [
     path('', include('django_prometheus.urls')),
     path("farmacias/", listar_farmacias, name="listar-farmacias"),
     path("farmacias/registar/", crear_farmacia, name="registrar-farmacia"),
+    path("ruta/prueba/farmacia/", listar_farmacias, name="listar-farmacias"),
 ]

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:8006/farmacias/')
+    fetch('http://ms-farmacia-production-c583.up.railway.app/farmacias/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener farmacias');

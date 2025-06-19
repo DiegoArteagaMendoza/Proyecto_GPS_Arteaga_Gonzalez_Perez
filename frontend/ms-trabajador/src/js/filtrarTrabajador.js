@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         switch (type) {
             case 'rut':
-                endpoint = `http://localhost:8003/trabajador/buscar/rut/?rut=${encodeURIComponent(value)}`;
+                endpoint = `http://ms-trabajador-production-f278.up.railway.app/trabajador/buscar/rut/?rut=${encodeURIComponent(value)}`;
                 break;
             case 'nombre':
-                endpoint = `http://localhost:8003/trabajador/buscar/nombre/?nombre=${encodeURIComponent(value)}`;
+                endpoint = `http://ms-trabajador-production-f278.up.railway.app/trabajador/buscar/nombre/?nombre=${encodeURIComponent(value)}`;
                 break;
             case 'correo':
-                endpoint = `http://localhost:8003/trabajador/buscar/correo/?correo=${encodeURIComponent(value)}`;
+                endpoint = `http://ms-trabajador-production-f278.up.railway.app/trabajador/buscar/correo/?correo=${encodeURIComponent(value)}`;
                 break;
         }
 
