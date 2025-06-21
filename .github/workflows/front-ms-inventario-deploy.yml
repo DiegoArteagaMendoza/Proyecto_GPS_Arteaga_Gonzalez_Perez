@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'frontend/ms-inventario/**'
+      - 'frontend/ms-inventarioo/**'
   pull_request:
     branches: [main]
     paths:
-      - 'frontend/ms-inventario/**'
+      - 'frontend/ms-inventarioo/**'
 
 jobs:
   build-and-deploy-inventario:
