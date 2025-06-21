@@ -8,7 +8,7 @@ from inventario.views import obtener_bodegas, obtener_bodega_por_id, obtener_bod
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('django_prometheus.urls')),
+    path('metrics/', include('django_prometheus.urls')),
     # urls para productos
     path('productos/', listar_productos, name="listar-todos-productos"),
     path('productos/buscar/nombre/', listar_producto_por_nombre, name="listar-producto-por-nombre"),
