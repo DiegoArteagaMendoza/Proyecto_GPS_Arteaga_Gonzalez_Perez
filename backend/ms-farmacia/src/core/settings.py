@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'prometheus_client',
-    'django_prometheus',
     'rest_framework',
     'corsheaders',
     'farmacia',
