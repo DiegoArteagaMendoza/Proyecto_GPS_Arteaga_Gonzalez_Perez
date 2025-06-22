@@ -6,7 +6,7 @@ from usuariocliente.views import listar_productos, consulta_nombre_producto, far
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('django_prometheus.urls')),
+    path('metrics/', include('django_prometheus.urls')),
     # urls para productos
     path('productos/', listar_productos, name="listar-todos-los-productos"),
     path('productos/consulta_nombre/', consulta_nombre_producto, name="consulta-nombre-producto"),

@@ -22,7 +22,7 @@ from venta.views import listar_boletas, realizar_boleta, listar_boleta_por_rut
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('django_prometheus.urls')),
+    path('metrics/', include('django_prometheus.urls')),
     #venta
     path('listar/venta/', listar_ventas, name='listar-ventas'),
     path('realizar/venta/', realizar_venta, name='realizar-venta'),

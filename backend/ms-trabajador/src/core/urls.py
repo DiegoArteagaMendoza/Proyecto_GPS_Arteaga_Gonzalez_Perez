@@ -22,7 +22,7 @@ from trabajador.views import login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('django_prometheus.urls')),
+    path('metrics/', include('django_prometheus.urls')),
     # urls para roles
     path('roles/', listar_roles, name="listar-roles-disponibles"),
     path('roles/crear/', crear_rol, name="crear-nuevo-rol"),
