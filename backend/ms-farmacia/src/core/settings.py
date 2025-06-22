@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-vb6)ih=w5f_fzb$o6zx@#0r4s&v($56nv14odr0()+6l+!lz+(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*', 'ms-farmacia-production-c583.up.railway.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,18 +41,21 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'farmacia',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 

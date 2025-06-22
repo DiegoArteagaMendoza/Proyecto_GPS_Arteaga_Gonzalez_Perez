@@ -40,11 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
     'inventario',
     'rest_framework',
-    # 'pytest',
-    # 'pytest-django',
-    'coverage',
     'corsheaders',
 ]
 
