@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             submitBtn.textContent = 'Creando...';
 
             // Send data to the endpoint
-            const response = await fetch('https://ms-trabajador-production-f278.up.railway.app/roles/crear/', {
+            const response = await fetch('https://ms-trabajador-production.up.railway.app/roles/crear/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

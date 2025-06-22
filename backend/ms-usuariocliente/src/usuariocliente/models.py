@@ -14,7 +14,7 @@ class Usuario(models.Model):
     telefono = models.CharField(max_length=20, blank=True, null=True)
     rol = models.CharField(max_length=50, choices=[('cliente', 'Cliente'), ('admin', 'Admin'), ('farmaceutico', 'Farmacéutico')], default='cliente')
     estado = models.BooleanField(default=True)
-    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_registro = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} ({self.rut})"

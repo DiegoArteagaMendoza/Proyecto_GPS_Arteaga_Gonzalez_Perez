@@ -1,44 +1,3 @@
-// async function listarFarmacias() {
-//     try {
-//         const response = await fetch("http://localhost:8006/farmacias/");
-//         const data = await response.json();
-//         document.getElementById("lista-output").textContent = JSON.stringify(data, null, 2);
-//     } catch (error) {
-//         console.error("Error al obtener farmacias:", error);
-//         document.getElementById("lista-output").textContent = "Error al cargar datos.";
-//     }
-// }
-
-// document.getElementById("registro-form").addEventListener("submit", async function (e) {
-//     e.preventDefault();
-
-//     const nombre = document.getElementById("nombre").value.trim();
-//     const direccion = document.getElementById("direccion").value.trim();
-//     const comuna = document.getElementById("comuna").value.trim();
-
-//     const payload = {
-//         nombre_farmacia: nombre,
-//         direccion: direccion,
-//         comuna: comuna
-//     };
-
-//     try {
-//         const response = await fetch("http://localhost:8006/farmacias/registar/", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify(payload)
-//         });
-
-//         const result = await response.json();
-//         document.getElementById("registro-output").textContent = JSON.stringify(result, null, 2);
-//     } catch (error) {
-//         console.error("Error al registrar farmacia:", error);
-//         document.getElementById("registro-output").textContent = "Error al enviar datos.";
-//     }
-// });
-
 document.getElementById("registro-form").addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -53,7 +12,7 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     };
 
     try {
-        const response = await fetch("http://ms-farmacia-production-c583.up.railway.app/farmacias/registrar/", {
+        const response = await fetch("https://ms-farmacia-production.up.railway.app/farmacias/registrar/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

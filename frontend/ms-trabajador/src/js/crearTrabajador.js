@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             submitBtn.textContent = 'Registrando...';
 
             // Send data to the endpoint
-            const response = await fetch('https://ms-trabajador-production-f278.up.railway.app/trabajador/registrar/', {
+            const response = await fetch('https://ms-trabajador-production.up.railway.app/trabajador/registrar/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

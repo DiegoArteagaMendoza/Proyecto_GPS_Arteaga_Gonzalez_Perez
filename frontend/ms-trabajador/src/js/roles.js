@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('https://ms-trabajador-production-f278.up.railway.app/roles/')
+    fetch('https://ms-trabajador-production.up.railway.app/roles/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los roles');

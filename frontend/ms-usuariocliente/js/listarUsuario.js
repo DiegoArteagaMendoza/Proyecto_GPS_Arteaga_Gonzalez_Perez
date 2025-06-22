@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tableBody = document.querySelector('#usuariosTable tbody');
 
     try {
-        const response = await fetch('http://localhost:8004/usuarios/');
+        const response = await fetch('https://ms-usuariocliente-production.up.railway.app/usuarios/');
         const usuarios = await response.json();
 
         if (!Array.isArray(usuarios)) {
