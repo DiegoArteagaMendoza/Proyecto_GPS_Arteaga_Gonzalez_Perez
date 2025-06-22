@@ -53,7 +53,7 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     };
 
     try {
-        const response = await fetch("http://ms-farmacia-production-c583.up.railway.app/farmacias/registar/", {
+        const response = await fetch("http://ms-farmacia-production-c583.up.railway.app/farmacias/registrar/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
