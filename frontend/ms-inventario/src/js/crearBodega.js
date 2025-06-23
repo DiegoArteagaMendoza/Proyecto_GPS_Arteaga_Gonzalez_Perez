@@ -50,8 +50,8 @@ async function openCreateBodegaModal() {
                                 <select id="farmacia" required>
                                     <option value="">Seleccione una farmacia</option>
                                     ${farmacias.map(f => `
-                                        <option value="${f.id_farmacia}">
-                                            ${f.nombre} - ${f.comuna} (${f.direccion})
+                                        <option value="${f.nombre}">
+                                            ${f.nombre} - ${f.comuna}
                                         </option>
                                     `).join('')}
                                 </select>
@@ -79,7 +79,7 @@ async function openCreateBodegaModal() {
     }
 }
 
-// Función para manejar el envío del formulario
+// Función para manejar el envío del formulario CORREGIDA
 async function handleFormSubmit(e) {
     e.preventDefault();
 
@@ -91,7 +91,8 @@ async function handleFormSubmit(e) {
         const formData = {
             nombre: document.getElementById('nombre').value.trim(),
             ubicacion: document.getElementById('ubicacion').value.trim(),
-            farmacia: document.getElementById('farmacia').value
+            farmacia: document.getElementById('farmacia').value, // Cambiado a 'farmacia' para coincidir con el modelo
+            estado: 1 // Agregado el campo estado con valor por defecto
         };
 
         if (!formData.nombre || !formData.ubicacion || !formData.farmacia) {
@@ -106,8 +107,12 @@ async function handleFormSubmit(e) {
 
         if (!response.ok) {
             const errorData = await response.json();
+            console.error('Error detallado del backend:', errorData);
             throw new Error(errorData.message || 'Error al registrar la bodega');
         }
+
+        const result = await response.json();
+        console.log('Respuesta del servidor:', result);
 
         alert('Bodega registrada exitosamente');
         closeModal();

@@ -37,7 +37,6 @@ function renderBodegas(tableBody, bodegas) {
 
         return `
             <tr>
-                <td>${bodega.id_bodega || 'N/A'}</td>
                 <td>${capitalize(bodega.nombre) || 'N/A'}</td>
                 <td>${bodega.ubicacion || 'No especificada'}</td>
                 <td>${capitalize(bodega.farmacia) || 'N/A'}</td>
