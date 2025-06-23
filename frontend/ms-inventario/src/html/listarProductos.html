@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Trabajadores</title>
     <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/trabajadores.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Productos</title>
 </head>
-
 <body>
     <div class="navbar">
         <a href="../../../inicio/src/html/index.html">Inicio</a>
@@ -59,37 +55,5 @@
     
         <a href="../../../ms-usuariocliente/html/index.html">Lado Cliente</a>
     </div>
-
-    <div class="container">
-        <h1>Listado de Trabajadores</h1>
-
-        <div class="table-container">
-            <table id="workersTable">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>RUT</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="workersTableBody">
-                    <!-- Workers will be loaded here -->
-                </tbody>
-            </table>
-        </div>
-
-        <div class="pagination">
-            <button id="prevBtn" disabled><i class="fas fa-chevron-left"></i></button>
-            <span id="pageInfo">Página 1</span>
-            <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </div>
-
-    <script src="../js/trabajadores.js"></script>
-    <script src="../js/filtrarTrabajador.js"></script>
 </body>
-
 </html>

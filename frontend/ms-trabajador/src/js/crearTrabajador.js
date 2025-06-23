@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async function () {
  * Fetches roles from API
  */
 async function fetchRoles() {
-    const response = await fetch('http://ms-trabajador-production-f278.up.railway.app/roles/');
+    const response = await fetch('https://ms-trabajador-production.up.railway.app/roles/');
     if (!response.ok) {
         throw new Error('Error al obtener los roles');
     }

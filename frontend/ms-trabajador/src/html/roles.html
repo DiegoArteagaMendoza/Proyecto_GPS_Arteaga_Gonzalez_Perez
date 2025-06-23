@@ -15,6 +15,23 @@
         <a href="../../../inicio/src/html/index.html">Inicio</a>
     
         <div class="dropdown">
+            <button class="dropbtn">Ventas</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-venta/src/html/ventas.html">Ver ventas</a>
+                <a href="../../../ms-venta/src/html/ventas.html">Registra venta</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Inventario</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-inventario/src/html/listarBodegas.html">Bodegas</a>
+                <a href="../../../ms-inventario/src/html/listarProductos.html">Productos</a>
+                <a href="../../../ms-inventario/src/html/listarInventario.html">Inventario completo</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
             <button class="dropbtn">Farmacias</button>
             <div class="dropdown-content">
                 <a href="../../../ms-farmacia/src/html/listarFarmacias.html">Todas las farmacias</a>
@@ -33,8 +50,8 @@
         <div class="dropdown">
             <button class="dropbtn">Roles</button>
             <div class="dropdown-content">
-                <a href="../../../ms-trabajador/src/html/crearRol.html">Registrar Rol</a>
                 <a href="../../../ms-trabajador/src/html/roles.html">Administrar Roles</a>
+                <a href="../../../ms-trabajador/src/html/crearRol.html">Registrar Rol</a>
             </div>
         </div>
     
@@ -44,19 +61,23 @@
     </div>
 
 
-    <h1>Lista de Roles</h1>
-    <table id="rolesTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Se llenará dinámicamente con JS -->
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Lista de Roles</h1>
+        <div class="table-container">
+            <table id="rolesTable"> <!-- Cambiado a rolesTable -->
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody id="rolesTableBody"> <!-- Cambiado a rolesTableBody -->
+                    <!-- Roles will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script src="../js/roles.js"></script>
 </body>

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadWorkers();
     setupEventListeners();
 
-    function setupEventListeners() {1
+    function setupEventListeners() {
         searchInput.addEventListener('input', filterWorkers);
         refreshBtn.addEventListener('click', loadWorkers);
         prevBtn.addEventListener('click', () => {
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadWorkers() {
         try {
-            // Show loading state
             workersTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Cargando trabajadores...</td></tr>';
 
             const response = await fetch('https://ms-trabajador-production.up.railway.app/trabajador/');
@@ -45,8 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             allWorkers = await response.json();
             filteredWorkers = [...allWorkers];
-
-            // Reset pagination
             currentPage = 1;
             renderWorkers();
 
@@ -58,17 +55,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function filterWorkers() {
         const searchTerm = searchInput.value.toLowerCase();
-
-        if (searchTerm === '') {
-            filteredWorkers = [...allWorkers];
-        } else {
-            filteredWorkers = allWorkers.filter(worker =>
+        filteredWorkers = searchTerm === ''
+            ? [...allWorkers]
+            : allWorkers.filter(worker =>
                 worker.nombre.toLowerCase().includes(searchTerm) ||
                 worker.apellido.toLowerCase().includes(searchTerm) ||
-                worker.rut.toLowerCase().includes(searchTerm) ||
-                worker.rol.toLowerCase().includes(searchTerm)
+                (worker.rut && worker.rut.toLowerCase().includes(searchTerm)) ||
+                (worker.rol && worker.rol.toLowerCase().includes(searchTerm))
             );
-        }
 
         currentPage = 1;
         renderWorkers();
@@ -79,15 +73,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const endIndex = startIndex + itemsPerPage;
         const workersToShow = filteredWorkers.slice(startIndex, endIndex);
 
-        if (workersToShow.length === 0) {
-            workersTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No se encontraron trabajadores</td></tr>';
-        } else {
-            workersTableBody.innerHTML = workersToShow.map(worker => `
+        workersTableBody.innerHTML = workersToShow.length === 0
+            ? '<tr><td colspan="6" style="text-align: center;">No se encontraron trabajadores</td></tr>'
+            : workersToShow.map(worker => `
                 <tr>
-                    <td>${worker.nombre}</td>
-                    <td>${worker.apellido}</td>
-                    <td>${formatRUT(worker.rut)}</td>
-                    <td>${worker.rol}</td>
+                    <td>${worker.nombre || ''}</td>
+                    <td>${worker.apellido || ''}</td>
+                    <td>${worker.rut ? formatRUT(worker.rut) : ''}</td>
+                    <td>${worker.rol || ''}</td>
                     <td class="${worker.estado ? 'status-active' : 'status-inactive'}">
                         ${worker.estado ? 'Activo' : 'Inactivo'}
                     </td>
@@ -102,23 +95,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 </tr>
             `).join('');
 
-            // Add event listeners to action buttons
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const workerId = e.currentTarget.getAttribute('data-id');
-                    editWorker(workerId);
-                });
-            });
+        // Add event listeners
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', () => editWorker(btn.getAttribute('data-id')));
+        });
 
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const workerId = e.currentTarget.getAttribute('data-id');
-                    confirmDelete(workerId);
-                });
-            });
-        }
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', () => confirmDelete(btn.getAttribute('data-id')));
+        });
 
-        // Update pagination controls
         updatePaginationControls();
     }
 
@@ -130,41 +115,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function formatRUT(rut) {
         if (!rut) return '';
-
-        // Remove any existing formatting
         rut = rut.replace(/\./g, '').replace(/\-/g, '').toUpperCase();
-
         if (rut.length > 1) {
             const dv = rut.slice(-1);
             const body = rut.slice(0, -1);
-            const formattedBody = body.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-            return `${formattedBody}-${dv}`;
+            return `${body.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}-${dv}`;
         }
         return rut;
     }
 
     function editWorker(workerId) {
-        // Redirect to edit page or show edit modal
         alert(`Editar trabajador con ID: ${workerId}`);
         // window.location.href = `editarTrabajador.html?id=${workerId}`;
     }
 
     async function confirmDelete(workerId) {
-        if (confirm('¿Está seguro que desea eliminar este trabajador?')) {
+        if (confirm('¿Está seguro que desea desactivar este trabajador?')) {
             try {
-                const response = await fetch(`https://ms-trabajador-production.up.railway.app/trabajador/${workerId}/`, {
-                    method: 'DELETE'
+                const response = await fetch('https://ms-trabajador-production.up.railway.app/trabajador/desactivar/', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id_trabajador: workerId })
                 });
 
                 if (!response.ok) {
-                    throw new Error('Error al eliminar el trabajador');
+                    throw new Error('Error al desactivar el trabajador');
                 }
 
-                alert('Trabajador eliminado exitosamente');
+                alert('Trabajador desactivado exitosamente');
                 loadWorkers();
             } catch (error) {
                 console.error('Error:', error);
-                alert(error.message || 'Hubo un error al eliminar el trabajador');
+                alert(error.message || 'Hubo un error al desactivar el trabajador');
             }
         }
     }

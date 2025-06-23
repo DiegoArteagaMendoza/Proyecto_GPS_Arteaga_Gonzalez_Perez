@@ -4,14 +4,31 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Pharmacy</title>
+    <title>Gestor de farmacias comunales</title>
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/grilla.css">
 </head>
 
 <body>
     <div class="navbar">
-        <a href="#">Inicio</a>
+        <a href="../../../inicio/src/html/index.html">Inicio</a>
+
+        <div class="dropdown">
+            <button class="dropbtn">Ventas</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-venta/src/html/ventas.html">Ver ventas</a>
+                <a href="../../../ms-venta/src/html/Registraventas.html">Registra venta</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Inventario</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-inventario/src/html/listarBodegas.html">Bodegas</a>
+                <a href="../../../ms-inventario/src/html/listarProductos.html">Productos</a>
+                <a href="../../../ms-inventario/src/html/listarInventario.html">Inventario completo</a>
+            </div>
+        </div>
     
         <div class="dropdown">
             <button class="dropbtn">Farmacias</button>
@@ -32,6 +49,7 @@
         <div class="dropdown">
             <button class="dropbtn">Roles</button>
             <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/roles.html">Administrar Roles</a>
                 <a href="../../../ms-trabajador/src/html/crearRol.html">Registrar Rol</a>
             </div>
         </div>
@@ -39,40 +57,6 @@
         <a href="../../../ms-usuariocliente/html/listarUsuario.html">Listado de usuarios</a>
 
         <a href="../../../ms-usuariocliente/html/index.html">Lado Cliente</a>
-    </div>
-
-    <div class="grid-container">
-        <div class="grid">
-            <!-- Cuadro 1: Crear Farmacia -->
-            <div class="grid-item">
-                <a href="../../../ms-farmacia/src/html/crearFarmacia.html">Crear Farmacia</a>
-            </div>
-    
-            <!-- Cuadro 2: Ingresar Trabajador -->
-            <div class="grid-item">
-                <a href="../../../ms-trabajador/src/html/crearTrabajador.html">Ingresar Trabajador</a>
-            </div>
-
-            <!-- Cuadro 3: Crear Rol -->
-            <div class="grid-item">
-                <a href="../../../ms-trabajador/src/html/crearRol.html">Crear Rol</a>
-            </div>
-
-            <!-- Cuadro 5: Grafna -->
-            <div class="grid-item">
-                <a href="http://localhost:3000/d/O6v4rMpizda/django?orgId=1&refresh=5s">Grafana</a>
-            </div>
-    
-            <!-- Cuadro 6: Prometheus -->
-            <div class="grid-item">
-                <a href="http://localhost:9090/targets?search=">Prometheus</a>
-            </div>
-
-            <!-- Cuadro 4: Trello -->
-            <div class="grid-item">
-                <a href="https://trello.com/b/RU2ktcFb/proy-gps-farmacias">Trello</a>
-            </div>
-        </div>
     </div>
 </body>
 
