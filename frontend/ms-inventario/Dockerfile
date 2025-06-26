@@ -1,16 +1,19 @@
-# Etapa 1: Construcción del código Angular
-FROM node:18-alpine AS build
-WORKDIR /app
-COPY package.json . /app/
-RUN npm install
-COPY . /app
-RUN npm run build --prod
-
-# Etapa 2: Servir la app con nginx
+# Usa una imagen base ligera de Nginx
 FROM nginx:alpine
 
-COPY --from=build /app/dist/ms-inventario/browser /usr/share/nginx/html
-COPY default.conf /etc/nginx/conf.d/default.conf
+# Elimina el contenido por defecto del directorio HTML de Nginx
+RUN rm -rf /usr/share/nginx/html/*
 
+# Copia los archivos HTML al directorio raíz
+COPY src/html/ /usr/share/nginx/html/
 
+# Copia los archivos CSS a una carpeta css/
+COPY src/css/ /usr/share/nginx/html/css/
 
+# Copia los archivos JS a una carpeta js/
+COPY src/js/ /usr/share/nginx/html/js/
+
+# Expone el puerto 80 (requerido por Railway)
+EXPOSE 80
+
+# No es necesario sobrescribir el CMD, Nginx ya se inicia por defecto

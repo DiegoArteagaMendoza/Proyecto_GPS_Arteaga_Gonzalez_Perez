@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'django_prometheus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -79,19 +82,32 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'usuarios_farmacia',
+#         'USER': 'admin',
+#         'PASSWORD': 'secret',
+#         # 'HOST': 'localhost',
+#         'HOST': 'db-usuariocliente-production.up.railway.app',
+#         # 'PORT': '54321',
+#         'PORT': '5432',
+#     }
+# }
+
+
+import os
+# Configuración de la base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'usuarios_farmacia',
-        'USER': 'admin',
-        'PASSWORD': 'secret',
-        # 'HOST': 'localhost',
-        'HOST': 'db-usuariocliente-usuariocliente.database.svc.cluster.local',
-        # 'PORT': '54321',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'usuarios_farmacia'),      # Valor por defecto: 'farmacias'
+        'USER': os.getenv('DB_USER', 'admin'),          # Valor por defecto: 'admin'
+        'PASSWORD': os.getenv('DB_PASSWORD', 'secret'), # Valor por defecto: 'secret'
+        'HOST': os.getenv('DB_HOST', 'db-usuarios-farmacia.database.svc.cluster.local'), # Defecto: tu HOST actual
+        'PORT': os.getenv('DB_PORT', '5432'),           # Valor por defecto: '5432'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

@@ -29,10 +29,14 @@ jobs:
         run: |
           echo "VERSION=$(cat backend/${{ matrix.microservice }}/VERSION)" >> $GITHUB_ENV
 
-      # - name: Probar tests
-      #   run: |
-      #     cd backend/${{ matrix.microservice }}
-      #     pytest 
+      - name: Ejecutar tests
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r backend/ms-usuariocliente/requirements.txt
+          cd backend/ms-usuariocliente/src
+          python manage.py test
 
 
       - name: Iniciar sesión en Docker Hub

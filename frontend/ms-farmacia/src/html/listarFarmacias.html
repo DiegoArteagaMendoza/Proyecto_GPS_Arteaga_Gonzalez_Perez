@@ -1,33 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacies</title>
-    <link rel="stylesheet" href="../css/listarFarmacias.css">
+    <link rel="stylesheet" href="/farmacia/css/navbar.css">
+    <link rel="stylesheet" href="/farmacia/css/listarFarmacias.css">
 </head>
 
 <body>
     <div class="navbar">
-        <a href="#">Home</a>
-        <a href="../../../ms-farmacia/src/html/listarFarmacias.html" class="active">Farmacias</a>
-        <a href="../../../ms-farmacia/src/html/crearFarmacia.html">Crear farmacia</a>
-        <a href="../../../ms-trabajador/src/html/crearTrabajador.html">Ingresar Trabajador</a>
-        <a href="../../../ms-trabajador/src/html/crearRol.html">Crear Rol</a>
-        <a href="../../../ms-trabajador/src/html/trabajadores.html">Trabajadores farmacia</a>
-        <a href="#">Orders</a>
+        <a href="/inicio/index.html">Inicio</a>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Ventas</button>
+            <div class="dropdown-content">
+                <a href="/venta/ventas.html">Ver ventas</a>
+                <a href="/venta/Registraventas.html">Registra venta</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Inventario</button>
+            <div class="dropdown-content">
+                <a href="/inventario/listarBodegas.html">Bodegas</a>
+                <a href="/inventario/listarProductos.html">Productos</a>
+                <a href="/inventario/listarInventario.html">Inventario completo</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Farmacias</button>
+            <div class="dropdown-content">
+                <a href="/farmacia/listarFarmacias.html">Todas las farmacias</a>
+                <a href="/farmacia/crearFarmacia.html">Registrar farmacia</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Trabajadores</button>
+            <div class="dropdown-content">
+                <a href="/trabajador/trabajadores.html">Trabajadores farmacia</a>
+                <a href="/trabajador/crearTrabajador.html">Registrar Trabajador</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Roles</button>
+            <div class="dropdown-content">
+                <a href="/trabajador/roles.html">Administrar Roles</a>
+                <a href="/trabajador/crearRol.html">Registrar Rol</a>
+            </div>
+        </div>
+    
+        <a href="/usuariocliente/listarUsuario.html">Listado de usuarios</a>
+        <a href="/usuariocliente/index.html">Lado Cliente</a>
     </div>
+    
+
     <div class="container">
-        <h1>Pharmacies</h1>
+        <h1>Farmacias</h1>
 
         <div class="table-container">
             <table id="farmacias-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Commune</th>
+                        <th>Farmacia</th>
+                        <th>Direccion</th>
+                        <th>Comuna</th>
                     </tr>
                 </thead>
                 <tbody id="farmacias-body">
@@ -37,7 +78,7 @@
         </div>
     </div>
 
-    <script src="../js/listarFarmacias.js"></script>
+    <script src="/farmacia/js/listarFarmacias.js"></script>
 </body>
 
 </html>

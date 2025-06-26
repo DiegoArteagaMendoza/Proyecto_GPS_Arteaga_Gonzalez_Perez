@@ -31,18 +31,21 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'django_prometheus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'prometheus_client',
     'rest_framework',
     'corsheaders',
     'farmacia',
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -80,16 +84,35 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default="postgresql://postgres:zofTwVrfFbmnwcqqwzOjfuFMUdPaKWBp@ballast.proxy.rlwy.net:38687/railway"
+#     )
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'farmacias',
+#         'USER': 'admin',
+#         'PASSWORD': 'secret',
+#         # 'HOST': 'localhost',
+#         'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
+#         # 'PORT': '54321',
+#         'PORT': '5432',
+#     }
+# }
+
+import os
+# Configuración de la base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'farmacias',
-        'USER': 'admin',
-        'PASSWORD': 'secret',
-        # 'HOST': 'localhost',
-        'HOST': 'db-farmacia-farmacia.database.svc.cluster.local',
-        # 'PORT': '54321',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'farmacias'),      # Valor por defecto: 'farmacias'
+        'USER': os.getenv('DB_USER', 'admin'),          # Valor por defecto: 'admin'
+        'PASSWORD': os.getenv('DB_PASSWORD', 'secret'), # Valor por defecto: 'secret'
+        'HOST': os.getenv('DB_HOST', 'db-farmacia-farmacia.database.svc.cluster.local'), # Defecto: tu HOST actual
+        'PORT': os.getenv('DB_PORT', '5432'),           # Valor por defecto: '5432'
     }
 }
 

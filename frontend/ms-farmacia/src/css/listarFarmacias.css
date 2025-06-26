@@ -1,98 +1,150 @@
-* {
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #f5f5f5;
-    padding: 20px;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-around;
-    background-color: white;
-    padding: 15px 0;
-    margin-bottom: 30px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.navbar a {
-    text-decoration: none;
+    background-color: #f5f7fa;
     color: #333;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 3px;
-}
-
-.navbar a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.navbar a:hover:not(.active) {
-    background-color: #f0f0f0;
+    line-height: 1.6;
 }
 
 .container {
-    background-color: white;
-    padding: 25px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
 }
 
 h1 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
 }
 
+/* Estilos para la tabla */
 .table-container {
-    overflow-x: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
-th,
-td {
-    padding: 12px 15px;
+#farmacias-table {
+    width: 100%;
+}
+
+#farmacias-table thead {
+    background-color: #3498db;
+    color: white;
+}
+
+#farmacias-table th {
+    padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
 }
 
-th {
-    background-color: #f8f8f8;
-    font-weight: bold;
+#farmacias-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s;
+}
+
+#farmacias-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+#farmacias-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+#farmacias-table td {
+    padding: 15px;
     color: #555;
 }
 
-tr:hover {
-    background-color: #f5f5f5;
-}
-
+/* Estilos responsive */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
+    .table-container {
+        border-radius: 0;
     }
 
-    .navbar a {
-        margin: 5px 0;
-        width: 100%;
-        text-align: center;
+    #farmacias-table {
+        display: block;
+        overflow-x: auto;
     }
 
-    th,
-    td {
-        padding: 8px 10px;
+    #farmacias-table th,
+    #farmacias-table td {
+        padding: 10px 8px;
+        font-size: 0.9em;
+    }
+
+    .container {
+        padding: 0 10px;
     }
 }
+
+/* Efectos de hover para mejor interactividad */
+#farmacias-table tbody tr:hover {
+    background-color: #e8f4fc;
+    cursor: pointer;
+}
+
+/* Estilos para el navbar (consistentes con el anterior)
+.navbar {
+    background-color: #2c3e50;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.navbar a,
+.navbar .dropbtn {
+    float: left;
+    display: block;
+    color: #3498db;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+    background-color: #3498db;
+    color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #3498db;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #3498db;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+} */
