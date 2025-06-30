@@ -1,6 +1,6 @@
 from django.apps import apps
 from django.db import models
-from django.db.models import F, Q
+from django.db.models import F, Q, Sum
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import InventarioSerializer, ProductoSerializer, BodegaSerializer
@@ -51,6 +51,37 @@ class ProductosQuerySet(models.QuerySet):
             except Exception as e:
                 return Response({"error":"error al crear producto", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @staticmethod
+    def listar_productos_disponibles(request):
+        Inventario = apps.get_model('inventario', 'Inventario')
+
+        productos_disponibles = (
+            Inventario.objects
+            .values(
+                'producto__id_producto',
+                'producto__nombre',
+                'producto__descripcion',
+                'precio_venta'
+            )
+            .annotate(stock=Sum('cantidad'))
+            .filter(stock__gt=0)
+        )
+
+        # Formatear datos para el serializer
+        data = [
+            {
+                'id': item['producto__id_producto'],
+                'nombre': item['producto__nombre'],
+                'descripcion': item['producto__descripcion'],
+                'precio_venta': item['precio_venta'],
+                'stock': item['stock'],
+            }
+            for item in productos_disponibles
+        ]
+
+        serializer = ProductoSerializer(data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 # consultas para Bodega
 """
