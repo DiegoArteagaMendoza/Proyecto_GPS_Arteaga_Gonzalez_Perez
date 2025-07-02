@@ -1,6 +1,6 @@
 from django.apps import apps
 from django.db import models
-from django.db.models import F, Q
+from django.db.models import F, Q, Sum
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import InventarioSerializer, ProductoSerializer, BodegaSerializer
@@ -260,3 +260,32 @@ class InventarioQuerySet(models.QuerySet):
             except Exception as e:
                 return Response({"error":"error al guardar inventario", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @staticmethod
+    def mostrar_inventario_disponible(request):
+        Inventario = apps.get_model('inventario', 'Inventario')
+        datos = Inventario.objects.select_related('producto').all()
+        resultado = []
+        for item in datos:
+            resultado.append({
+                'nombre_producto': item.nombre_producto,
+                'cantidad': item.cantidad,
+                'costo_unitario': item.costo_unitario,
+                'descripcion': item.producto.descripcion
+            })
+
+        return Response(resultado, status=status.HTTP_200_OK)
+
+    # @staticmethod
+    # def mostrar_inventario_disponible(request):
+    #     Inventario = apps.get_model('inventario', 'Inventario')
+    #     query = Inventario.objects.all().values(
+    #         nombre_producto = F('nombre_producto'),
+    #         cantidad = F('cantidad'),
+    #         costo_unitario = F('costo_unitario'),
+    #         descripcio = F('producto__descripcion')
+    #     )
+    #     datos = InventarioQuerySet.mostrar_inventario_disponible(request)
+    #     return Response(datos, status=status.HTTP_200_OK)
+    
+    

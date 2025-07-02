@@ -23,6 +23,10 @@ def crear_producto(request):
 
 # Vistas para inventario
 @api_view(['GET'])
+def mostrar_inventario_disponible(request):
+    return InventarioQuerySet.mostrar_inventario_disponible(request)
+
+@api_view(['GET'])
 def obtener_inventario_completo(request):
     return InventarioQuerySet.consultar_inventario_completo()
 
