@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import RolSerializer, TrabajadorSerializer
 from django.contrib.auth.hashers import make_password, check_password
+import requests
+from rest_framework import status
+from django.conf import settings
    
 """
 Querys para roles
@@ -248,3 +251,19 @@ class IniciarSesionQuerySet(models.QuerySet):
                 {"error": "Contraseña incorrecta"},
                 status=status.HTTP_401_UNAUTHORIZED
             )
+    
+    @staticmethod
+    def crear_usuario_cliente(request):
+        """
+        Envía datos al microservicio ms-usuariocliente para registrar un nuevo usuario.
+        """
+        try:
+            url = "http://usuariocliente:8083/usuarios/registrar/"  # Verifica que esta ruta sea correcta
+            data = request.data
+
+            response = requests.post(url, json=data)
+
+            return Response(response.json(), status=response.status_code)
+
+        except requests.exceptions.RequestException as e:
+            return Response({"error": "Error al conectar con el microservicio de usuario"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
