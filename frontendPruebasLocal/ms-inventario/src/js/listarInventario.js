@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:8002/inventario/')
+    fetch('http://localhost:8002/inventario/mostrar/disponibles/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener inventario');
@@ -22,13 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
             data.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${item.producto_id}</td>
                     <td>${item.nombre_producto}</td>
-                    <td>${item.farmacia}</td>
-                    <td>${item.bodega}</td>
-                    <td>${item.disponible}</td>
-                    <td>$${item.costo_unitario.toFixed(2)}</td>
+                    <td>${item.descripcion}</td>
+                    <td>${item.cantidad}</td>
+                    <td>$${item.costo_unitario}</td>
                 `;
+                // <td>${item.producto_id}</td>
+
+                // <td>${item.farmacia}</td>
+
                 tableBody.appendChild(row);
             });
         })
