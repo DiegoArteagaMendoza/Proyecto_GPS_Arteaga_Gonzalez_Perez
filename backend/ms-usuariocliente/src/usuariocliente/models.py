@@ -19,7 +19,7 @@ class Usuario(models.Model):
     # Nuevos atributos
     beneficiario = models.BooleanField(default=False)
     medicamentos = models.TextField(blank=True, null=True)
-    retiro_en_dias = models.DateField(blank=True, null=True)
+    retiro_en_dias = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} ({self.rut})"
