@@ -2,8 +2,8 @@ from django.urls import path, include
 from django.contrib import admin
 # from django_prometheus import exports
 from django.urls import path
-from inventario.views import obtener_inventario_completo, buscar_inventario_por_nombre_producto, buscar_inventario_por_lote, buscar_inventario_por_bodega, buscar_inventario_por_id_producto, obtener_inventario_bajo_stock, registrar_inventario, obtener_disponibilidad_por_farmacia
-from inventario.views import listar_productos, listar_producto_por_nombre, consultar_producto_por_id, crear_producto, listar_productos_disponibles
+from inventario.views import obtener_inventario_completo, buscar_inventario_por_nombre_producto, buscar_inventario_por_lote, buscar_inventario_por_bodega, buscar_inventario_por_id_producto, obtener_inventario_bajo_stock, registrar_inventario, obtener_disponibilidad_por_farmacia, mostrar_inventario_disponible
+from inventario.views import listar_productos, listar_producto_por_nombre, consultar_producto_por_id, crear_producto
 from inventario.views import obtener_bodegas, obtener_bodega_por_id, obtener_bodega_por_nombre, obtener_bodega_por_ubicacion, obtener_bodega_por_estado, registrar_bodega
 
 urlpatterns = [
@@ -14,7 +14,6 @@ urlpatterns = [
     path('productos/buscar/nombre/', listar_producto_por_nombre, name="listar-producto-por-nombre"),
     path('productos/buscar/id/', consultar_producto_por_id, name="listar-productos-por-id"),
     path('productos/registrar/', crear_producto, name="registrar-producto"),
-    path('productos/mostrar/', listar_productos_disponibles, name="listar-productos-disponibless"),
 
     # urls para bodegas
     path('bodegas/', obtener_bodegas, name="listar-todas-las-bodegas"),
@@ -33,4 +32,6 @@ urlpatterns = [
     path('inventario/buscar/bodega/', buscar_inventario_por_bodega, name='buscar-por-bodega'),
     path('inventario/buscar/farmacia/', obtener_disponibilidad_por_farmacia, name='buscar-por-farmacia'),
     path('inventario/registrar/', registrar_inventario, name='registrar-inventario'),
+    path('inventario/mostrar/disponibles/', mostrar_inventario_disponible, name="listar-productos-disponibless"),
+    
 ]

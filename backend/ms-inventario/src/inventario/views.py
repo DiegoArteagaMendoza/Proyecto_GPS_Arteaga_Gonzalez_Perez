@@ -21,11 +21,11 @@ def consultar_producto_por_id(request):
 def crear_producto(request):
     return ProductosQuerySet.crear_producto(request)
 
-@api_view(['GET'])
-def listar_productos_disponibles(request):
-    return ProductosQuerySet.listar_productos_disponibles(request)
-
 # Vistas para inventario
+@api_view(['GET'])
+def mostrar_inventario_disponible(request):
+    return InventarioQuerySet.mostrar_inventario_disponible(request)
+
 @api_view(['GET'])
 def obtener_inventario_completo(request):
     return InventarioQuerySet.consultar_inventario_completo()

@@ -51,37 +51,6 @@ class ProductosQuerySet(models.QuerySet):
             except Exception as e:
                 return Response({"error":"error al crear producto", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    @staticmethod
-    def listar_productos_disponibles(request):
-        Inventario = apps.get_model('inventario', 'Inventario')
-
-        productos_disponibles = (
-            Inventario.objects
-            .values(
-                'producto__id_producto',
-                'producto__nombre',
-                'producto__descripcion',
-                'precio_venta'
-            )
-            .annotate(stock=Sum('cantidad'))
-            .filter(stock__gt=0)
-        )
-
-        # Formatear datos para el serializer
-        data = [
-            {
-                'id': item['producto__id_producto'],
-                'nombre': item['producto__nombre'],
-                'descripcion': item['producto__descripcion'],
-                'precio_venta': item['precio_venta'],
-                'stock': item['stock'],
-            }
-            for item in productos_disponibles
-        ]
-
-        serializer = ProductoSerializer(data, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
 # consultas para Bodega
 """
@@ -271,3 +240,32 @@ class InventarioQuerySet(models.QuerySet):
             except Exception as e:
                 return Response({"error":"error al guardar inventario", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @staticmethod
+    def mostrar_inventario_disponible(request):
+        Inventario = apps.get_model('inventario', 'Inventario')
+        datos = Inventario.objects.select_related('producto').all()
+        resultado = []
+        for item in datos:
+            resultado.append({
+                'nombre_producto': item.nombre_producto,
+                'cantidad': item.cantidad,
+                'costo_unitario': item.costo_unitario,
+                'descripcion': item.producto.descripcion
+            })
+
+        return Response(resultado, status=status.HTTP_200_OK)
+
+    # @staticmethod
+    # def mostrar_inventario_disponible(request):
+    #     Inventario = apps.get_model('inventario', 'Inventario')
+    #     query = Inventario.objects.all().values(
+    #         nombre_producto = F('nombre_producto'),
+    #         cantidad = F('cantidad'),
+    #         costo_unitario = F('costo_unitario'),
+    #         descripcio = F('producto__descripcion')
+    #     )
+    #     datos = InventarioQuerySet.mostrar_inventario_disponible(request)
+    #     return Response(datos, status=status.HTTP_200_OK)
+    
+    
