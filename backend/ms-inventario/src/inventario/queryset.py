@@ -157,9 +157,29 @@ class InventarioQuerySet(models.QuerySet):
     def consultar_inventario_completo():
         Inventario = apps.get_model('inventario', 'Inventario')
 
-        respuesta = Inventario.objects.all()
-        serializer = InventarioSerializer(respuesta, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        datos = Inventario.objects.select_related('producto', 'bodega').all()
+
+        resultado = []
+        for item in datos:
+            resultado.append({
+                'producto_id': item.producto.id_producto,
+                'nombre_producto': item.nombre_producto or item.producto.nombre,
+                'farmacia': item.farmacia,
+                'bodega': item.bodega.nombre,
+                'disponible': float(item.cantidad),
+                'costo_unitario': float(item.costo_unitario),
+            })
+
+        return Response(resultado, status=status.HTTP_200_OK)
+
+
+    # @staticmethod
+    # def consultar_inventario_completo():
+    #     Inventario = apps.get_model('inventario', 'Inventario')
+
+    #     respuesta = Inventario.objects.all()
+    #     serializer = InventarioSerializer(respuesta, many=True)
+    #     return Response(serializer.data, status=status.HTTP_200_OK)
 
     # consultar de inventario mediante nombre_producto
     @staticmethod

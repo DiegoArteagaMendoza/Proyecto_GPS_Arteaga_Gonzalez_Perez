@@ -22,6 +22,10 @@ def realizar_venta(request):
 def listar_venta_por_rut(request):
     return VentaQuerySet.listar_venta_por_rut(request)
 
+@api_view(['GET'])
+def listar_venta_por_rut_con_detalle(request):
+    return VentaQuerySet.listar_ventas_por_rut_con_detalle(request)
+
 #BOLETAS
 @api_view(['GET'])
 def listar_boletas(request):

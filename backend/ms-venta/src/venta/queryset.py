@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models import F, Q
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import VentaSerializer, DetalleVentaSerializer, BoletaSerializer
+from .serializers import DetalleVentaSerializer, BoletaSerializer, VentaSerializer
 #CONSULTAS VENTA
 class VentaQuerySet(models.QuerySet):
     @staticmethod
@@ -25,14 +25,27 @@ class VentaQuerySet(models.QuerySet):
     
     @staticmethod
     def realizar_venta(request):
-        serializer = VentaSerializer(data=request.data)
+        from .serializers import VentaConDetalleSerializer
+        serializer = VentaConDetalleSerializer(data=request.data)
         if serializer.is_valid():
             try:
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                venta = serializer.save()
+                return Response(VentaConDetalleSerializer(venta).data, status=status.HTTP_201_CREATED)
             except Exception as e:
-                return Response({"error":"error al crear/realizar la venta", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response({"error": "Error al crear/realizar la venta", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+    # @staticmethod
+    # def realizar_venta(request):
+    #     serializer = VentaSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         try:
+    #             serializer.save()
+    #             return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #         except Exception as e:
+    #             return Response({"error":"error al crear/realizar la venta", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     @staticmethod
     def listar_venta_por_rut(request):
@@ -43,6 +56,42 @@ class VentaQuerySet(models.QuerySet):
         respuesta = Venta.objects.filter(rut__icontains=rut_cliente)
         serializer = VentaSerializer(respuesta, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @staticmethod
+    def listar_ventas_por_rut_con_detalle(request):
+        Venta = apps.get_model('venta', 'Venta')
+        rut_cliente = request.GET.get('rut_cliente')
+
+        if not rut_cliente:
+            return Response({'error': 'Debe proporcionar un rut'}, status=status.HTTP_400_BAD_REQUEST)
+
+        ventas = Venta.objects.filter(rut_cliente__icontains=rut_cliente)
+
+        resultado = []
+        for venta in ventas:
+            detalles = venta.detalles.all()
+            productos = []
+            for detalle in detalles:
+                productos.append({
+                    'id_producto': detalle.id_producto,
+                    'nombre_producto': detalle.nombre_producto,
+                    'cantidad': float(detalle.cantidad),
+                    'precio_unitario': float(detalle.precio_unitario),
+                    'subtotal': float(detalle.subtotal),
+                })
+            
+            resultado.append({
+                'id_venta': venta.id_venta,
+                'fecha_venta': venta.fecha_venta.strftime('%Y-%m-%d %H:%M'),
+                'rut_cliente': venta.rut_cliente,
+                'total_venta': float(venta.total_venta),
+                'metodo_pago': venta.metodo_pago,
+                'estado_venta': venta.estado_venta,
+                'farmacia': venta.farmacia,
+                'productos': productos
+            })
+
+        return Response(resultado, status=status.HTTP_200_OK)
     
 #CONSULTAS DETALLE DE VENTA
 #que se genere automaticamente al realizar una venta con la info 
@@ -95,14 +144,6 @@ class BoletaQuerySet(models.QuerySet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({"error": "Error al crear la boleta", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        # serializer = BoletaSerializer(data=request.data)
-        # if serializer.is_valid():
-        #     try:
-        #         serializer.save()
-        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-        #     except Exception as e:
-        #         return Response({"error":"error al crear/realizar la boleta", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @staticmethod
     def listar_boleta_por_rut(request):

@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.contrib import admin
 from trabajador.views import crear_rol, listar_roles
 from trabajador.views import listar_trabajadores, buscar_trabajador_rut, buscar_trabajador_nombre, buscar_por_correo, actualizar_trabajador, desactivar_trabajador, crear_trabajador
-from trabajador.views import login
+from trabajador.views import login, crear_usuario_cliente
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,5 +39,7 @@ urlpatterns = [
     # urls para login
     path('login/', login, name="login"),
     path('RutaDePrueba/', login, name="logout"),
+    path('usuario/crear-cliente/', crear_usuario_cliente, name="crear-usuario-cliente"),
+
 
 ]

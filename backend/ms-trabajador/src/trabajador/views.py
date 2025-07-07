@@ -52,3 +52,7 @@ Login
 @api_view(['GET'])
 def login(request):
     return IniciarSesionQuerySet.login(request)
+
+@api_view(['POST'])
+def crear_usuario_cliente(request):
+    return IniciarSesionQuerySet.crear_usuario_cliente(request)

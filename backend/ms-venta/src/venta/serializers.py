@@ -12,15 +12,59 @@ class VentaSerializer(serializers.ModelSerializer):
         read_only_fields = ('id_venta', 'fecha_venta')
 
 
-# Serializer para DetalleVenta
+# # Serializer para DetalleVenta
+# class DetalleVentaSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = DetalleVenta
+#         fields = [
+#             'id_detalle', 'venta', 'id_producto', 'nombre_producto', 
+#             'cantidad', 'precio_unitario', 'subtotal'
+#         ]
+#         read_only_fields = ('id_detalle',)
+
+
 class DetalleVentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = DetalleVenta
+        exclude = ['venta']  # La relación se asigna desde el serializer de Venta
+
+class VentaConDetalleSerializer(serializers.ModelSerializer):
+    detalles = DetalleVentaSerializer(many=True)
+    nombre_cliente = serializers.CharField(write_only=True, required=False)
+    numero_boleta = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = Venta
         fields = [
-            'id_detalle', 'venta', 'id_producto', 'nombre_producto', 
-            'cantidad', 'precio_unitario', 'subtotal'
+            'id_venta', 'fecha_venta', 'rut_cliente', 'total_venta',
+            'metodo_pago', 'estado_venta', 'farmacia',
+            'detalles', 'nombre_cliente', 'numero_boleta'
         ]
-        read_only_fields = ('id_detalle',)
+        read_only_fields = ('id_venta', 'fecha_venta')
+
+    def create(self, validated_data):
+        detalles_data = validated_data.pop('detalles')
+        numero_boleta = validated_data.pop('numero_boleta')
+        nombre_cliente = validated_data.pop('nombre_cliente', '')
+
+        # Crear la venta
+        venta = Venta.objects.create(**validated_data)
+
+        # Crear los detalles de la venta
+        for detalle in detalles_data:
+            DetalleVenta.objects.create(venta=venta, **detalle)
+
+        # Crear la boleta asociada
+        Boleta.objects.create(
+            venta=venta,
+            numero_boleta=numero_boleta,
+            tipo_documento="boleta",
+            total=venta.total_venta,
+            rut_cliente=venta.rut_cliente,
+            nombre_cliente=nombre_cliente
+        )
+
+        return venta
 
 
 # Serializer para Boleta

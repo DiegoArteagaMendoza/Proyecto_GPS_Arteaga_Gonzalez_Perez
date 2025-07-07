@@ -33,6 +33,7 @@ class Inventario(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name='inventarios', verbose_name="Producto", db_column='id_producto')
     nombre_producto = models.CharField(max_length=255, blank=True, null=True, verbose_name="Nombre del Producto")
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, related_name='inventarios', verbose_name="Bodega", db_column='id_bodega')
+    farmacia = models.CharField(max_length=100, blank=True, null=True, verbose_name="Farmacia", db_column='farmacia')
     lote = models.CharField(max_length=100, blank=True, null=True, verbose_name="Lote")
     fecha_lote = models.DateField(blank=True, null=True, verbose_name="Fecha del Lote")
     fecha_vencimiento = models.DateField(blank=True, null=True, verbose_name="Fecha de Vencimiento")

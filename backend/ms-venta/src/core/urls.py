@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib import admin
 from django.urls import path
-from venta.views import listar_ventas, realizar_venta, listar_venta_ultimos_30_dias, listar_venta_por_rut
+from venta.views import listar_ventas, realizar_venta, listar_venta_ultimos_30_dias, listar_venta_por_rut,listar_venta_por_rut_con_detalle
 from venta.views import listar_boletas, realizar_boleta, listar_boleta_por_rut
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('realizar/venta/', realizar_venta, name='realizar-venta'),
     path('listar/venta/ultimos30dias/', listar_venta_ultimos_30_dias, name='listar-venta-ultimos-30-dias'),
     path('listar/venta/rut/', listar_venta_por_rut, name='listar-venta-por-rut'),
+    path('listar/venta/rut/detalle/', listar_venta_por_rut_con_detalle, name='listar-venta-por-rut-con-detalle'),
     #boleta
     path('listar/boleta/', listar_boletas, name='listar-boletas'),
     path('realizar/boleta/', realizar_boleta, name='realizar-boleta'),
