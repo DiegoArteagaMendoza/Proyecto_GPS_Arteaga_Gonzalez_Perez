@@ -18,3 +18,22 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'medicamentos', 'retiro_en_dias'
         ]
         read_only_fields = ('id_usuario',)
+
+class UsuarioRetiroMedicamentos(serializers.Serializer):
+    nombre = serializers.CharField()
+    apellido = serializers.CharField()
+    correo = serializers.EmailField()
+    fecha_registro = serializers.DateField()
+    medicamentos = serializers.CharField()
+    retiro_en_dias = serializers.IntegerField()
+
+    class Meta:
+        model = Usuario
+        fields = (
+            'nombre',
+            'apellido',
+            'correo',
+            'fecha_registro',
+            'medicamentos',
+            'retiro_en_dias'
+        )
