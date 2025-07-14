@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function fetchUsuarios() {
-    const response = await fetch('https://ms-usuariocliente-production.up.railway.app/usuarios/');
+  const response = await fetch(''); // https://ms-usuariocliente-production.up.railway.app/usuarios/
 
     if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
