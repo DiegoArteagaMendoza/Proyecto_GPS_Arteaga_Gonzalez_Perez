@@ -256,14 +256,73 @@ class IniciarSesionQuerySet(models.QuerySet):
     def crear_usuario_cliente(request):
         """
         Envía datos al microservicio ms-usuariocliente para registrar un nuevo usuario.
+        Si es beneficiario, procesa los medicamentos separados por ";"
         """
         try:
-            url = "http://usuariocliente:8083/usuarios/registrar/"  # Verifica que esta ruta sea correcta
-            data = request.data
+            url = "http://usuariocliente:8083/usuarios/registrar/"
+            data = request.data.copy()
+            
+            # Validar campos obligatorios
+            campos_obligatorios = ['rut', 'nombre', 'apellido', 'correo', 'contrasena', 'rol']
+            for campo in campos_obligatorios:
+                if not data.get(campo):
+                    return Response(
+                        {"error": f"El campo '{campo}' es obligatorio"},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            
+            # Si es beneficiario, procesar medicamentos
+            if data.get('beneficiario', False):
+                medicamentos_str = data.get('medicamentos', '')
+                
+                if medicamentos_str:
+                    # Separar medicamentos por ";" y limpiar espacios
+                    medicamentos_lista = [med.strip() for med in medicamentos_str.split(';') if med.strip()]
+                    
+                    # Validar que no esté vacío después del procesamiento
+                    if not medicamentos_lista:
+                        return Response(
+                            {"error": "Debe proporcionar al menos un medicamento para beneficiarios"},
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+                    
+                    # Guardar tanto la lista como el string original
+                    data['medicamentos_lista'] = medicamentos_lista
+                    data['medicamentos_string'] = medicamentos_str
+                else:
+                    return Response(
+                        {"error": "Los beneficiarios deben tener medicamentos asignados"},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            
+            # Enviar al microservicio
+            response = requests.post(url, json=data, timeout=30)
+            
+            # Procesar respuesta para el frontend
+            if response.status_code == 201:
+                response_data = response.json()
+                
+                # Si es beneficiario, agregar medicamentos procesados a la respuesta
+                if data.get('beneficiario', False):
+                    response_data['medicamentos_lista'] = data.get('medicamentos_lista', [])
+                    response_data['total_medicamentos'] = len(data.get('medicamentos_lista', []))
+                
+                return Response(response_data, status=response.status_code)
+            else:
+                return Response(response.json(), status=response.status_code)
 
-            response = requests.post(url, json=data)
-
-            return Response(response.json(), status=response.status_code)
-
+        except requests.exceptions.Timeout:
+            return Response(
+                {"error": "Timeout al conectar con el microservicio de usuario"}, 
+                status=status.HTTP_504_GATEWAY_TIMEOUT
+            )
         except requests.exceptions.RequestException as e:
-            return Response({"error": "Error al conectar con el microservicio de usuario"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+            return Response(
+                {"error": "Error al conectar con el microservicio de usuario", "detalle": str(e)}, 
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+        except Exception as e:
+            return Response(
+                {"error": "Error interno del servidor", "detalle": str(e)}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
