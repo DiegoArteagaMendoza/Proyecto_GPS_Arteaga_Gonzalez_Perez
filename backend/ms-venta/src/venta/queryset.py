@@ -34,18 +34,6 @@ class VentaQuerySet(models.QuerySet):
             except Exception as e:
                 return Response({"error": "Error al crear/realizar la venta", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    
-    # @staticmethod
-    # def realizar_venta(request):
-    #     serializer = VentaSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         try:
-    #             serializer.save()
-    #             return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #         except Exception as e:
-    #             return Response({"error":"error al crear/realizar la venta", "details": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     @staticmethod
     def listar_venta_por_rut(request):
