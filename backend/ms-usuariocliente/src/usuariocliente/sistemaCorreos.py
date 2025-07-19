@@ -13,6 +13,11 @@ def procesar_envio_recordatorios():
         if fecha_registro.tzinfo is None:
             fecha_registro = make_aware(fecha_registro)
 
+        intervalo_dias = usuario.get('retiro_en_dias')
+        if intervalo_dias is None or not isinstance(intervalo_dias, int) or intervalo_dias <= 0:
+            print(f"❌ Usuario con datos inválidos: {usuario['correo']} | retiro_en_dias={intervalo_dias}")
+            continue
+
         intervalo_dias = usuario['retiro_en_dias']
         tiempo_transcurrido = ahora - fecha_registro
         ciclos = tiempo_transcurrido.days // intervalo_dias

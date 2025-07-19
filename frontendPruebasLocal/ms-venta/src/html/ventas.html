@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/listarVenta.css">
     <title>Ventas</title>
 </head>
+
 <body>
     <div class="navbar">
         <a href="../../../inicio/src/html/index.html">Inicio</a>
-    
+
         <div class="dropdown">
             <button class="dropbtn">Ventas</button>
             <div class="dropdown-content">
@@ -17,7 +20,7 @@
                 <a href="../../../ms-venta/src/html/Registraventas.html">Registra venta</a>
             </div>
         </div>
-    
+
         <div class="dropdown">
             <button class="dropbtn">Inventario</button>
             <div class="dropdown-content">
@@ -26,7 +29,7 @@
                 <a href="../../../ms-inventario/src/html/listarInventario.html">Inventario completo</a>
             </div>
         </div>
-    
+
         <div class="dropdown">
             <button class="dropbtn">Farmacias</button>
             <div class="dropdown-content">
@@ -34,7 +37,7 @@
                 <a href="../../../ms-farmacia/src/html/crearFarmacia.html">Registrar farmacia</a>
             </div>
         </div>
-    
+
         <div class="dropdown">
             <button class="dropbtn">Trabajadores</button>
             <div class="dropdown-content">
@@ -42,7 +45,7 @@
                 <a href="../../../ms-trabajador/src/html/crearTrabajador.html">Registrar Trabajador</a>
             </div>
         </div>
-    
+
         <div class="dropdown">
             <button class="dropbtn">Roles</button>
             <div class="dropdown-content">
@@ -50,10 +53,50 @@
                 <a href="../../../ms-trabajador/src/html/crearRol.html">Registrar Rol</a>
             </div>
         </div>
-    
-        <a href="../../../ms-usuariocliente/html/listarUsuario.html">Listado de usuarios</a>
-        <!-- <a href="/usuariocliente/index.html">Lado Cliente</a> -->
+
+        <div class="dropdown">
+            <button class="dropbtn">Clientes</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/crearCliente.html">Registrar cliente</a>
+                <a href="../../../ms-usuariocliente/html/listarUsuario.html">Listado de clientes</a>
+            </div>
+        </div>
     </div>
-    
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Ventas</h1>
+            <button id="crearVenta" class="create-btn">
+                <i class="fas fa-plus"></i> Agregar Venta
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="bodegasTable">
+                <thead>
+                    <tr>
+                        <!-- <th>Producto</th> -->
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <!-- <th>Bodega</th> -->
+                        <th>Rut comprador</th>
+                        <th>Total</th>
+                        <th>Método pago</th>
+                        <th>Estado</th>
+                        <th>Farmacia</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/listarVenta.js"></script>
+    <script src="../js/crearVenta.js"></script>
+
 </body>
+
 </html>

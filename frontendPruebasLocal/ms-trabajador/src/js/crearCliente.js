@@ -167,6 +167,7 @@ async function crearUsuarioCliente() {
     const correo = document.getElementById('correo').value.trim();
     const contrasena = document.getElementById('contrasena').value.trim();
     const beneficiario = document.getElementById('beneficiario').checked;
+    const retiro = document.getElementById('retiro').value.trim();
 
     if (!rut || !nombre || !apellido || !correo || !contrasena) {
         mostrarMensaje('Por favor complete todos los campos obligatorios', 'error');
@@ -186,7 +187,8 @@ async function crearUsuarioCliente() {
         contrasena: contrasena,
         telefono: document.getElementById('telefono').value.trim(),
         rol: "cliente",
-        beneficiario: beneficiario
+        beneficiario: beneficiario,
+        retiro_en_dias: retiro
     };
 
     // Si es beneficiario, agregar medicamentos
