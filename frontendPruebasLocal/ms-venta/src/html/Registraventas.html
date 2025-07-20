@@ -63,10 +63,10 @@
         </div>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
         <h1>Registrar Nueva Venta</h1>
 
-        <!-- Formulario de venta -->
+        Formulario de venta
         <div id="formContainer">
             <div class="form-card">
                 <form id="ventaForm">
@@ -99,7 +99,7 @@
                             <label for="farmacia">Farmacia</label>
                             <select id="farmacia" required>
                                 <option value="">Seleccione una farmacia</option>
-                                <!-- Las opciones se cargarán con JS -->
+                                Las opciones se cargarán con JS
                             </select>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
             </div>
         </div>
 
-        <!-- Mensaje de éxito -->
+        Mensaje de éxito
         <div id="successContainer" class="success-container">
             <div class="success-icon">
                 <i class="fas fa-check-circle"></i>
@@ -131,6 +131,92 @@
             <h2 class="success-title">¡Venta Registrada Exitosamente!</h2>
             <p class="success-message">La venta ha sido registrada correctamente en el sistema.</p>
 
+            <div class="success-actions">
+                <a href="Registraventas.html" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Registrar Otra Venta
+                </a>
+                <a href="ventas.html" class="btn btn-primary">
+                    <i class="fas fa-list"></i> Ver Listado de Ventas
+                </a>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container">
+        <h1>Registrar Nueva Venta</h1>
+    
+        <!-- Formulario de venta -->
+        <div id="formContainer">
+            <div class="form-card">
+                <form id="ventaForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rut_comprador">RUT comprador</label>
+                            <input type="text" id="rut_comprador" required>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="numero_boleta">Número de Boleta</label>
+                            <input type="text" id="numero_boleta" required>
+                        </div>
+                    </div>
+    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="metodo_pago">Método de pago</label>
+                            <select id="metodo_pago" required>
+                                <option value="">Seleccione método</option>
+                                <option value="EFECTIVO">Efectivo</option>
+                                <option value="TARJETA">Tarjeta</option>
+                                <option value="TRANSFERENCIA">Transferencia</option>
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <input type="text" id="estado" value="COMPLETADA" readonly required>
+                        </div>
+                    </div>
+    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="farmacia">Farmacia</label>
+                            <select id="farmacia" required>
+                                <option value="">Seleccione una farmacia</option>
+                                <!-- Las opciones se cargarán con JS -->
+                            </select>
+                        </div>
+                    </div>
+    
+                    <hr>
+                    <h4>Detalle de Productos</h4>
+                    <div id="detalle-productos-container">
+                        <!-- Los productos se agregarán dinámicamente aquí -->
+                    </div>
+                    <button type="button" id="addProductBtn" class="add-product-btn">
+                        <i class="fas fa-plus"></i> Agregar Producto
+                    </button>
+    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="window.location.href='ventas.html'">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-check"></i> Registrar Venta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <!-- Mensaje de éxito -->
+        <div id="successContainer" class="success-container" style="display: none;">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="success-title">¡Venta Registrada Exitosamente!</h2>
+            <p class="success-message">La venta ha sido registrada correctamente en el sistema.</p>
+    
             <div class="success-actions">
                 <a href="Registraventas.html" class="btn btn-secondary">
                     <i class="fas fa-plus"></i> Registrar Otra Venta

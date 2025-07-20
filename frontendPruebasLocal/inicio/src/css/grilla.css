@@ -47,3 +47,40 @@ body {
     font-size: 18px;
     font-weight: bold;
 }
+
+/* Estilo para el contenedor del botón centrado */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+    /* Igual que grid-container para consistencia */
+    padding: 20px;
+}
+
+/* Estilo para el botón (ajusta según tus necesidades) */
+.centered-button {
+    padding: 14px 28px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    text-align: center;
+}
+
+.centered-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.centered-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
