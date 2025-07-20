@@ -33,8 +33,9 @@ SECCIONES.forEach(seccion => {
     fs.copySync(SOURCE_JS, DEST_JS);
 });
 
-// Copiar index.html raíz
+// Copiar index.html raíz a dist/index.html
 const SOURCE_INDEX = path.join(__dirname, 'index.html');
-fs.copySync(SOURCE_INDEX, DEST);
+const DEST_INDEX = path.join(DEST, 'index.html');
+fs.copySync(SOURCE_INDEX, DEST_INDEX);
 
 console.log('✅ Build completado. Todas las secciones están listas en /dist/');
