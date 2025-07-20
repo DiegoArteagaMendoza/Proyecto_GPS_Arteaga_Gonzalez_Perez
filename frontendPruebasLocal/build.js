@@ -1,8 +1,6 @@
-// build.js
 const fs = require('fs-extra');
 const path = require('path');
 
-// Definir las secciones a desplegar
 const SECCIONES = [
     'inicio',
     'ms-farmacia',
@@ -34,5 +32,9 @@ SECCIONES.forEach(seccion => {
     const DEST_JS = path.join(DEST_SECCION, 'js');
     fs.copySync(SOURCE_JS, DEST_JS);
 });
+
+// Copiar index.html raíz
+const SOURCE_INDEX = path.join(__dirname, 'index.html');
+fs.copySync(SOURCE_INDEX, DEST);
 
 console.log('✅ Build completado. Todas las secciones están listas en /dist/');
