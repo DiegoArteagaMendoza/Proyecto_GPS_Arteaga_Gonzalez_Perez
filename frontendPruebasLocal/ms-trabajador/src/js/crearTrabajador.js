@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             submitBtn.textContent = 'Registrando...';
 
             // Send data to the endpoint
-            const response = await fetch('http://localhost:8003/trabajador/registrar/', {
+            const response = await fetch('https://ms-trabajador-production.up.railway.app/trabajador/registrar/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async function () {
  * Fetches roles from API
  */
 async function fetchRoles() {
-    const response = await fetch('http://localhost:8003/roles/');
+    const response = await fetch('https://ms-trabajador-production.up.railway.app/roles/');
     if (!response.ok) {
         throw new Error('Error al obtener los roles');
     }

@@ -1,0 +1,106 @@
+/* Ajusta el contenedor del modal para que sea más ancho */
+.modal-container {
+    background-color: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Divide el formulario en dos columnas */
+.modal-body form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 16px;
+    margin-top: 10px;
+}
+
+/* Cada grupo ocupará 48% en pantallas grandes */
+.modal-body .form-group {
+    flex: 1 40%;
+}
+
+/* Asegura que el textarea y selects se comporten igual */
+.modal-body .form-group textarea,
+.modal-body .form-group input,
+.modal-body .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95em;
+    background-color: #fafafa;
+}
+
+/* Estilo para etiquetas */
+.modal-body .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Botones centrados y abajo */
+.form-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* Botones */
+.cancel-btn,
+.submit-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #27ae60;
+}
+
+.cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background-color: #ccc;
+}
+
+/* Responsive: pasa a una sola columna en móviles */
+@media (max-width: 768px) {
+    .modal-body form {
+        flex-direction: column;
+    }
+
+    .modal-body .form-group {
+        flex: 1 1 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .submit-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+}

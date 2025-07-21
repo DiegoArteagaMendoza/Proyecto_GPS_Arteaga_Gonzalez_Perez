@@ -5,14 +5,14 @@ from django.db import models
 from django.db.models import F, Q
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import DetalleVentaSerializer, BoletaSerializer, VentaSerializer
+from .serializers import DetalleVentaSerializer, BoletaSerializer, VentaSerializer, VentaSerializerDos
 #CONSULTAS VENTA
 class VentaQuerySet(models.QuerySet):
     @staticmethod
     def listar_ventas():
         Venta = apps.get_model('venta', 'Venta')
         respuesta = Venta.objects.all()
-        serializer = VentaSerializer(respuesta, many=True)
+        serializer = VentaSerializerDos(respuesta, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     @staticmethod

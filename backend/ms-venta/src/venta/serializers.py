@@ -11,6 +11,29 @@ class VentaSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ('id_venta', 'fecha_venta')
 
+class VentaSerializerDos(serializers.ModelSerializer):
+    class Meta:
+        model = Venta
+        fields = [
+            'id_venta', 'fecha_venta', 'rut_cliente', 'total_venta', 
+            'metodo_pago', 'estado_venta', 'farmacia'
+        ]
+        read_only_fields = ('id_venta', 'fecha_venta')
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+
+        fecha_venta = getattr(instance, 'fecha_venta', None)
+        if isinstance(fecha_venta, datetime.date) and not isinstance(fecha_venta, datetime.datetime):
+            # Convertir date a datetime
+            fecha_venta = datetime.combine(fecha_venta, time.min)
+
+        if isinstance(fecha_venta, datetime.datetime) and is_naive(fecha_venta):
+            fecha_venta = make_aware(fecha_venta)
+
+        rep['fecha_venta'] = fecha_venta.isoformat() if fecha_venta else None
+        return rep
+
 
 # # Serializer para DetalleVenta
 # class DetalleVentaSerializer(serializers.ModelSerializer):

@@ -120,19 +120,19 @@ function closeModal() {
 }
 
 async function fetchProductos() {
-    const response = await fetch('http://localhost:8002/productos/');
+    const response = await fetch('https://ms-inventario-production-98de.up.railway.app/productos/');
     if (!response.ok) throw new Error("Error al obtener productos");
     return await response.json();
 }
 
 async function fetchBodegas() {
-    const response = await fetch('http://localhost:8002/bodegas/');
+    const response = await fetch('https://ms-inventario-production-98de.up.railway.app/bodegas/');
     if (!response.ok) throw new Error("Error al obtener bodegas");
     return await response.json();
 }
 
 async function fetchFarmacias() {
-    const response = await fetch('http://localhost:8006/farmacias/');
+    const response = await fetch('https://ms-farmacia-production.up.railway.app/farmacias/');
     if (!response.ok) throw new Error("Error al obtener farmacias");
     return await response.json();
 }
@@ -163,7 +163,7 @@ async function handleInventarioSubmit(e) {
     console.log("", data);
 
     try {
-        const response = await fetch('http://localhost:8002/inventario/registrar/', {
+        const response = await fetch('https://ms-inventario-production-98de.up.railway.app/inventario/registrar/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

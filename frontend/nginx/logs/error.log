@@ -1,5 +1,0 @@
-2025/06/23 13:20:26 [notice] 12#12: *1 "^/([^/]+)(/.*)$" matches "/inicio/index.html", client: 172.20.0.1, server: localhost, request: "GET /inicio/index.html HTTP/1.1", host: "localhost"
-2025/06/23 13:20:26 [notice] 12#12: *1 rewritten data: "/index.html", args: "", client: 172.20.0.1, server: localhost, request: "GET /inicio/index.html HTTP/1.1", host: "localhost"
-2025/06/23 13:20:26 [error] 12#12: *1 no resolver defined to resolve ms-inicio, client: 172.20.0.1, server: localhost, request: "GET /inicio/index.html HTTP/1.1", host: "localhost"
-2025/06/23 13:20:34 [notice] 12#12: *1 "^/([^/]+)(/.*)$" does not match "/inicio", client: 172.20.0.1, server: localhost, request: "GET /inicio HTTP/1.1", host: "localhost"
-2025/06/23 13:20:34 [error] 12#12: *1 no resolver defined to resolve ms-, client: 172.20.0.1, server: localhost, request: "GET /inicio HTTP/1.1", host: "localhost"

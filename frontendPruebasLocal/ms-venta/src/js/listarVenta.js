@@ -48,7 +48,7 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:8005/listar/venta/')
+    fetch('https://ms-venta-production.up.railway.app/listar/venta/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener ventas');

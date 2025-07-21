@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            const response = await fetch('', { //https://ms-usuariocliente-production.up.railway.app/usuarios/registrar/
+            const response = await fetch('https://ms-usuariocliente-production.up.railway.app/usuarios/registrar/', { //https://ms-usuariocliente-production.up.railway.app/usuarios/registrar/
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
