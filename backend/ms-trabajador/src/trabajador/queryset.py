@@ -338,13 +338,13 @@ class IniciarSesionQuerySet(models.QuerySet):
             data = request.data.copy()
             
             # Validar campos obligatorios
-            campos_obligatorios = ['rut', 'nombre', 'apellido', 'correo', 'contraseña', 'rol']
-            for campo in campos_obligatorios:
-                if not data.get(campo):
-                    return Response(
-                        {"error": f"El campo '{campo}' es obligatorio"},
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
+            # campos_obligatorios = ['rut', 'nombre', 'apellido', 'correo', 'contraseña', 'rol']
+            # for campo in campos_obligatorios:
+            #     if not data.get(campo):
+            #         return Response(
+            #             {"error": f"El campo '{campo}' es obligatorio"},
+            #             status=status.HTTP_400_BAD_REQUEST
+            #         )
             
             # Si es beneficiario, procesar medicamentos
             if data.get('beneficiario', False):
