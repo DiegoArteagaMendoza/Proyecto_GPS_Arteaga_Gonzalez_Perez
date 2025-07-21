@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Venta, DetalleVenta, Boleta
-from datetime import datetime, time
+from datetime import datetime, time, timezone
 from django.utils.timezone import make_aware, is_naive
 
 # Serializer para Venta
@@ -26,14 +26,19 @@ class VentaSerializerDos(serializers.ModelSerializer):
         rep = super().to_representation(instance)
 
         fecha_venta = getattr(instance, 'fecha_venta', None)
+        
+        # Si es date, convertirlo a datetime
         if isinstance(fecha_venta, datetime.date) and not isinstance(fecha_venta, datetime.datetime):
-            # Convertir date a datetime
-            fecha_venta = datetime.combine(fecha_venta, time.min)
-
-        if isinstance(fecha_venta, datetime.datetime) and is_naive(fecha_venta):
-            fecha_venta = make_aware(fecha_venta)
-
-        rep['fecha_venta'] = fecha_venta.isoformat() if fecha_venta else None
+            fecha_venta = datetime.datetime.combine(fecha_venta, datetime.time.min)
+        
+        # Solo aplicar make_aware si es datetime y naive
+        if isinstance(fecha_venta, datetime.datetime):
+            if timezone.is_naive(fecha_venta):
+                fecha_venta = timezone.make_aware(fecha_venta)
+            rep['fecha_venta'] = fecha_venta.isoformat()
+        else:
+            rep['fecha_venta'] = None
+            
         return rep
 
 
