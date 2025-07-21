@@ -263,7 +263,7 @@ class IniciarSesionQuerySet(models.QuerySet):
             data = request.data.copy()
             
             # Validar campos obligatorios
-            campos_obligatorios = ['rut', 'nombre', 'apellido', 'correo', 'contrasena', 'rol']
+            campos_obligatorios = ['rut', 'nombre', 'apellido', 'correo', 'contraseña', 'rol']
             for campo in campos_obligatorios:
                 if not data.get(campo):
                     return Response(
