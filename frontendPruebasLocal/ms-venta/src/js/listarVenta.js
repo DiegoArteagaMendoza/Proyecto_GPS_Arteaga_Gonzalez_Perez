@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${item.id_venta}</td>
-                    <td>${item.fecha_venta}</td>
                     <td>${item.rut_cliente}</td>
                     <td>$${item.total_venta}</td>
                     <td>${item.metodo_pago}</td>

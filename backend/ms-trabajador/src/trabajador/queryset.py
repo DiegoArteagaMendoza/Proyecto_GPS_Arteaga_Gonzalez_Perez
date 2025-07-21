@@ -252,6 +252,81 @@ class IniciarSesionQuerySet(models.QuerySet):
                 status=status.HTTP_401_UNAUTHORIZED
             )
     
+    # @staticmethod
+    # def crear_usuario_cliente(request):
+    #     """
+    #     Envía datos al microservicio ms-usuariocliente para registrar un nuevo usuario.
+    #     Si es beneficiario, procesa los medicamentos separados por ";"
+    #     """
+    #     try:
+    #         url = "https://ms-usuariocliente-production.up.railway.app/usuarios/registrar/"
+    #         data = request.data.copy()
+            
+    #         # Validar campos obligatorios
+    #         campos_obligatorios = ['rut', 'nombre', 'apellido', 'correo', 'contraseña', 'rol']
+    #         for campo in campos_obligatorios:
+    #             if not data.get(campo):
+    #                 return Response(
+    #                     {"error": f"El campo '{campo}' es obligatorio"},
+    #                     status=status.HTTP_400_BAD_REQUEST
+    #                 )
+            
+    #         # Si es beneficiario, procesar medicamentos
+    #         if data.get('beneficiario', False):
+    #             medicamentos_str = data.get('medicamentos', '')
+                
+    #             if medicamentos_str:
+    #                 # Separar medicamentos por ";" y limpiar espacios
+    #                 medicamentos_lista = [med.strip() for med in medicamentos_str.split(';') if med.strip()]
+                    
+    #                 # Validar que no esté vacío después del procesamiento
+    #                 if not medicamentos_lista:
+    #                     return Response(
+    #                         {"error": "Debe proporcionar al menos un medicamento para beneficiarios"},
+    #                         status=status.HTTP_400_BAD_REQUEST
+    #                     )
+                    
+    #                 # Guardar tanto la lista como el string original
+    #                 data['medicamentos_lista'] = medicamentos_lista
+    #                 data['medicamentos_string'] = medicamentos_str
+    #             else:
+    #                 return Response(
+    #                     {"error": "Los beneficiarios deben tener medicamentos asignados"},
+    #                     status=status.HTTP_400_BAD_REQUEST
+    #                 )
+            
+    #         # Enviar al microservicio
+    #         response = requests.post(url, json=data, timeout=30)
+            
+    #         # Procesar respuesta para el frontend
+    #         if response.status_code == 201:
+    #             response_data = response.json()
+                
+    #             # Si es beneficiario, agregar medicamentos procesados a la respuesta
+    #             if data.get('beneficiario', False):
+    #                 response_data['medicamentos_lista'] = data.get('medicamentos_lista', [])
+    #                 response_data['total_medicamentos'] = len(data.get('medicamentos_lista', []))
+                
+    #             return Response(response_data, status=response.status_code)
+    #         else:
+    #             return Response(response.json(), status=response.status_code)
+
+    #     except requests.exceptions.Timeout:
+    #         return Response(
+    #             {"error": "Timeout al conectar con el microservicio de usuario"}, 
+    #             status=status.HTTP_504_GATEWAY_TIMEOUT
+    #         )
+    #     except requests.exceptions.RequestException as e:
+    #         return Response(
+    #             {"error": "Error al conectar con el microservicio de usuario", "detalle": str(e)}, 
+    #             status=status.HTTP_503_SERVICE_UNAVAILABLE
+    #         )
+    #     except Exception as e:
+    #         return Response(
+    #             {"error": "Error interno del servidor", "detalle": str(e)}, 
+    #             status=status.HTTP_500_INTERNAL_SERVER_ERROR
+    #         )
+
     @staticmethod
     def crear_usuario_cliente(request):
         """
@@ -276,17 +351,14 @@ class IniciarSesionQuerySet(models.QuerySet):
                 medicamentos_str = data.get('medicamentos', '')
                 
                 if medicamentos_str:
-                    # Separar medicamentos por ";" y limpiar espacios
                     medicamentos_lista = [med.strip() for med in medicamentos_str.split(';') if med.strip()]
                     
-                    # Validar que no esté vacío después del procesamiento
                     if not medicamentos_lista:
                         return Response(
                             {"error": "Debe proporcionar al menos un medicamento para beneficiarios"},
                             status=status.HTTP_400_BAD_REQUEST
                         )
                     
-                    # Guardar tanto la lista como el string original
                     data['medicamentos_lista'] = medicamentos_lista
                     data['medicamentos_string'] = medicamentos_str
                 else:
@@ -295,21 +367,34 @@ class IniciarSesionQuerySet(models.QuerySet):
                         status=status.HTTP_400_BAD_REQUEST
                     )
             
-            # Enviar al microservicio
-            response = requests.post(url, json=data, timeout=30)
+            # Depuración: imprimir el payload que se enviará
+            print("Payload a enviar:", data)
+            
+            # Enviar al microservicio con headers explícitos
+            headers = {'Content-Type': 'application/json'}
+            response = requests.post(url, json=data, headers=headers, timeout=30)
+            
+            # Depuración: imprimir la respuesta cruda
+            print("Respuesta cruda del microservicio:", response.text)
             
             # Procesar respuesta para el frontend
+            try:
+                response_json = response.json() if response.text else {}
+            except ValueError as e:
+                return Response(
+                    {"error": "Respuesta inválida del microservicio", "detalle": str(e), "respuesta_cruda": response.text},
+                    status=status.HTTP_502_BAD_GATEWAY
+                )
+            
             if response.status_code == 201:
-                response_data = response.json()
-                
                 # Si es beneficiario, agregar medicamentos procesados a la respuesta
                 if data.get('beneficiario', False):
-                    response_data['medicamentos_lista'] = data.get('medicamentos_lista', [])
-                    response_data['total_medicamentos'] = len(data.get('medicamentos_lista', []))
+                    response_json['medicamentos_lista'] = data.get('medicamentos_lista', [])
+                    response_json['total_medicamentos'] = len(data.get('medicamentos_lista', []))
                 
-                return Response(response_data, status=response.status_code)
+                return Response(response_json, status=response.status_code)
             else:
-                return Response(response.json(), status=response.status_code)
+                return Response(response_json, status=response.status_code)
 
         except requests.exceptions.Timeout:
             return Response(
