@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="listarBodegas.css">
+    <link rel="stylesheet" href="modalCrearInventario.css">
+    <title>Inventairo</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Inicio</a>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Ventas</button>
+            <div class="dropdown-content">
+                <a href="ventas.html">Ver ventas</a>
+                <a href="Registraventas.html">Registra venta</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Inventario</button>
+            <div class="dropdown-content">
+                <a href="listarBodegas.html">Bodegas</a>
+                <a href="listarProductos.html">Productos</a>
+                <a href="listarInventario.html">Inventario completo</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Farmacias</button>
+            <div class="dropdown-content">
+                <a href="listarFarmacias.html">Todas las farmacias</a>
+                <a href="crearFarmacia.html">Registrar farmacia</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Trabajadores</button>
+            <div class="dropdown-content">
+                <a href="trabajadores.html">Trabajadores farmacia</a>
+                <a href="crearTrabajador.html">Registrar Trabajador</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Roles</button>
+            <div class="dropdown-content">
+                <a href="roles.html">Administrar Roles</a>
+                <a href="crearRol.html">Registrar Rol</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Clientes</button>
+            <div class="dropdown-content">
+                <a href="crearCliente.html">Registrar cliente</a>
+                <a href="listarUsuario.html">Listado de clientes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Inventario</h1>
+            <button id="crearInventario" class="create-btn">
+                <i class="fas fa-plus"></i> Agregar Inventario
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="bodegasTable">
+                <thead>
+                    <tr>
+                        <!-- <th>Producto</th> -->
+                        <th>Nombre</th>
+                        <th>Derscripcion</th>
+                        <!-- <th>Bodega</th> -->
+                        <th>Disponible</th>
+                        <th>Valor Unitario</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="listarInventario.js"></script>
+    <script src="crearInventario.js"></script>
+
+</body>
+</html>

@@ -115,13 +115,13 @@ function closeModal() {
 }
 
 async function fetchFarmacias() {
-    const response = await fetch('http://localhost:8006/farmacias/');
+    const response = await fetch('https://ms-farmacia-production.up.railway.app/farmacias/');
     if (!response.ok) throw new Error("Error al obtener farmacias");
     return await response.json();
 }
 
 async function fetchProductos() {
-    const response = await fetch('http://localhost:8002/productos/');
+    const response = await fetch('https://ms-inventario-production-98de.up.railway.app/productos/');
     if (!response.ok) throw new Error("Error al obtener productos");
     return await response.json();
 }
@@ -166,7 +166,7 @@ async function handleVentaSubmit(e) {
     };
 
     try {
-        const response = await fetch('http://localhost:8005/realizar/venta/', {
+        const response = await fetch('https://ms-venta-production.up.railway.app//realizar/venta/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

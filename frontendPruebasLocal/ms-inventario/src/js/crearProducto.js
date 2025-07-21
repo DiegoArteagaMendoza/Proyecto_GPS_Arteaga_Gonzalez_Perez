@@ -58,7 +58,7 @@ async function handleProductoSubmit(e) {
             throw new Error('Todos los campos son obligatorios');
         }
 
-        const response = await fetch('http://localhost:8002/productos/registrar/', {
+        const response = await fetch('https://ms-inventario-production-98de.up.railway.app/productos/registrar/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)

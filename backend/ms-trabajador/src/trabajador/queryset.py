@@ -259,7 +259,7 @@ class IniciarSesionQuerySet(models.QuerySet):
         Si es beneficiario, procesa los medicamentos separados por ";"
         """
         try:
-            url = "http://usuariocliente:8083/usuarios/registrar/"
+            url = "https://ms-usuariocliente-production.up.railway.app/usuarios/registrar/"
             data = request.data.copy()
             
             # Validar campos obligatorios

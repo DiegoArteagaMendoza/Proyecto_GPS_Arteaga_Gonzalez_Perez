@@ -1,6 +1,6 @@
 async function listarFarmacias() {
     try {
-        const response = await fetch("http://localhost:8006/farmacias/");
+        const response = await fetch("https://ms-farmacia-production.up.railway.app/farmacias/");
         const data = await response.json();
 
         const tbody = document.getElementById("farmacias-body");

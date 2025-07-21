@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Mostrar estado de carga
     tableBody.innerHTML = '<tr><td colspan="3" style="text-align: center;">Cargando roles...</td></tr>';
 
-    fetch('http://localhost:8003/roles/')
+    fetch('https://ms-trabajador-production.up.railway.app/roles/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los roles');

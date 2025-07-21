@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:8002/inventario/mostrar/disponibles/')
+    fetch('https://ms-inventario-production-98de.up.railway.app/inventario/mostrar/disponibles/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener inventario');

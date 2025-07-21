@@ -20,7 +20,7 @@ async function loadProductos() {
     }
 }
 async function fetchProductos() {
-    const response = await fetch('http://localhost:8002/productos/');
+    const response = await fetch('https://ms-inventario-production-98de.up.railway.app/productos/');
     if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
 
     const data = await response.json();

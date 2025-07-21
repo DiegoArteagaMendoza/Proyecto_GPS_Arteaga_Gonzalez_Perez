@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             workersTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Cargando trabajadores...</td></tr>';
 
-            const response = await fetch('http://localhost:8003/trabajador/');
+            const response = await fetch('https://ms-trabajador-production.up.railway.app/trabajador/');
             if (!response.ok) {
                 throw new Error('Error al cargar los trabajadores');
             }
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function confirmDelete(workerId) {
         if (confirm('¿Está seguro que desea desactivar este trabajador?')) {
             try {
-                const response = await fetch('http://localhost:8003/trabajador/desactivar/', {
+                const response = await fetch('https://ms-trabajador-production.up.railway.app/trabajador/desactivar/', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ function closeModal() {
 // Función para obtener las farmacias
 async function fetchFarmacias() {
     try {
-        const response = await fetch('http://localhost:8006/farmacias/');
+        const response = await fetch('https://ms-farmacia-production.up.railway.app/farmacias/');
         if (!response.ok) throw new Error('Error al cargar farmacias');
 
         const farmacias = await response.json();
@@ -99,7 +99,7 @@ async function handleFormSubmit(e) {
             throw new Error('Todos los campos son obligatorios');
         }
 
-        const response = await fetch('http://localhost:8002/bodegas/registrar/', {
+        const response = await fetch('https://ms-inventario-production-98de.up.railway.app/bodegas/registrar/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)

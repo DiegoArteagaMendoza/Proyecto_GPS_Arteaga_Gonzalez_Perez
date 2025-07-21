@@ -12,7 +12,7 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     };
 
     try {
-        const response = await fetch("http://localhost:8006/farmacias/registrar/", {
+        const response = await fetch("https://ms-farmacia-production.up.railway.app/farmacias/registrar/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

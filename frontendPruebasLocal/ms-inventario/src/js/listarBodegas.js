@@ -21,7 +21,7 @@ async function loadBodegas() {
 }
 
 async function fetchBodegas() {
-    const response = await fetch('http://localhost:8002/bodegas/');
+    const response = await fetch('https://ms-inventario-production-98de.up.railway.app/bodegas/');
     if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
 
     const data = await response.json();

@@ -26,7 +26,7 @@ async function cargarMedicamentos() {
 
     try {
         // URL CORREGIDA: cambiada de /inventario/ a /productos/
-        const response = await fetch('http://localhost:8002/productos/');
+        const response = await fetch('https://ms-inventario-production-98de.up.railway.app/productos/');
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -48,7 +48,7 @@ async function cargarMedicamentos() {
             <p style="color: #d32f2f;">❌ Error al cargar productos del inventario</p>
             <p style="font-size: 14px; color: #666;">
                 Verifica que el microservicio de inventario esté ejecutándose en 
-                <strong>http://localhost:8002/productos/</strong>
+                <strong>https://ms-inventario-production-98de.up.railway.app/productos/</strong>
             </p>
             <p style="font-size: 12px; color: #999; margin-top: 10px;">
                 Error técnico: ${error.message}
@@ -200,7 +200,7 @@ async function crearUsuarioCliente() {
     }
 
     try {
-        const response = await fetch('http://localhost:8003/usuario/crear-cliente/', {
+        const response = await fetch('https://ms-trabajador-production.up.railway.app/usuario/crear-cliente/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -280,5 +280,5 @@ function limpiarFormulario() {
 // Inicializar cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Sistema de gestión de clientes cargado');
-    console.log('URL del microservicio de inventario: http://localhost:8002/productos/');
+    console.log('URL del microservicio de inventario: https://ms-inventario-production-98de.up.railway.app/productos/');
 });

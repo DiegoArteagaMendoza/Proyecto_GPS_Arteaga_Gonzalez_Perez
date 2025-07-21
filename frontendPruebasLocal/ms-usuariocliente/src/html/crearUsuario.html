@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="../css/crearUsuario.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="../../../inicio/src/html/index.html">Inicio</a>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Ventas</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-venta/src/html/ventas.html">Ver ventas</a>
+                <a href="../../../ms-venta/src/html/Registraventas.html">Registra venta</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Inventario</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-inventario/src/html/listarBodegas.html">Bodegas</a>
+                <a href="../../../ms-inventario/src/html/listarProductos.html">Productos</a>
+                <a href="../../../ms-inventario/src/html/listarInventario.html">Inventario completo</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Farmacias</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-farmacia/src/html/listarFarmacias.html">Todas las farmacias</a>
+                <a href="../../../ms-farmacia/src/html/crearFarmacia.html">Registrar farmacia</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Trabajadores</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/trabajadores.html">Trabajadores farmacia</a>
+                <a href="../../../ms-trabajador/src/html/crearTrabajador.html">Registrar Trabajador</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Roles</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/roles.html">Administrar Roles</a>
+                <a href="../../../ms-trabajador/src/html/crearRol.html">Registrar Rol</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Clientes</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/crearCliente.html">Registrar cliente</a>
+                <a href="../../../ms-usuariocliente/src/html/listarUsuario.html">Listado de clientes</a>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <h1>Registrar Nuevo Usuario</h1>
+        <form id="usuarioForm">
+            <div class="form-group">
+                <label for="rut">RUT*</label>
+                <input type="text" id="rut" placeholder="Ingrese RUT" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre">Nombre*</label>
+                <input type="text" id="nombre" placeholder="Ingrese nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Apellido*</label>
+                <input type="text" id="apellido" placeholder="Ingrese apellido" required>
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo*</label>
+                <input type="email" id="correo" placeholder="Ingrese correo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contrasena">Contraseña*</label>
+                <input type="password" id="contrasena" placeholder="Ingrese contraseña" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" placeholder="Ingrese teléfono (opcional)">
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="rol">Rol*</label>
+                <select id="rol" required>
+                    <option value="cliente">Cliente</option>
+                    <option value="admin">Admin</option>
+                    <option value="farmaceutico">Farmacéutico</option>
+                </select>
+            </div> -->
+
+            <button type="submit" class="submit-btn">Registrar Usuario</button>
+        </form>
+
+        <div id="mensaje"></div>
+    </div>
+
+    <script src="../js/crearUsuario.js"></script>
+</body>
+</html>
