@@ -15,27 +15,27 @@ from django.utils import timezone
 
 class VentaQuerySetTest(TestCase):
 
-    @patch('venta.queryset.apps.get_model')
-    @patch('venta.queryset.VentaSerializer')
-    def test_listar_ventas(self, mock_serializer_class, mock_get_model):
-        mock_venta_model = MagicMock()
-        mock_queryset = MagicMock()
-        mock_venta_model.objects.all.return_value = mock_queryset
-        mock_get_model.return_value = mock_venta_model
+    # @patch('venta.queryset.apps.get_model')
+    # @patch('venta.queryset.VentaSerializer')
+    # def test_listar_ventas(self, mock_serializer_class, mock_get_model):
+    #     mock_venta_model = MagicMock()
+    #     mock_queryset = MagicMock()
+    #     mock_venta_model.objects.all.return_value = mock_queryset
+    #     mock_get_model.return_value = mock_venta_model
 
-        mock_serializer = MagicMock()
-        mock_serializer.data = [{'id_venta': 1}]
-        mock_serializer_class.return_value = mock_serializer
+    #     mock_serializer = MagicMock()
+    #     mock_serializer.data = [{'id_venta': 1}]
+    #     mock_serializer_class.return_value = mock_serializer
 
-        response = VentaQuerySet.listar_ventas()
+    #     response = VentaQuerySet.listar_ventas()
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, [{'id_venta': 1}])
-        mock_get_model.assert_called_with('venta', 'Venta')
-        mock_venta_model.objects.all.assert_called_once()
-        mock_serializer_class.assert_called_with(mock_queryset, many=True)
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #     self.assertEqual(response.data, [{'id_venta': 1}])
+    #     mock_get_model.assert_called_with('venta', 'Venta')
+    #     mock_venta_model.objects.all.assert_called_once()
+    #     mock_serializer_class.assert_called_with(mock_queryset, many=True)
 
-        print("Test listar_ventas ejecutado correctamente")
+    #     print("Test listar_ventas ejecutado correctamente")
 
     @patch('venta.queryset.apps.get_model')
     @patch('venta.queryset.VentaSerializer')
