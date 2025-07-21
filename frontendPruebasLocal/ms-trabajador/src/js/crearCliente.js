@@ -1,4 +1,4 @@
-let medicamentosDisponibles = [];
+ let medicamentosDisponibles = [];
 let medicamentosSeleccionados = [];
 
 // Función para alternar la sección de medicamentos

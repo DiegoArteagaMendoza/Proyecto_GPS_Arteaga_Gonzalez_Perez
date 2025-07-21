@@ -25,5 +25,5 @@ class Usuario(models.Model):
         return f"{self.nombre} {self.apellido} ({self.rut})"
 
     class Meta:
-        db_table = 'usuarios'
+        db_table = 'usuarios_real'
         managed = False
