@@ -186,4 +186,8 @@ async function handleVentaSubmit(e) {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Registrar Venta';
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> development

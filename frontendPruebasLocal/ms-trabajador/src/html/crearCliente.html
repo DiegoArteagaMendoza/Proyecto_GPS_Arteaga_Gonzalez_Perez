@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario Cliente - Farmacia</title>
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/crearCliente.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="../../../inicio/src/html/index.html">Inicio</a>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Ventas</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-venta/src/html/ventas.html">Ver ventas</a>
+                <a href="../../../ms-venta/src/html/Registraventas.html">Registra venta</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Inventario</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-inventario/src/html/listarBodegas.html">Bodegas</a>
+                <a href="../../../ms-inventario/src/html/listarProductos.html">Productos</a>
+                <a href="../../../ms-inventario/src/html/listarInventario.html">Inventario completo</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Farmacias</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-farmacia/src/html/listarFarmacias.html">Todas las farmacias</a>
+                <a href="../../../ms-farmacia/src/html/crearFarmacia.html">Registrar farmacia</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Trabajadores</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/trabajadores.html">Trabajadores farmacia</a>
+                <a href="../../../ms-trabajador/src/html/crearTrabajador.html">Registrar Trabajador</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Roles</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/roles.html">Administrar Roles</a>
+                <a href="../../../ms-trabajador/src/html/crearRol.html">Registrar Rol</a>
+            </div>
+        </div>
+    
+
+        <div class="dropdown">
+            <button class="dropbtn">Clientes</button>
+            <div class="dropdown-content">
+                <a href="../../../ms-trabajador/src/html/crearCliente.html">Registrar cliente</a>
+                <a href="../../../ms-usuariocliente/html/listarUsuario.html">Listado de clientes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Farmacia Comunal</h1>
+            <p>Registro de Usuario Cliente</p>
+        </div>
+
+        <div class="form-container">
+            <form id="usuarioForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="rut">RUT *</label>
+                        <input type="text" id="rut" name="rut" required placeholder="12345678-9">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre *</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Pedro">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellido">Apellido *</label>
+                        <input type="text" id="apellido" name="apellido" required placeholder="González">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" id="telefono" name="telefono" placeholder="+56987654321">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="correo">Correo Electrónico *</label>
+                        <input type="email" id="correo" name="correo" required placeholder="pedro@correo.com">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="contrasena">Contraseña *</label>
+                        <input type="password" id="contrasena" name="contrasena" required placeholder="Mínimo 6 caracteres">
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="beneficiario" name="beneficiario" onchange="toggleMedicamentos()">
+                    <label for="beneficiario">Es beneficiario de medicamentos</label>
+                </div>
+
+                <div id="medicamentos-section" class="medicamentos-section">
+                    <div class="medicamentos-header">
+                        <h3>Seleccionar Medicamentos</h3>
+                        <button type="button" onclick="cargarMedicamentos()" class="btn" style="width: auto; margin: 0; padding: 8px 16px; font-size: 14px;">
+                            Recargar
+                        </button>
+                    </div>
+
+                    <div id="loading" class="loading">
+                        <p>Cargando productos del inventario...</p>
+                    </div>
+
+                    <div id="medicamentos-content" style="display: none;">
+                        <div class="search-box">
+                            <input type="text" id="search-medicamentos" placeholder="Buscar productos..." onkeyup="filtrarMedicamentos()">
+                        </div>
+
+                        <div id="medicamentos-grid" class="medicamentos-grid">
+                            <!-- Los productos se cargan aquí dinámicamente -->
+                        </div>
+
+                        <div id="medicamentos-seleccionados" class="medicamentos-seleccionados" style="display: none;">
+                            <h4>Productos Seleccionados (<span id="contador-medicamentos">0</span>)</h4>
+                            <div id="medicamentos-tags" class="medicamentos-tags">
+                                <!-- Tags de productos seleccionados -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="retiro">Retiro en dias *</label>
+                        <input type="retiro" id="retiro" name="retiro" required placeholder="Ingrese cada cuantos dias retira el beneficiario">
+                    </div>
+                </div>
+
+                <button type="button" class="btn" onclick="crearUsuarioCliente()">
+                    Crear Usuario Cliente
+                </button>
+            </form>
+
+            <div id="resultado" class="resultado"></div>
+        </div>
+    </div>
+
+    <script src="../js/crearCliente.js"></script>
+</body>
+</html>

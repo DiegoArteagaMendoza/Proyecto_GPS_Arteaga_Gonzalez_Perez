@@ -44,4 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 <tr><td colspan="6" style="text-align:center; color:red;">Error al cargar ventas</td></tr>
             `;
         });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> development

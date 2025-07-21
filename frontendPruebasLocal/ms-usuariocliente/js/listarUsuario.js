@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function fetchUsuarios() {
-    const response = await fetch('https://ms-usuariocliente-production.up.railway.app/usuarios/');
+  const response = await fetch('http://localhost:8004/usuarios/'); // https://ms-usuariocliente-production.up.railway.app/usuarios/
 
     if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -48,7 +48,6 @@ function renderUsuarios(tableBody, usuarios) {
         <td>${capitalize(usuario.apellido) || 'N/A'}</td>
         <td>${usuario.correo?.toLowerCase() || 'N/A'}</td>
         <td>${formatPhone(usuario.telefono) || 'N/A'}</td>
-        <td>${capitalize(usuario.rol) || 'N/A'}</td>
         <td class="${estadoClass}">${usuario.estado ? 'Activo' : 'Inactivo'}</td>
         <td>${formatDate(usuario.fecha_registro) || 'N/A'}</td>
       `;
