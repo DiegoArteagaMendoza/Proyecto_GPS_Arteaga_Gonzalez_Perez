@@ -24,17 +24,15 @@ class VentaSerializerDos(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-
         fecha_venta = getattr(instance, 'fecha_venta', None)
         
-        # Si es date, convertirlo a datetime
-        if isinstance(fecha_venta, datetime.date) and not isinstance(fecha_venta, datetime.datetime):
-            fecha_venta = datetime.datetime.combine(fecha_venta, datetime.time.min)
-        
-        # Solo aplicar make_aware si es datetime y naive
-        if isinstance(fecha_venta, datetime.datetime):
-            if timezone.is_naive(fecha_venta):
-                fecha_venta = timezone.make_aware(fecha_venta)
+        if isinstance(fecha_venta, datetime.date):
+            # Si es solo date (sin tiempo), lo convertimos a datetime a medianoche
+            rep['fecha_venta'] = datetime.datetime.combine(
+                fecha_venta, 
+                datetime.time.min
+            ).isoformat()
+        elif isinstance(fecha_venta, datetime.datetime):
             rep['fecha_venta'] = fecha_venta.isoformat()
         else:
             rep['fecha_venta'] = None
