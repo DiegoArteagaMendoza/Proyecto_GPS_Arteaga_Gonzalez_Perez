@@ -20,36 +20,7 @@ class VentaSerializerDos(serializers.ModelSerializer):
             'id_venta', 'rut_cliente', 'total_venta', 
             'metodo_pago', 'estado_venta', 'farmacia'
         ]
-        read_only_fields = ('id_venta')
-
-    # def to_representation(self, instance):
-    #     rep = super().to_representation(instance)
-    #     fecha_venta = getattr(instance, 'fecha_venta', None)
-        
-    #     if isinstance(fecha_venta, datetime.date):
-    #         # Si es solo date (sin tiempo), lo convertimos a datetime a medianoche
-    #         rep['fecha_venta'] = datetime.datetime.combine(
-    #             fecha_venta, 
-    #             datetime.time.min
-    #         ).isoformat()
-    #     elif isinstance(fecha_venta, datetime.datetime):
-    #         rep['fecha_venta'] = fecha_venta.isoformat()
-    #     else:
-    #         rep['fecha_venta'] = None
-            
-    #     return rep
-
-
-# # Serializer para DetalleVenta
-# class DetalleVentaSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = DetalleVenta
-#         fields = [
-#             'id_detalle', 'venta', 'id_producto', 'nombre_producto', 
-#             'cantidad', 'precio_unitario', 'subtotal'
-#         ]
-#         read_only_fields = ('id_detalle',)
-
+        read_only_fields = ['id_venta']  # Usando lista (estilo más común en DRF)
 
 class DetalleVentaSerializer(serializers.ModelSerializer):
     class Meta:
