@@ -10,7 +10,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     correo = models.EmailField(max_length=150, unique=True)
-    contrasena = models.TextField(verbose_name="Contraseña")
+    contraseña = models.TextField(verbose_name="Contraseña")
     telefono = models.CharField(max_length=20, blank=True, null=True)
     rol = models.CharField(max_length=50, choices=[('cliente', 'Cliente'), ('admin', 'Admin'), ('farmaceutico', 'Farmacéutico')], default='cliente')
     estado = models.BooleanField(default=True)
@@ -25,5 +25,5 @@ class Usuario(models.Model):
         return f"{self.nombre} {self.apellido} ({self.rut})"
 
     class Meta:
-        db_table = 'usuarios_real'
+        db_table = 'usuarios'
         managed = False

@@ -184,7 +184,7 @@ async function crearUsuarioCliente() {
         nombre: nombre,
         apellido: apellido,
         correo: correo,
-        contrasena: contrasena,
+        contraseña: contrasena,
         telefono: document.getElementById('telefono').value.trim(),
         rol: "cliente",
         beneficiario: beneficiario,
