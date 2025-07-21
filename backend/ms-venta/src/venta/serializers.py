@@ -17,27 +17,27 @@ class VentaSerializerDos(serializers.ModelSerializer):
     class Meta:
         model = Venta
         fields = [
-            'id_venta', 'fecha_venta', 'rut_cliente', 'total_venta', 
+            'id_venta', 'rut_cliente', 'total_venta', 
             'metodo_pago', 'estado_venta', 'farmacia'
         ]
-        read_only_fields = ('id_venta', 'fecha_venta')
+        read_only_fields = ('id_venta')
 
-    def to_representation(self, instance):
-        rep = super().to_representation(instance)
-        fecha_venta = getattr(instance, 'fecha_venta', None)
+    # def to_representation(self, instance):
+    #     rep = super().to_representation(instance)
+    #     fecha_venta = getattr(instance, 'fecha_venta', None)
         
-        if isinstance(fecha_venta, datetime.date):
-            # Si es solo date (sin tiempo), lo convertimos a datetime a medianoche
-            rep['fecha_venta'] = datetime.datetime.combine(
-                fecha_venta, 
-                datetime.time.min
-            ).isoformat()
-        elif isinstance(fecha_venta, datetime.datetime):
-            rep['fecha_venta'] = fecha_venta.isoformat()
-        else:
-            rep['fecha_venta'] = None
+    #     if isinstance(fecha_venta, datetime.date):
+    #         # Si es solo date (sin tiempo), lo convertimos a datetime a medianoche
+    #         rep['fecha_venta'] = datetime.datetime.combine(
+    #             fecha_venta, 
+    #             datetime.time.min
+    #         ).isoformat()
+    #     elif isinstance(fecha_venta, datetime.datetime):
+    #         rep['fecha_venta'] = fecha_venta.isoformat()
+    #     else:
+    #         rep['fecha_venta'] = None
             
-        return rep
+    #     return rep
 
 
 # # Serializer para DetalleVenta
